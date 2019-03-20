@@ -1,0 +1,42 @@
+#group > .button{
+	-fx-background-color: white;
+	-fx-font-size: 20;
+}
+
+#group > .button:hover{
+	-fx-font-size: 21;
+}
+
+#pane_background > .button{
+	-fx-background-color: #0066cc;
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+}
+
+#pane_background > .button:hover{
+	-fx-font-weight: bold;
+	-fx-font-size: 21;
+}
+
+#bt_back{
+	-fx-background-color: #0066cc;
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+}
+
+#bt_back:hover{
+	-fx-font-weight: bold;
+	-fx-font-size: 21;
+}
+
+.column-header{
+    -fx-pref-height: 8ex;
+    -fx-font-size: 16;
+    -fx-text-alignment: center;
+    -fx-background-color: #C9C9C9;
+    -fx-border-color: black;
+}
+
+.table-cell{
+	-fx-alignment: center;
+}

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="pane_background" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="employee.view.ClaimAffairController">
+   <children>
+      <Group id="group" stylesheets="@style.css">
+         <children>
+            <Button id="bt_policyModification" fx:id="btn_policyModification" layoutX="50.0" layoutY="240.0" mnemonicParsing="false" stylesheets="@style.css" text="Policy Modification" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Button id="bt_myAccount" fx:id="btn_myAccount" layoutX="50.0" layoutY="325.0" mnemonicParsing="false" stylesheets="@style.css" text="My Account" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Line id="line_myAccount" endX="200.0" layoutY="390.0" startX="50.0" stroke="#3399ff" strokeWidth="2.0" />
+            <Button id="bt_insuranceClaim" fx:id="btn_insuranceClaim" layoutX="50.0" layoutY="155.0" mnemonicParsing="false" onAction="#backToInsuranceClaim" stylesheets="@style.css" text="Insurance Claim" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Line id="line_InsuranceClaim" endX="200.0" layoutY="220.0" startX="50.0" stroke="#0066cc" strokeWidth="3.0" />
+            <Line id="line_workMenu" endX="200.0" layoutY="135.0" startX="50.0" stroke="#3399ff" strokeWidth="2.0" />
+            <Label id="lb_workMenu" layoutX="50.0" layoutY="80.0" text="Work Menu" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="20.0" />
+               </font>
+            </Label>
+            <Line id="line_policyModification" endX="200.0" layoutY="305.0" startX="50.0" stroke="#3399ff" strokeWidth="2.0" />
+         </children>
+      </Group>
+      <Label id="lb_claimAffairs" layoutX="255.0" layoutY="80.0" text="Claim Affairs" textFill="#0066cc">
+         <font>
+            <Font name="Microsoft YaHei Bold" size="20.0" />
+         </font>
+      </Label>
+      <TableView id="tb_claims" fx:id="tb_claims" layoutX="255.0" layoutY="120.0" prefWidth="700.0" stylesheets="@style.css">
+        <columns>
+          <TableColumn id="firstNameColumn" fx:id="policyIdColumn" prefWidth="140.0" text="Policy Number" />
+          <TableColumn id="lastNameColumn" fx:id="insuranceTypeColumn" minWidth="-1.0" prefWidth="140.0" text="Insurance Type" />
+            <TableColumn fx:id="dateOfSubmissionColumn" minWidth="-1.0" prefWidth="140.0" text="Date of&#10;Submission" />
+            <TableColumn fx:id="amountOfDamageColumn" minWidth="-1.0" prefWidth="140.0" text="Amount of&#10;Damages" />
+            <TableColumn fx:id="acceptanceColumn" minWidth="-1.0" prefWidth="140.0" text="Acceptance" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>
