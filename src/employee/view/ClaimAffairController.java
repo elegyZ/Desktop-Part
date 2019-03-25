@@ -8,8 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import employee.model.Claim;
-import employee.test.TestCase;
+import javafx.scene.control.ToggleButton;
+import model.Claim;
+import test.TestCase;
 import tool.ClaimTool;
 
 public class ClaimAffairController 
@@ -26,6 +27,8 @@ public class ClaimAffairController
     private TableColumn<Claim, String> amountOfDamageColumn;
     @FXML
     private TableColumn<Claim, String> acceptanceColumn;
+    @FXML
+    private ToggleButton bt_translate;
     @FXML
     private Button btn_insuranceClaim;
     @FXML
@@ -46,7 +49,6 @@ public class ClaimAffairController
     	insuranceTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAccLocation()));		//test
     	dateOfSubmissionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUpdateDate().toString()));
     	amountOfDamageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getClaimAmount())));
-
     	acceptanceColumn.setCellFactory((col) -> 
     	{
             TableCell<Claim, String> cell = new TableCell<Claim, String>() 
@@ -84,6 +86,20 @@ public class ClaimAffairController
     	mainApp.showClaimAffairView();
     }
     
+    @FXML
+    private void changeLanguage()
+    {
+    	if(bt_translate.isSelected())
+    	{
+    		bt_translate.setText("English");
+    		btn_insuranceClaim.setText("保险理赔");
+    	}
+    	else
+    	{
+    		bt_translate.setText("中文");
+    		btn_insuranceClaim.setText("InsuranceClaim");
+    	}
+    }
     public void setMainApp(MainApp mainApp) 
     {
     	if(TestCase.flag == 0)		//for testing

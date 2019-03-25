@@ -12,7 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
-import employee.model.Claim;
+import model.Claim;
 
 public class ClaimInformationController 
 {

@@ -3,7 +3,7 @@ package tool;
 import java.util.Iterator;
 
 import javafx.collections.ObservableList;
-import employee.model.Claim;
+import model.Claim;
 
 public class ClaimTool 
 {

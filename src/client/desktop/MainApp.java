@@ -1,6 +1,10 @@
-package employee.desktop;
+package client.desktop;
 
 import java.io.IOException;
+import client.view.ClaimApplicationCheckController;
+import client.view.ClaimApplicationController;
+import client.view.ClaimNoticeController;
+import client.view.InsuranceClaimController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,9 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Claim;
-import employee.view.ClaimAffairController;
-import employee.view.ClaimInformationController;
-import employee.view.ClaimNoticeController;
 
 public class MainApp extends Application 
 {
@@ -24,10 +25,12 @@ public class MainApp extends Application
         this.primaryStage.setTitle("Hibernia-Sino");
         
         initRootLayout();
-        showClaimAffairView();
-        //showClaimInformationView();
+        showInsuranceClaimView();
+        //showClaimApplicationView();
+        //showClaimApplicationCheckView();
         //showClaimNoticeView();
 	}
+	
 	
 	public void initRootLayout() 
 	{
@@ -44,32 +47,50 @@ public class MainApp extends Application
         }
     }
 	
-	public void showClaimAffairView() 
+	public void showInsuranceClaimView() 
 	{
         try 
         {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("../view/ClaimAffairView.fxml"));
+            loader.setLocation(MainApp.class.getResource("../view/InsuranceClaimView.fxml"));
             AnchorPane claimAffairView = (AnchorPane) loader.load();
             claimAffairView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(claimAffairView);
-            ClaimAffairController controller = loader.getController();
+            InsuranceClaimController controller = loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 	
-	public void showClaimInformationView(Claim claim) 
+	public void showClaimApplicationView(String policyId) 
 	{
         try 
         {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("../view/ClaimInformationView.fxml"));
-            AnchorPane claimInformationView = (AnchorPane) loader.load();
-            claimInformationView.setStyle("-fx-background-color: white;");
-            rootLayout.setCenter(claimInformationView);
-            ClaimInformationController controller = loader.getController();
+            loader.setLocation(MainApp.class.getResource("../view/ClaimApplicationView.fxml"));
+            AnchorPane claimApplicationView = (AnchorPane) loader.load();
+            claimApplicationView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(claimApplicationView);
+            ClaimApplicationController controller = loader.getController();
+            controller.setPolicy(policyId);
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	public void showClaimApplicationCheckView(String policyId, Claim claim) 
+	{
+        try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../view/ClaimApplicationCheckView.fxml"));
+            AnchorPane claimApplicationCheckView = (AnchorPane) loader.load();
+            claimApplicationCheckView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(claimApplicationCheckView);
+            ClaimApplicationCheckController controller = loader.getController();
+            controller.setPolicy(policyId);
             controller.setClaim(claim);
             controller.setMainApp(this);
         } catch (IOException e) {
@@ -83,9 +104,9 @@ public class MainApp extends Application
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("../view/ClaimNoticeView.fxml"));
-            AnchorPane claimNoticeViewView = (AnchorPane) loader.load();
-            claimNoticeViewView.setStyle("-fx-background-color: white;");
-            rootLayout.setCenter(claimNoticeViewView);
+            AnchorPane claimNoticeView = (AnchorPane) loader.load();
+            claimNoticeView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(claimNoticeView);
             ClaimNoticeController controller = loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {

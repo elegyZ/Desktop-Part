@@ -65,5 +65,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <ToggleButton fx:id="bt_translate" layoutX="836.0" layoutY="30.0" mnemonicParsing="false" onAction="#changeLanguage" text="中文" />
    </children>
 </AnchorPane>
