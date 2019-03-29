@@ -1,9 +1,11 @@
 package client.view;
 
-import client.desktop.MainApp;
+import client.desktop.ClientMainApp;
 import model.Claim;
 import model.Policy;
 import test.TestCase;
+import tool.HttpTool;
+import tool.PolicyTool;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,18 +46,21 @@ public class InsuranceClaimController
 	@FXML
 	private Button btn_insuranceClaim;
 	
-	private TestCase testcase = new TestCase();
-    private ObservableList<Policy> policyData = TestCase.clientPolicyData;
-    private ObservableList<Claim> claimData = TestCase.clientClaimData;
-	private MainApp mainApp;
+    private ObservableList<Policy> policyData;
+    private ObservableList<Claim> claimData;
+	private ClientMainApp mainApp;
 	
 	@FXML
 	private void initialize() 
 	{
+		//------------------------------------------------------------Data Update---------------------------------------------
+		policyData = PolicyTool.initPolicyList(PolicyTool.getPolicyList(HttpTool.getArray(TestCase.policy_array)));
+		
+		//------------------------------------------------------------GUI Update---------------------------------------------
 		tb_policys.setItems(policyData);
 		insurancePlanColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlanLevelProperty()));
 		guaranteePeriodColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDurationProperty()));
-		startingEndingDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStartEndTimeProperty()));
+		startingEndingDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStartEndTimeProperty("Ireland")));		//test
 		insuranceClaimColumn.setCellFactory((col) -> 
     	{
             TableCell<Policy, String> cell = new TableCell<Policy, String>() 
@@ -96,13 +101,8 @@ public class InsuranceClaimController
 		mainApp.showInsuranceClaimView();
 	}
 	    
-	public void setMainApp(MainApp mainApp) 
+	public void setMainApp(ClientMainApp mainApp) 
     {
-		if(TestCase.flag == 0)		//for testing
-    	{
-    		testcase.addPolicyList();
-    		TestCase.flag = 1;
-    	}
         this.mainApp = mainApp;
 
     }

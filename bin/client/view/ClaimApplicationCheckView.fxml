@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
@@ -14,7 +15,7 @@
    <children>
       <Group id="group">
          <children>
-            <Button fx:id="btn_insuranceService" layoutX="55.0" layoutY="235.0" prefHeight="27.0" stylesheets="@style.css" text="Insurance Service" textFill="#0066cc">
+            <Button fx:id="btn_insuranceService" layoutX="55.0" layoutY="235.0" prefHeight="27.0" stylesheets="@style.css" text="Luggage Insurances" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -31,7 +32,7 @@
                   <Insets top="10.0" />
                </padding>
             </Button>
-            <Button fx:id="btn_myInsurance" layoutX="55.0" layoutY="320.0" stylesheets="@style.css" text="My Insurance" textFill="#0066cc">
+            <Button fx:id="btn_myInsurance" layoutX="55.0" layoutY="320.0" stylesheets="@style.css" text="My Insurances" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -47,7 +48,7 @@
                </font>
             </Label>
             <Line endX="205.0" layoutY="470.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" strokeWidth="2.0" />
-            <Button fx:id="btn_insuranceClaim" layoutX="55.0" layoutY="405.0" onAction="#backToInsuranceClaim" stylesheets="@style.css" text="Insurance Claim" textFill="#0066cc">
+            <Button fx:id="btn_insuranceClaim" layoutX="55.0" layoutY="405.0" onAction="#backToInsuranceClaim" stylesheets="@style.css" text="Claim Settlement" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -83,20 +84,17 @@
                            </font>
                         </Label>
                         <Line endX="1.0" endY="164.0" fill="#0066cc" layoutX="243.0" layoutY="358.0" stroke="#0066cc" />
-                        <Button layoutX="94.0" layoutY="496.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="66.0" text="Next" />
                         <Label layoutX="265.0" layoutY="357.0" prefHeight="90.0" prefWidth="200.0" text="Passenger transport&#10;suffered fire, explosion,&#10;collision and overturn" textAlignment="CENTER">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="332.0" layoutY="496.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="66.0" text="Next" />
                         <Line endX="1.0" endY="164.0" fill="#0066cc" layoutX="465.0" layoutY="358.0" stroke="#0066cc" />
                         <Label layoutX="482.0" layoutY="340.0" prefHeight="107.0" prefWidth="200.0" text="Theft,  robbery, loss&#10;of luggage" textAlignment="CENTER">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="541.0" layoutY="496.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="66.0" text="Next" />
                         <Label layoutX="6.0" layoutY="550.0" prefHeight="27.0" prefWidth="226.0" text="Claim Supporting File" textFill="#0066cc">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="20.0" />
@@ -108,7 +106,7 @@
                               <Font name="Microsoft YaHei Bold" size="20.0" />
                            </font>
                         </Button>
-                        <Button id="bt_confirm" fx:id="btn_confirm" layoutX="469.0" layoutY="611.0" mnemonicParsing="false" onAction="#toNoticeView" prefWidth="150.0" stylesheets="@style.css" text="Confirm" textFill="WHITE">
+                        <Button id="bt_confirm" fx:id="btn_confirm" layoutX="469.0" layoutY="611.0" mnemonicParsing="false" onAction="#submit" prefWidth="150.0" stylesheets="@style.css" text="Confirm" textFill="WHITE">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="20.0" />
                            </font>
@@ -149,6 +147,25 @@
                         <Font name="Microsoft YaHei" size="18.0" />
                      </font>
                   </Label>
+                  <Group id="group_next">
+                     <children>
+                        <ImageView id="next1" fx:id="iv_next1" layoutX="100.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/pic/btn_next.PNG" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="next2" fx:id="iv_next2" layoutX="330.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/pic/btn_next.PNG" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="next3" fx:id="iv_next3" layoutX="560.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/pic/btn_next.PNG" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Group>
                </children>
             </AnchorPane>
         </content>

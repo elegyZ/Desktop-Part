@@ -1,7 +1,11 @@
 package model;
 
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Claim 
 {
@@ -11,13 +15,13 @@ public class Claim
 	private Date accDate;
 	private float claimAmount;
 	private String claimReason;
-	private List<String> claimFiles;
+	private List<File> claimFiles;
 	private String status;					//”–accept, notAccept, processing, pendingÀƒ÷÷
 	private String rejectReason;
 	private Date createDate;
 	private Date updateDate;
 	
-	public Claim(String id, String policyId, String accLocation, Date accDate, String claimReason, float claimAmount, List<String> claimFiles, String status,
+	public Claim(String id, String policyId, String accLocation, Date accDate, String claimReason, float claimAmount, List<File> claimFiles, String status,
 				 Date createDate, Date updateDate)
 	{
 		this.id = id;
@@ -73,7 +77,7 @@ public class Claim
 		this.claimAmount = claimAmount;
 	}
 	
-	public void setClaimFiles(List<String> claimFiles)
+	public void setClaimFiles(List<File> claimFiles)
 	{
 		this.claimFiles = claimFiles;
 	}
@@ -113,7 +117,7 @@ public class Claim
 		return claimAmount;
 	}
 	
-	public List<String> getClaimFiles()
+	public List<File> getClaimFiles()
 	{
 		return claimFiles;
 	}
@@ -136,5 +140,20 @@ public class Claim
 	public String getRejectReason()
 	{
 		return rejectReason;
+	}
+	
+	//--------------get String property----------------
+	public String getSubmissionDateProperty(String country)
+	{
+		if(country.equals("Ireland"))
+		{
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.UK);
+			return df.format(updateDate);
+		}
+		else
+		{
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
+			return df.format(updateDate);
+		}
 	}
 }

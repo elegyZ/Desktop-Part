@@ -1,6 +1,6 @@
 package client.view;
 
-import client.desktop.MainApp;
+import client.desktop.ClientMainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -18,7 +18,7 @@ public class ClaimNoticeController
 	@FXML
 	private Button btn_back;
 	
-	private MainApp mainApp;
+	private ClientMainApp mainApp;
 	
 	@FXML
 	public void backToInsuranceClaim()
@@ -26,7 +26,7 @@ public class ClaimNoticeController
 		mainApp.showInsuranceClaimView();
 	}
 	
-	public void setMainApp(MainApp mainApp) 
+	public void setMainApp(ClientMainApp mainApp) 
     {
         this.mainApp = mainApp;
     }

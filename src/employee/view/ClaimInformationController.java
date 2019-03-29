@@ -1,8 +1,7 @@
 package employee.view;
 
 import java.util.Optional;
-
-import employee.desktop.MainApp;
+import employee.desktop.EmployeeMainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -16,7 +15,7 @@ import model.Claim;
 
 public class ClaimInformationController 
 {
-	private MainApp mainApp;
+	private EmployeeMainApp mainApp;
 	private Claim claim;
 	@FXML
     private Button btn_insuranceClaim;
@@ -47,7 +46,7 @@ public class ClaimInformationController
 		this.claim = claim;
 	}
 	
-	public void setMainApp(MainApp mainApp) 
+	public void setMainApp(EmployeeMainApp mainApp) 
     {
 		locationOfAccident.setText(claim.getAccLocation());
 		dateOfAccident.setText(claim.getAccDate().toString());
@@ -107,6 +106,7 @@ public class ClaimInformationController
     private void backToInsuranceClaim()
     {
 		claim.setStatus("pending");
+		//POSTÐÞ¸Ä²Ù×÷
     	mainApp.showClaimAffairView();
     }
 }

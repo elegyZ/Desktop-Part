@@ -17,9 +17,9 @@ public class Policy
 	private Date expireDate;
 	private Date createDate;
 	private Date updateDate;
-	private String insuredId;
+	private Insured insured;
 	
-	public Policy(String id, int plan, int level, Date startDate, int duration, Date createDate, Date updateDate, String insuredId)
+	public Policy(String id, int plan, int level, Date startDate, int duration, Date createDate, Date updateDate, Insured insured)
 	{
 		this.id = id;
 		setPlan(plan);
@@ -29,9 +29,10 @@ public class Policy
 		setExpireDate(startDate, duration);
 		setCreateDate(createDate);
 		setUpdateDate(updateDate);
-		setInsuredId(insuredId);
+		setInsured(insured);
 	}
 
+	//------------set methods-----------------------------------------
 	public void setPlan(int plan)
 	{
 		this.plan = plan;
@@ -67,11 +68,12 @@ public class Policy
 		this.updateDate = updateDate;
 	}
 	
-	public void setInsuredId(String insuredId)
+	public void setInsured(Insured insured)
 	{
-		this.insuredId = insuredId;
+		this.insured = insured;
 	}
 	
+	//------------get methods-----------------------------------
 	public Date getCreateDate()
 	{
 		return createDate;
@@ -82,9 +84,9 @@ public class Policy
 		return updateDate;
 	}
 	
-	public String getInsuredId()
+	public Insured getInsured()
 	{
-		return insuredId;
+		return insured;
 	}
 	
 	public String getId()
@@ -117,6 +119,7 @@ public class Policy
 		return expireDate;
 	}
 
+	//--------------get String property----------------
 	public String getPlanLevelProperty() 
 	{
 		String property = "";
@@ -148,10 +151,17 @@ public class Policy
 		return property;
 	}
 	
-	public String getStartEndTimeProperty()
+	public String getStartEndTimeProperty(String country)
 	{
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.UK);
-		return df.format(startDate) + "\n" + df.format(expireDate);
+		if(country.equals("Ireland"))
+		{
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.UK);
+			return df.format(startDate) + "\n" + df.format(expireDate);
+		}
+		else
+		{
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
+			return df.format(startDate) + "\n" + df.format(expireDate);
+		}
 	}
-	
 }

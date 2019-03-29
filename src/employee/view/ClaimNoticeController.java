@@ -1,6 +1,6 @@
 package employee.view;
 
-import employee.desktop.MainApp;
+import employee.desktop.EmployeeMainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -14,7 +14,7 @@ public class ClaimNoticeController
     private Button btn_policyModification;
     @FXML
     private Button btn_myAccount;
-	private MainApp mainApp;
+	private EmployeeMainApp mainApp;
 	
 	@FXML
 	public void backToClaimAffair()
@@ -28,7 +28,7 @@ public class ClaimNoticeController
     	mainApp.showClaimAffairView();
     }
 	
-	public void setMainApp(MainApp mainApp) 
+	public void setMainApp(EmployeeMainApp mainApp) 
     {
         this.mainApp = mainApp;
     }

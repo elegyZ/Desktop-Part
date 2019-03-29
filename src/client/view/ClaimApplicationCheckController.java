@@ -1,14 +1,13 @@
 package client.view;
 
-import client.desktop.MainApp;
+import client.desktop.ClientMainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import model.Claim;
-import model.Client;
-import model.Policy;
-import test.TestCase;
+import tool.ClaimTool;
+import tool.HttpTool;
 
 //client-À˜≈‚…Í«Î»∑»œ“≥
 public class ClaimApplicationCheckController 
@@ -34,38 +33,35 @@ public class ClaimApplicationCheckController
 	@FXML
 	private Button btn_confirm;
 	
-	private MainApp mainApp;
-	private Client client = TestCase.testClient;
-	private Policy policy;
+	private ClientMainApp mainApp;
 	private Claim claim;
-	
-	public void setPolicy(String policyId)
-	{
-		this.policy = client.getPolicy().get(policyId);
-	}
 	
 	public void setClaim(Claim claim)
 	{
 		this.claim = claim;
+		initView();
 	}
 	
-	@FXML
-	public void initialize()
+	public void initView()
 	{
 		locationOfAcc.setText(claim.getAccLocation());
 		dateOfAcc.setText(claim.getAccDate().toString());
+		reasonOfClaim.setText(claim.getClaimReason());
+		amountOfDamage.setText(String.valueOf(claim.getClaimAmount()));
 	}
 	
 	@FXML
-	public void toNoticeView()
+	public void submit()
 	{
-		mainApp.showClaimNoticeView();
+		String result = HttpTool.postObject("claims", ClaimTool.claimToJSONObject(claim));
+		if(result.equals("200"))
+			mainApp.showClaimNoticeView();
 	}
 	
 	@FXML
 	public void backToClaimApplication()
 	{
-		mainApp.showClaimApplicationView(policy.getId());
+		mainApp.showClaimApplicationView2(claim);
 	}
 	
 	@FXML
@@ -74,7 +70,7 @@ public class ClaimApplicationCheckController
 		mainApp.showInsuranceClaimView();
 	}
 	
-	public void setMainApp(MainApp mainApp) 
+	public void setMainApp(ClientMainApp mainApp) 
     {
         this.mainApp = mainApp;
 

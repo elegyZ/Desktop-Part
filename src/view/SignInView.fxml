@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SignInController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="7.0" prefHeight="600.0" prefWidth="1000.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.topAnchor="7.0">
+         <children>
+            <Label layoutX="279.0" layoutY="155.0" text="Welcome to use the baggage loss insurance" textAlignment="CENTER" textFill="#0066cc" AnchorPane.bottomAnchor="418.0" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="279.0" AnchorPane.topAnchor="130.0">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="20.0" />
+               </font>
+            </Label>
+            <TabPane layoutX="275.0" layoutY="197.0" prefHeight="310.0" prefWidth="457.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="268.0" AnchorPane.topAnchor="197.0">
+              <tabs>
+                <Tab text="                                                        client                                                        ">
+                     <content>
+                        <Label prefHeight="206.0" prefWidth="292.0" text="&#10;&#10;&#10;             username：&#10;&#10;&#10;             password：&#10;&#10;             &#10;             retype password:">
+                           <font>
+                              <Font name="Microsoft YaHei Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </content></Tab>
+              </tabs>
+            </TabPane>
+            <TextField layoutX="420.0" layoutY="290.0" prefHeight="23.0" prefWidth="228.0" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="290.0" />
+            <TextField layoutX="420.0" layoutY="346.0" prefHeight="23.0" prefWidth="228.0" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="346.0" />
+            <Button layoutX="550.0" layoutY="456.0" mnemonicParsing="false" text="sign in" textFill="#0066cc" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="456.0">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="360.0" layoutY="456.0" mnemonicParsing="false" text="back" textFill="#0066cc" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="456.0">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <TextField layoutX="490.0" layoutY="411.0" prefHeight="23.0" prefWidth="228.0" />
+   </children>
+</AnchorPane>

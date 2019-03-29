@@ -7,10 +7,6 @@
 	-fx-font-size: 21;
 }
 
-#group_next > .button{
-	-fx-background-image:url(/InsuranceCompany/resources/pic/btn_next.png) 
-}
-
 #pane_background > .button{
 	-fx-background-color: #0066cc;
 	-fx-font-size: 20;
