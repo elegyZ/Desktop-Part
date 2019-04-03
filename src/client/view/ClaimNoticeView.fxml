@@ -13,7 +13,7 @@
    <children>
       <Group id="group">
          <children>
-            <Button fx:id="btn_insuranceClaim" layoutX="55.0" layoutY="405.0" onAction="#backToInsuranceClaim" stylesheets="@style.css" text="Claim Settlement" textFill="#0066cc">
+            <Button fx:id="btn_insuranceClaim" layoutX="55.0" layoutY="405.0" stylesheets="@style.css" text="Claim Settlement" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -23,7 +23,7 @@
             </Button>
             <Line endX="205.0" layoutY="215.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
             <Line endX="205.0" layoutY="130.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-            <Button fx:id="btn_insuranceService" layoutX="55.0" layoutY="235.0" stylesheets="@style.css" text="Luggage Insurances" textFill="#0066cc">
+            <Button fx:id="btn_insuranceService" layoutX="55.0" layoutY="235.0" stylesheets="@style.css" text="My Profile" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -40,12 +40,12 @@
                </padding>
             </Button>
             <Line endX="205.0" layoutY="385.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-            <Label layoutX="55.0" layoutY="80.0" prefHeight="27.0" prefWidth="128.0" text="Client Server" textFill="#0066cc">
+            <Label layoutX="55.0" layoutY="80.0" text="Client Service" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei Bold" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="btn_myInsurance" layoutX="55.0" layoutY="320.0" stylesheets="@style.css" text="My Insurances" textFill="#0066cc">
+            <Button fx:id="btn_myInsurance" layoutX="55.0" layoutY="320.0" onAction="#backToInsurance" stylesheets="@style.css" text="My Insurances" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -62,7 +62,7 @@
             <Font name="Microsoft YaHei Bold" size="20.0" />
          </font>
       </Label>
-      <Button id="bt_back" fx:id="btn_back" layoutX="501.0" layoutY="310.0" mnemonicParsing="false" onAction="#backToInsuranceClaim" prefHeight="30.0" prefWidth="150.0" stylesheets="@style.css" text="Back" textFill="WHITE">
+      <Button id="bt_back" fx:id="btn_back" layoutX="501.0" layoutY="310.0" mnemonicParsing="false" onAction="#backToInsurance" prefHeight="30.0" prefWidth="150.0" stylesheets="@style.css" text="Back" textFill="WHITE">
          <font>
             <Font name="Microsoft YaHei Bold" size="20.0" />
          </font>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="pane_insuranceclaim" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.InsuranceController">
+   <children>
+      <Group id="group">
+         <children>
+            <Button fx:id="btn_myInsurance" layoutX="55.0" layoutY="320.0" onAction="#backToInsurance" stylesheets="@style.css" text="My Insurances" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btn_insuranceService" layoutX="55.0" layoutY="235.0" stylesheets="@style.css" text="My Profile" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Line endX="205.0" layoutY="385.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" strokeWidth="2.0" />
+            <Line endX="205.0" layoutY="300.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+            <Line endX="205.0" layoutY="215.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+            <Button fx:id="btn_insuranceClaim" layoutX="54.0" layoutY="405.0" onAction="#toClaimView" stylesheets="@style.css" text="Claim Settlement" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Line endX="205.0" layoutY="130.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+            <Button fx:id="btn_home" layoutX="55.0" layoutY="150.0" stylesheets="@style.css" text="Home" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Line endX="205.0" layoutY="470.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+            <Label layoutX="55.0" layoutY="80.0" text="Client Service" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Label layoutX="256.0" layoutY="80.0" text="Purchased Insurance" textFill="#0066cc">
+         <font>
+            <Font name="Microsoft YaHei Bold" size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tb_policys" layoutX="256.0" layoutY="115.0" prefHeight="350.0" prefWidth="700.0" stylesheets="@style.css">
+        <columns>
+            <TableColumn fx:id="insurancePlanColumn" prefWidth="174.0" text="Insurance Plan" />
+          <TableColumn fx:id="guaranteePeriodColumn" prefWidth="175.0" text="Guarantee Period" />
+            <TableColumn fx:id="startingEndingDateColumn" prefWidth="175.0" text="Starting&#10;Ending Date" />
+          <TableColumn fx:id="insuranceClaimColumn" prefWidth="176.0" text="Insurance Claim" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

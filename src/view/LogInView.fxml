@@ -17,15 +17,25 @@
                <content>
                   <Pane id="pane_background" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Group>
+                        <Group id="pane_background">
                            <children>
+                              <Button fx:id="bt_clientLogIn" layoutX="112.0" layoutY="169.0" mnemonicParsing="false" onAction="#clientLogIn" text="Log In" textFill="WHITE">
+                                 <font>
+                                    <Font name="Microsoft YaHei Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="bt_clientSignUp" layoutX="223.0" layoutY="169.0" mnemonicParsing="false" onAction="#clientSignUp" text="Sign Up" textFill="WHITE">
+                                 <font>
+                                    <Font name="Microsoft YaHei Bold" size="18.0" />
+                                 </font>
+                              </Button>
                               <Label layoutX="50.0" layoutY="100.0" text="Password">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="clientUserName" layoutX="170.0" layoutY="47.0" prefWidth="230.0" />
-                              <Label layoutX="50.0" layoutY="50.0" text="User Name">
+                              <Label layoutX="50.0" layoutY="50.0" text="Username">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="18.0" />
                                  </font>
@@ -33,25 +43,15 @@
                               <TextField fx:id="clientPassword" layoutX="170.0" layoutY="100.0" prefWidth="230.0" />
                            </children>
                         </Group>
-                        <Button fx:id="bt_clientLogIn" layoutX="128.0" layoutY="170.0" mnemonicParsing="false" onAction="#clientLogIn" text="Log In" textFill="WHITE">
-                           <font>
-                              <Font name="Microsoft YaHei Bold" size="18.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="bt_clientSignIn" layoutX="228.0" layoutY="170.0" mnemonicParsing="false" text="Sign In" textFill="WHITE">
-                           <font>
-                              <Font name="Microsoft YaHei Bold" size="18.0" />
-                           </font>
-                        </Button>
                      </children>
                   </Pane>
                </content>
             </Tab>
           <Tab text="employee">
                <content>
-                  <Pane id="pane_background" prefHeight="200.0" prefWidth="200.0">
+                  <Pane id="pane_background" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css">
                      <children>
-                        <Group>
+                        <Group id="pane_background">
                            <children>
                               <Label layoutX="50.0" layoutY="100.0" text="Password">
                                  <font>
@@ -59,19 +59,24 @@
                                  </font>
                               </Label>
                               <TextField fx:id="employeeUserName" layoutX="170.0" layoutY="47.0" prefWidth="230.0" />
-                              <Label layoutX="50.0" layoutY="50.0" text="User Name">
+                              <Label layoutX="50.0" layoutY="50.0" text="Username">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="employeePassword" layoutX="170.0" layoutY="100.0" prefWidth="230.0" />
+                              <Button fx:id="bt_employeeLogIn" layoutX="112.0" layoutY="169.0" mnemonicParsing="false" onAction="#employeeLogIn" text="Log In" textFill="WHITE">
+                                 <font>
+                                    <Font name="Microsoft YaHei Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="bt_employeeSignUp" layoutX="223.0" layoutY="169.0" mnemonicParsing="false" onAction="#employeeSignUp" text="Sign Up" textFill="WHITE">
+                                 <font>
+                                    <Font name="Microsoft YaHei Bold" size="18.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </Group>
-                        <Button fx:id="bt_employeeLogIn" layoutX="192.0" layoutY="170.0" mnemonicParsing="false" text="Log In" textFill="WHITE">
-                           <font>
-                              <Font name="Microsoft YaHei Bold" size="18.0" />
-                           </font>
-                        </Button>
                      </children>
                   </Pane>
                </content>

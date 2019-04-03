@@ -1,8 +1,11 @@
 package tool;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStream;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
@@ -12,21 +15,20 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import model.Claim;
+import javafx.util.Pair;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class HttpTool 
 {
-	public final static String URL = "https://65ea4d1c-c0d7-4115-8198-1c38cf9dd578.mock.pstmn.io/";
+	//public final static String URL = "https://65ea4d1c-c0d7-4115-8198-1c38cf9dd578.mock.pstmn.io/";
+	public final static String URL = "http://59.110.243.55";
+	public final static String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzlkOGQyM2UzZDE4MjZjOTE1YzJkOGIiLCJpYXQiOjE1NTQxODc3MzMsImV4cCI6MTU1NDI3NDEzM30.UBaYE-fbg82bO8NBk0d29HHkcC1MPElbKNlJrYqhusk";
 	
-	public static JSONObject getObject(String lastpart)
+	public static Pair<Integer, String> getObject(String lastpart, String token)
 	{
 		String urlStr = URL +lastpart; 
 	    CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -39,53 +41,42 @@ public class HttpTool
         //socketTimeout：指客户端从服务器读取数据的timeout，超出后会抛出SocketTimeOutException
         //setRedirectsEnabled允许重定向
 	    httpGet.setConfig(requestConfig);
-	    httpGet.setHeader("Content-Type","application/json");	    
+	    httpGet.setHeader("Content-Type","application/json");	   
+	    httpGet.addHeader("Authorization", "Bearer " + token);
 	    CloseableHttpResponse response = null;
-	    try 
-	    {
-	        response = httpClient.execute(httpGet);
-	        HttpEntity entity = response.getEntity();
-	        String result = EntityUtils.toString(entity, "UTF-8");
-	        JSONObject object = JSONObject.fromObject(result);
-			return object;
-	    } 
-	    catch (ClientProtocolException e) 
-	    {
-	        System.err.println("Problems with Http Protocol");
-	        e.printStackTrace();
-	        return null;
-	    } 
-	    catch (ParseException e) 
-	    {
-	        System.err.println("Parsing error");
-	        e.printStackTrace();
-	        return null;
-	    } 
-	    catch (IOException e) 
-	    {
-	        System.err.println("abnormal IO");
-	        e.printStackTrace();
-	        return null;
-	    } 
-	    finally 
-	    {
-	        if (null != response) 
-	        {
-	            try 
-	            {
-	                response.close();
-	                httpClient.close();
-	            } 
-	            catch (IOException e)
-	            {
-	                System.err.println("Error releasing connection");
-	                e.printStackTrace();
-	            }
-	        }
-	    }
+		try {
+			response = httpClient.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+			String result = EntityUtils.toString(entity, "UTF-8");
+			int code = response.getStatusLine().getStatusCode();
+			Pair<Integer, String> pair = new Pair<Integer, String>(code, result);
+			return pair;
+		} catch (ClientProtocolException e) {
+			System.err.println("Problems with Http Protocol");
+			e.printStackTrace();
+			return null;
+		} catch (ParseException e) {
+			System.err.println("Parsing error");
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			System.err.println("abnormal IO");
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (response != null) {
+				try {
+					response.close();
+					httpClient.close();
+				} catch (IOException e) {
+					System.err.println("Error releasing connection");
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
-	public static JSONArray getArray(String lastpart)
+	public static Pair<Integer, String> getArray(String lastpart, String token)
 	{
 		String urlStr = URL +lastpart; 
 	    CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -94,53 +85,42 @@ public class HttpTool
                 setConnectTimeout(180 * 1000).setConnectionRequestTimeout(180 * 1000)		
                 .setSocketTimeout(180 * 1000).setRedirectsEnabled(true).build();
 	    httpGet.setConfig(requestConfig);
-	    httpGet.setHeader("Content-Type","application/json");	    
+	    httpGet.setHeader("Content-Type","application/json");	
+	    httpGet.addHeader("Authorization", "Bearer " + token);
 	    CloseableHttpResponse response = null;
-	    try 
-	    {
-	        response = httpClient.execute(httpGet);
-	        HttpEntity entity = response.getEntity();
-	        String result = EntityUtils.toString(entity, "UTF-8");
-	        JSONArray array = JSONArray.fromObject(result);
-			return array;
-	    } 
-	    catch (ClientProtocolException e) 
-	    {
-	        System.err.println("Problems with Http Protocol");
-	        e.printStackTrace();
-	        return null;
-	    } 
-	    catch (ParseException e) 
-	    {
-	        System.err.println("Parsing error");
-	        e.printStackTrace();
-	        return null;
-	    } 
-	    catch (IOException e) 
-	    {
-	        System.err.println("abnormal IO");
-	        e.printStackTrace();
-	        return null;
-	    } 
-	    finally 
-	    {
-	        if (null != response) 
-	        {
-	            try 
-	            {
-	                response.close();
-	                httpClient.close();
-	            } 
-	            catch (IOException e)
-	            {
-	                System.err.println("Error releasing connection");
-	                e.printStackTrace();
-	            }
-	        }
-	    }
+		try {
+			response = httpClient.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+			String result = EntityUtils.toString(entity, "UTF-8");
+			int code = response.getStatusLine().getStatusCode();
+			Pair<Integer, String> pair = new Pair<Integer, String>(code, result);
+			return pair;
+		} catch (ClientProtocolException e) {
+			System.err.println("Problems with Http Protocol");
+			e.printStackTrace();
+			return null;
+		} catch (ParseException e) {
+			System.err.println("Parsing error");
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			System.err.println("abnormal IO");
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (null != response) {
+				try {
+					response.close();
+					httpClient.close();
+				} catch (IOException e) {
+					System.err.println("Error releasing connection");
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
-	public static String postObject(String lastpart, JSONObject object)
+	public static Pair<Integer, String> postObject(String lastpart, String token, JSONObject object)
 	{
 		String urlStr = URL +lastpart;
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -150,53 +130,44 @@ public class HttpTool
                 .setSocketTimeout(180 * 1000).setRedirectsEnabled(true).build();
         httpPost.setConfig(requestConfig);
         httpPost.setHeader("Content-Type","application/json");
+        httpPost.addHeader("Authorization", "Bearer " + token);
         CloseableHttpResponse response = null;
-        try 
-        {
-            httpPost.setEntity(new StringEntity(object.toString(),ContentType.create("application/json", "utf-8")));
-            System.out.println("request parameters" + EntityUtils.toString(httpPost.getEntity()));			//test
-            response = httpClient.execute(httpPost);
-            System.out.println(" code:"+response.getStatusLine().getStatusCode());							//test
-            System.out.println("doPostForInfobipUnsub response"+response.getStatusLine().toString());			//判断错误抛出异常alert？
-            return String.valueOf(response.getStatusLine().getStatusCode());								//成功就返回200
-        } 
-        catch (ClientProtocolException e) 
-	    {
-	        System.err.println("Problems with Http Protocol");
-	        e.printStackTrace();
-	        return null;
-	    } 
-	    catch (ParseException e) 
-	    {
-	        System.err.println("Parsing error");
-	        e.printStackTrace();
-	        return null;
-	    } 
-	    catch (IOException e) 
-	    {
-	        System.err.println("abnormal IO");
-	        e.printStackTrace();
-	        return null;
-	    } 
-        finally 
-        {
-        	if (null != response) 
-	        {
-	            try 
-	            {
-	                response.close();
-	                httpClient.close();
-	            } 
-	            catch (IOException e)
-	            {
-	                System.err.println("Error releasing connection");
-	                e.printStackTrace();
-	            }
-	        }
-        }
+		try {
+			httpPost.setEntity(new StringEntity(object.toString(), ContentType.create("application/json", "utf-8")));
+			System.out.println("request parameters" + EntityUtils.toString(httpPost.getEntity())); // test
+			response = httpClient.execute(httpPost);
+			String entity = EntityUtils.toString(response.getEntity());
+			int code = response.getStatusLine().getStatusCode();
+			System.out.println("code:" + response.getStatusLine().getStatusCode()); // test
+			System.out.println("response" + response.getStatusLine().toString()); // 判断错误抛出异常alert？
+			Pair<Integer, String> pair = new Pair<Integer, String>(code, entity);
+			return pair;
+		} catch (ClientProtocolException e) {
+			System.err.println("Problems with Http Protocol");
+			e.printStackTrace();
+			return null;
+		} catch (ParseException e) {
+			System.err.println("Parsing error");
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			System.err.println("abnormal IO");
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (null != response) {
+				try {
+					response.close();
+					httpClient.close();
+				} catch (IOException e) {
+					System.err.println("Error releasing connection");
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
-	public static String postArray(String lastpart, JSONArray array)
+	public static Pair<Integer, String> postArray(String lastpart, String token, JSONArray array)
 	{
 		String urlStr = URL +lastpart;
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -206,120 +177,96 @@ public class HttpTool
                 .setSocketTimeout(180 * 1000).setRedirectsEnabled(true).build();         
         httpPost.setConfig(requestConfig);
         httpPost.setHeader("Content-Type","application/json");
+        httpPost.addHeader("Authorization", "Bearer " + token);
         CloseableHttpResponse response = null;
         try 
         {
             httpPost.setEntity(new StringEntity(array.toString(),ContentType.create("application/json", "utf-8")));
-            System.out.println("request parameters" + EntityUtils.toString(httpPost.getEntity()));				//test
-            response = httpClient.execute(httpPost);
-            System.out.println(" code:"+response.getStatusLine().getStatusCode());								//test
-            System.out.println("doPostForInfobipUnsub response"+response.getStatusLine().toString());			//判断错误抛出异常alert？
-            return String.valueOf(response.getStatusLine().getStatusCode());
+            System.out.println("request parameters" + EntityUtils.toString(httpPost.getEntity())); // test
+			response = httpClient.execute(httpPost);
+			String entity = EntityUtils.toString(response.getEntity());
+			int code = response.getStatusLine().getStatusCode();
+			System.out.println("code:" + response.getStatusLine().getStatusCode()); // test
+			System.out.println("response" + response.getStatusLine().toString()); // 判断错误抛出异常alert？
+			Pair<Integer, String> pair = new Pair<Integer, String>(code, entity);
+			return pair;
         } 
-        catch (ClientProtocolException e) 
-	    {
-	        System.err.println("Problems with Http Protocol");
-	        e.printStackTrace();
-	        return null;
-	    } 
-	    catch (ParseException e) 
-	    {
-	        System.err.println("Parsing error");
-	        e.printStackTrace();
-	        return null;
-	    } 
-	    catch (IOException e) 
-	    {
-	        System.err.println("abnormal IO");
-	        e.printStackTrace();
-	        return null;
-	    } 
-        finally 
-        {
-        	if (null != response) 
-	        {
-	            try 
-	            {
-	                response.close();
-	                httpClient.close();
-	            } 
-	            catch (IOException e)
-	            {
-	                System.err.println("Error releasing connection");
-	                e.printStackTrace();
-	            }
-	        }
-        }
+		catch (ClientProtocolException e) {
+			System.err.println("Problems with Http Protocol");
+			e.printStackTrace();
+			return null;
+		} catch (ParseException e) {
+			System.err.println("Parsing error");
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			System.err.println("abnormal IO");
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (null != response) {
+				try {
+					response.close();
+					httpClient.close();
+				} catch (IOException e) {
+					System.err.println("Error releasing connection");
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
-	 /** 
-     * 上传文件 
-     */  
-    public void upload() 
-    {  
-        CloseableHttpClient httpclient = HttpClients.createDefault();  
-        HttpPost httppost = new HttpPost("http://localhost:8080/myDemo/Ajax/serivceFile.action");  
-        try 
-        {  
-            FileBody bin = new FileBody(new File("F:\\image\\sendpix0.jpg"));  
-            StringBody comment = new StringBody("A binary file of some kind", ContentType.TEXT_PLAIN);  
-  
-            HttpEntity reqEntity = MultipartEntityBuilder.create().addPart("bin", bin).addPart("comment", comment).build();  
-            httppost.setEntity(reqEntity);  
-  
-            System.out.println("executing request " + httppost.getRequestLine());  
-            CloseableHttpResponse response = httpclient.execute(httppost);  
-            try 
-            {  
-                System.out.println("----------------------------------------");  
-                System.out.println(response.getStatusLine());  
-                HttpEntity resEntity = response.getEntity();  
-                if (resEntity != null) 
-                {  
-                    System.out.println("Response content length: " + resEntity.getContentLength());  
-                }  
-                EntityUtils.consume(resEntity);  
-            } finally 
-            {  
-                response.close();  
-            }  
-        } 
-        catch (ClientProtocolException e) 
-        {  
-            e.printStackTrace();  
-        } 
-        catch (IOException e) 
-        {  
-            e.printStackTrace();  
-        } 
-        finally 
-        {  
-            try 
-            {  
-                httpclient.close();  
-            } 
-            catch (IOException e) 
-            {  
-                e.printStackTrace();  
-            }  
-        }  
-    }  
+	public static byte[] getFileToByte(File file) 
+	{
+        byte[] by = new byte[(int) file.length()];
+        InputStream is = null;
+        try {
+            is = new FileInputStream(file);
+            ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
+            byte[] bb = new byte[2048];
+            int ch;
+            ch = is.read(bb);
+            while (ch != -1) {
+                bytestream.write(bb, 0, ch);
+                ch = is.read(bb);
+            }
+            by = bytestream.toByteArray();
+        } catch (Exception ex) {
+            throw new RuntimeException("transform file into bin Array 出错",ex);
+        } finally {
+        	if(is != null)
+				try {
+					is.close();
+				} catch (IOException e) {
+					System.err.println("Error closing FileInputStream");
+					e.printStackTrace();
+				}
+        }
+        return by;
+    }
 	
 	public static void main(String[] args) 
 	{
-		
+		Pair<Integer, String> pair = getArray("/profiles/user", TOKEN);
+		System.out.println(pair);
+
 		/*
-		 * JSONArray testObject = HttpTool.getArray("claims");
-		 * System.out.println(testObject);
+		 * Claim claim = new Claim("claim_id", "001", null, null, null, 0, null,
+		 * "pending", DateTool.getCurrentDate(), DateTool.getCurrentDate());
+		 * claim.setAccLocation("Beijing"); claim.setAccDate(DateTool.getCurrentDate());
+		 * claim.setClaimReason("测试"); claim.setClaimAmount(Float.valueOf(250));
+		 * claim.setClaimFiles(new ArrayList<File>());
+		 * System.out.println("**************" + postObject("claims",
+		 * ClaimTool.claimToJSONObject(claim)));
 		 */
-		Claim claim = new Claim("claim_id", "001", null, null, null, 0, null, "pending", DateTool.getCurrentDate(), DateTool.getCurrentDate());
-		claim.setAccLocation("Beijing");
-		claim.setAccDate(DateTool.getCurrentDate());
-		claim.setClaimReason("测试");
-		claim.setClaimAmount(Float.valueOf(250));
-		claim.setClaimFiles(new ArrayList<File>());
-		System.out.println("**************" + postObject("claims", ClaimTool.claimToJSONObject(claim)));
-		 
+
+		/*
+		 * String username = "user"; String password = "pwd"; JSONObject jobject = new
+		 * JSONObject(); jobject.put("username", username); jobject.put("password",
+		 * password); System.out.println(postObject("/users/login", "",
+		 * jobject).getValue());
+		 */
+
 	}
 	
 

@@ -1,7 +1,7 @@
 package employee.view;
 
 import java.util.Optional;
-import employee.desktop.EmployeeMainApp;
+import desktop.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -12,11 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import model.Claim;
+import tool.Controller;
 
-public class ClaimInformationController 
+public class ClaimInformationController extends Controller 
 {
-	private EmployeeMainApp mainApp;
-	private Claim claim;
 	@FXML
     private Button btn_insuranceClaim;
     @FXML
@@ -36,6 +35,9 @@ public class ClaimInformationController
 	@FXML
 	private Button btn_notAccept;
 	
+	private MainApp mainApp;
+	private Claim claim;
+	
 	private ButtonType acceptType = new ButtonType("Accept", ButtonData.YES);
 	//private ButtonType notAcceptType = new ButtonType("Not Accept");
 	//private ButtonType cancelType = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
@@ -45,16 +47,6 @@ public class ClaimInformationController
 	{
 		this.claim = claim;
 	}
-	
-	public void setMainApp(EmployeeMainApp mainApp) 
-    {
-		locationOfAccident.setText(claim.getAccLocation());
-		dateOfAccident.setText(claim.getAccDate().toString());
-		claimReason.setText(claim.getClaimReason());
-		amountOfDamage.setText(String.valueOf(claim.getClaimAmount()));
-        this.mainApp = mainApp;
-
-    }
 	
 	@FXML
 	private void acceptClaim()
@@ -108,5 +100,15 @@ public class ClaimInformationController
 		claim.setStatus("pending");
 		//POSTÐÞ¸Ä²Ù×÷
     	mainApp.showClaimAffairView();
+    }
+	
+	public void setMainApp(MainApp mainApp) 
+    {
+		locationOfAccident.setText(claim.getAccLocation());
+		dateOfAccident.setText(claim.getAccDate().toString());
+		claimReason.setText(claim.getClaimReason());
+		amountOfDamage.setText(String.valueOf(claim.getClaimAmount()));
+        this.mainApp = mainApp;
+
     }
 }

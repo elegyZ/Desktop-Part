@@ -27,22 +27,26 @@ public class PolicyTool
 		String policyId = jobject.getString("_id");
 		int plan = jobject.getInt("plan");
 		int level = jobject.getInt("level");
-		Date startDate = DateTool.mangoToJava(jobject.getString("startDate"));													//test
+		Date startDate = DateTool.mangoToJava(jobject.getString("startDate"));
 		int duration = jobject.getInt("duration") / 30;
-		Date createDate = DateTool.mangoToJava(jobject.getString("createdAt"));															//test
-		Date updateDate = DateTool.mangoToJava(jobject.getString("updatedAt"));															//test
-		String insuredId = jobject.getString("insuredId");
-		String insuredName = jobject.getString("insuredName");
-		String socialId = jobject.getString("socialId");
-		String gender = jobject.getString("gender");
-		int age = jobject.getInt("age");
-		String phone = jobject.getString("phone");
-		String email = jobject.getString("email");
-		String bankUserName = jobject.getString("backUserName");
-		String bankName = jobject.getString("bankName");
-		String bankAccount = jobject.getString("bankAccount");
-		Insured insured = new Insured(insuredId, insuredName, socialId, gender, age, phone, email, bankUserName, bankName, bankAccount, policyId);
-		Policy policy = new Policy(policyId, plan, level, startDate, duration, createDate, updateDate, insured);
+		Date createDate = DateTool.mangoToJava(jobject.getString("createdAt"));
+		Date updateDate = DateTool.mangoToJava(jobject.getString("updatedAt"));
+		String claimId = "123";//jobject.getString("claim");									//test
+		
+		JSONObject jinsured = (JSONObject) jobject.get("insured");	
+		String insuredId = jinsured.getString("_id");		
+		String lastname = jinsured.getString("lastname");
+		String firstname = jinsured.getString("firstname");	
+		String socialId = jinsured.getString("socialId");
+		String gender = jinsured.getString("gender");
+		int age = jinsured.getInt("age");
+		String phone = jinsured.getString("phone");
+		String email = jinsured.getString("email");
+		String bankName = jinsured.getString("bankName");
+		String bankAccount = jinsured.getString("bankAccount");
+		String bankUsername = jinsured.getString("bankUsername");
+		Insured insured = new Insured(insuredId, lastname, firstname, socialId, gender, age, phone, email, bankUsername, bankName, bankAccount, policyId);
+		Policy policy = new Policy(policyId, plan, level, startDate, duration, createDate, updateDate, insured, claimId);
 		return policy;
 	}
 	

@@ -39,22 +39,22 @@ public class ClaimTool
 	public static Claim getClaimObject(JSONObject jobject)
 	{
 		String id = jobject.getString("_id");
-		String policyId = jobject.getString("insuranceId");
-		String accLocation = jobject.getString("accLocation");
-		Date accDate = DateTool.mangoToJava(jobject.getString("accDate"));	
-		String claimReason = jobject.getString("claimReason");
-		float claimAmount = (float) jobject.getDouble("claimAmount");
+		String policyId = jobject.getString("insurance");
+		String userId = jobject.getString("user");
+		String accLocation = jobject.getString("location");
+		Date accDate = DateTool.mangoToJava(jobject.getString("date"));	
+		String claimReason = jobject.getString("reason");
+		float claimAmount = (float) jobject.getDouble("amount");
 		List<File> claimFiles = new ArrayList<File>();
-		JSONArray array = jobject.getJSONArray("claimFiles");
-		if(!array.isEmpty())
-		{
-			for(int i = 0;i < array.size();i++)
-				claimFiles.add((File) array.get(i));
-		}
-		String status = jobject.getString("accDate");
+		/*
+		 * JSONArray array = jobject.getJSONArray("claimFiles"); if(!array.isEmpty()) {
+		 * for(int i = 0;i < array.size();i++) claimFiles.add((File) array.get(i)); }
+		 */
+		String status = jobject.getString("status");
+		String employeeId = jobject.getString("employee");
 		Date createDate = DateTool.mangoToJava(jobject.getString("createdAt"));	
 		Date updateDate = DateTool.mangoToJava(jobject.getString("updatedAt"));	
-		Claim claim = new Claim(id, policyId, accLocation, accDate, claimReason, claimAmount, claimFiles, status, createDate, updateDate);
+		Claim claim = new Claim(id, policyId, userId, accLocation, accDate, claimReason, claimAmount, claimFiles, status, employeeId, createDate, updateDate);
 		return claim;
 	}
 	
@@ -71,15 +71,21 @@ public class ClaimTool
 	
 	public static JSONObject claimToJSONObject(Claim claim)
 	{
+		/*
+		 * List<File> files = claim.getClaimFiles(); List<byte[]> bytefiles = new
+		 * ArrayList<byte[]>(); for(File file:files) { byte[] bytefile =
+		 * HttpTool.getFileToByte(file); bytefiles.add(bytefile); }
+		 */
 		JSONObject jobject = new JSONObject();
-		jobject.put("_id", claim.getId());
-		jobject.put("insuranceId", claim.getPolicyId());
-		jobject.put("accLocation", claim.getAccLocation());
-		jobject.put("accDate", DateTool.javaToMango(claim.getAccDate()));
-		jobject.put("claimReason", claim.getClaimReason());
-		jobject.put("claimAmount", claim.getClaimAmount());
-		jobject.put("claimFiles", "test");			//test
-		jobject.put("status", claim.getStatus());
+		//jobject.put("type", value);
+		jobject.put("status", claim.getStatus());			//test
+		jobject.put("insurance", claim.getPolicyId());
+		jobject.put("location", claim.getAccLocation());
+		jobject.put("date", DateTool.javaToMango(claim.getAccDate()));
+		jobject.put("reason", claim.getClaimReason());
+		jobject.put("amount", claim.getClaimAmount());
 		return jobject;
 	}
+	
+	
 }

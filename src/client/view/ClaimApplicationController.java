@@ -6,13 +6,11 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import client.desktop.ClientMainApp;
+import desktop.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -20,13 +18,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import model.Claim;
+import tool.ClientTool;
+import tool.Controller;
 import tool.DateTool;
 
 //client-À˜≈‚…Í«Î
-public class ClaimApplicationController 
+public class ClaimApplicationController  extends Controller 
 {
 	@FXML
 	private TextField locationOfAcc;
@@ -59,7 +57,7 @@ public class ClaimApplicationController
 	@FXML
 	private Button btn_submit;
 	
-	private ClientMainApp mainApp;
+	private MainApp mainApp;
 	private String policyId;
 	private Claim claim;
 	List<File> fileList = new ArrayList<File>();
@@ -81,7 +79,7 @@ public class ClaimApplicationController
 	
 	public void setClaim()
 	{
-		claim = new Claim("claim_id", policyId, null, null, null, 0, null, "pending", DateTool.getCurrentDate(), DateTool.getCurrentDate());
+		claim = new Claim("claim_id", policyId, ClientTool.userId, null, null, null, 0, null, "pending", "", DateTool.getCurrentDate(), DateTool.getCurrentDate());
 		claim.setAccLocation(locationOfAcc.getText());
 		claim.setAccDate(Date.valueOf(dateOfAcc.getValue().toString()));
 		claim.setClaimReason(reasonOfClaim.getText());
@@ -89,23 +87,12 @@ public class ClaimApplicationController
 		claim.setClaimFiles(fileList);
 	}
 	
-	public void checkAlert(String warning)
-	{
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Warning");
-		alert.setHeaderText(null);
-		alert.setContentText(warning);
-		alert.getButtonTypes().clear();
-		alert.getButtonTypes().add(new ButtonType("OK", ButtonData.YES));
-		alert.showAndWait();
-	}
-	
 	public void setFileNotation(String filelist)
 	{
 		try
 		{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(ClientMainApp.class.getResource("../view/ClaimFileView.fxml"));
+			loader.setLocation(MainApp.class.getResource("../client/view/ClaimFileView.fxml"));
 			AnchorPane claimFileView = (AnchorPane) loader.load();
 			claimFileView.setStyle("-fx-background-color: white;");
 			Stage fileStage = new Stage();
@@ -123,6 +110,11 @@ public class ClaimApplicationController
 	public void initialize()
 	{
 		reasonOfClaim.setText("Please describe in detail the reasons for applying for compensation.");
+		reasonOfClaim.setOnMouseClicked((me) -> 
+		{
+			if (reasonOfClaim.getText().equals("Please describe in detail the reasons for applying for compensation."))
+				reasonOfClaim.setText("");
+		});
 		dateOfAcc.setValue(LocalDate.now());
 		iv_upload.setVisible(false);
 	}
@@ -168,7 +160,7 @@ public class ClaimApplicationController
 	{
 		if(locationOfAcc.getText().equals(""))
 			checkAlert("You must enter the location of accident.");
-		else if(reasonOfClaim.getText().equals("Please describe in detail the reasons for applying for compensation."))
+		else if(reasonOfClaim.getText().equals(""))
 			checkAlert("You must enter the reason of accident.");
 		else if(amountOfDamage.getText().equals(""))
 			checkAlert("You must enter the amount of damage.");
@@ -182,12 +174,12 @@ public class ClaimApplicationController
 	}
 
 	@FXML
-	public void backToInsuranceClaim()
+	public void backToInsurance()
 	{
-		mainApp.showInsuranceClaimView();
+		mainApp.showInsuranceView();
 	}
 	
-	public void setMainApp(ClientMainApp mainApp) 
+	public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
     }

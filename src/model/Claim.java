@@ -11,6 +11,7 @@ public class Claim
 {
 	private String id;
 	private String policyId;
+	private String userId;
 	private String accLocation;
 	private Date accDate;
 	private float claimAmount;
@@ -18,14 +19,16 @@ public class Claim
 	private List<File> claimFiles;
 	private String status;					//”–accept, notAccept, processing, pendingÀƒ÷÷
 	private String rejectReason;
+	private String employeeId;
 	private Date createDate;
 	private Date updateDate;
 	
-	public Claim(String id, String policyId, String accLocation, Date accDate, String claimReason, float claimAmount, List<File> claimFiles, String status,
-				 Date createDate, Date updateDate)
+	public Claim(String id, String policyId, String userId, String accLocation, Date accDate, String claimReason, float claimAmount, List<File> claimFiles, String status,
+				 String employeeId, Date createDate, Date updateDate)
 	{
 		this.id = id;
 		setPolicyId(policyId);
+		setUserId(userId);
 		setAccLocation(accLocation);
 		setAccDate(accDate);
 		setClaimReason(claimReason);
@@ -33,8 +36,20 @@ public class Claim
 		setClaimFiles(claimFiles);
 		setStatus(status);
 		this.rejectReason = "";
+		setEmployeeId(employeeId);
 		setCreateDate(createDate);
 		setUpdateDate(updateDate);
+	}
+	
+	//------------set methods-----------------------------------------
+	public void setUserId(String userId)
+	{
+		this.userId = userId;
+	}
+	
+	public void setEmployeeId(String employeeId)
+	{
+		this.employeeId = employeeId;
 	}
 	
 	public void setRejectReason(String rejectReason)
@@ -85,6 +100,17 @@ public class Claim
 	public void setStatus(String status)
 	{
 		this.status = status;
+	}
+	
+	//------------get methods-----------------------------------
+	public String getUserId()
+	{
+		return userId;
+	}
+	
+	public String getEmployeeId()
+	{
+		return employeeId;
 	}
 	
 	public String getId()

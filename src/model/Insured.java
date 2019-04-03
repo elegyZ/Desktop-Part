@@ -3,29 +3,31 @@ package model;
 public class Insured 
 {
 	private String id;
-	private String insuredName;
+	private String lastname;
+	private String firstname;
 	private String socialId;
 	private String gender;
 	private int age;
 	private String phone;
 	private String email;
-	private String bankUserName;
+	private String bankUsername;
 	private String bankName;
 	private String bankAccount;
 	private String policyId;
 	
-	public Insured(String id, String insuredName, String socialId, String gender, int age, String phone, String email,
-				   String bankUserName, String bankName, String bankAccount, String policyId)
+	public Insured(String id, String lastname, String firstname, String socialId, String gender, int age, String phone, String email,
+				   String bankUsername, String bankName, String bankAccount, String policyId)
 	{
 		this.id = id;
 		setPolicyId(policyId);
-		setInsuranceName(insuredName);
+		setLastname(lastname);
+		setFirstname(firstname);
 		setSocialId(socialId);
 		setGender(gender);
 		setAge(age);
 		setPhone(phone);
 		setEmail(email);
-		setBankUserName(bankUserName);
+		setBankUserName(bankUsername);
 		setBankName(bankName);
 		setBankAccount(bankAccount);
 		setPolicyId(policyId);
@@ -36,9 +38,14 @@ public class Insured
 		this.policyId = policyId;
 	}
 	
-	public void setInsuranceName(String insuredName)
+	public void setLastname(String lastname)
 	{
-		this.insuredName = insuredName;
+		this.lastname = lastname;
+	}
+	
+	public void setFirstname(String firstname)
+	{
+		this.firstname = firstname;
 	}
 	
 	public void setSocialId(String socialId)
@@ -66,9 +73,9 @@ public class Insured
 		this.email = email;
 	}
 	
-	public void setBankUserName(String bankUserName)
+	public void setBankUserName(String bankUsername)
 	{
-		this.bankUserName = bankUserName;
+		this.bankUsername = bankUsername;
 	}
 	
 	public void setBankName(String bankName)
@@ -91,9 +98,14 @@ public class Insured
 		return policyId;
 	}
 	
-	public String getInsuredName()
+	public String getFirstname()
 	{
-		return insuredName;
+		return firstname;
+	}
+	
+	public String getLastname()
+	{
+		return lastname;
 	}
 	
 	public String getSocialId()
@@ -123,7 +135,7 @@ public class Insured
 	
 	public String getBankUserName()
 	{
-		return bankUserName;
+		return bankUsername;
 	}
 	
 	public String getBankName()

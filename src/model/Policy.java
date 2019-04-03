@@ -18,8 +18,9 @@ public class Policy
 	private Date createDate;
 	private Date updateDate;
 	private Insured insured;
+	private String claimId;
 	
-	public Policy(String id, int plan, int level, Date startDate, int duration, Date createDate, Date updateDate, Insured insured)
+	public Policy(String id, int plan, int level, Date startDate, int duration, Date createDate, Date updateDate, Insured insured, String claimId)
 	{
 		this.id = id;
 		setPlan(plan);
@@ -30,6 +31,7 @@ public class Policy
 		setCreateDate(createDate);
 		setUpdateDate(updateDate);
 		setInsured(insured);
+		setClaimId(claimId);
 	}
 
 	//------------set methods-----------------------------------------
@@ -73,7 +75,17 @@ public class Policy
 		this.insured = insured;
 	}
 	
+	public void setClaimId(String claimId)
+	{
+		this.claimId = claimId;
+	}
+	
 	//------------get methods-----------------------------------
+	public String getClaimId()
+	{
+		return claimId;
+	}
+	
 	public Date getCreateDate()
 	{
 		return createDate;
@@ -141,6 +153,34 @@ public class Policy
 			property += "No Level";
 		return property;
 	}
+	
+	public String getPlanProperty()
+	{
+		String property = "";
+		if(plan == 1)
+			property += "Basic";
+		else if(plan == 2)
+			property += "Medium";
+		else if(plan == 3)
+			property += "Premium";
+		else
+			property += "No Plan";
+		return property;
+	}
+	
+	public String getLevelProperty()
+	{
+		String property = "";
+		if(level == 1)
+			property += "I";
+		else if(level == 2)
+			property += "II";
+		else if(level == 3)
+			property += "III";
+		else
+			property += "No Level";
+		return property;
+	}
 
 	public String getDurationProperty() 
 	{
@@ -162,6 +202,34 @@ public class Policy
 		{
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
 			return df.format(startDate) + "\n" + df.format(expireDate);
+		}
+	}
+	
+	public String getStartTimeProperty(String country)
+	{
+		if(country.equals("Ireland"))
+		{
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.UK);
+			return df.format(startDate);
+		}
+		else
+		{
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
+			return df.format(startDate);
+		}
+	}
+	
+	public String getEndTimeProperty(String country)
+	{
+		if(country.equals("Ireland"))
+		{
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.UK);
+			return df.format(expireDate);
+		}
+		else
+		{
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
+			return df.format(expireDate);
 		}
 	}
 }

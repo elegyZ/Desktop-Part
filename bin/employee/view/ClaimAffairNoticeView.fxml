@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="pane_backgrouund" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="employee.view.ClaimAffairNoticeController">
+   <children>
+      <Group id="group">
+         <children>
+            <Button id="bt_policyModification" fx:id="btn_policyModification" layoutX="50.0" layoutY="230.0" mnemonicParsing="false" stylesheets="@style.css" text="Policy Modification" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Button id="bt_myAccount" fx:id="btn_myAccount" layoutX="50.0" layoutY="315.0" mnemonicParsing="false" stylesheets="@style.css" text="My Account" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Line id="line_myAccount" endX="200.0" layoutY="380.0" startX="50.0" stroke="#3399ff" strokeWidth="2.0" />
+            <Label id="lb_workMenu" layoutX="50.0" layoutY="80.0" text="Work Menu" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="20.0" />
+               </font>
+            </Label>
+            <Line id="line_policyModification" endX="200.0" layoutY="295.0" startX="50.0" stroke="#3399ff" strokeWidth="2.0" />
+            <Line id="line_InsuranceClaim" endX="200.0" layoutY="210.0" startX="50.0" stroke="#0066cc" strokeWidth="3.0" />
+            <Line id="line_workMenu" endX="200.0" layoutY="125.0" startX="50.0" stroke="#3399ff" strokeWidth="2.0" />
+            <Button id="bt_insuranceClaim" fx:id="btn_insuranceClaim" layoutX="50.0" layoutY="145.0" mnemonicParsing="false" onAction="#backToInsuranceClaim" stylesheets="@style.css" text="Insurance Claim" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+         </children>
+      </Group>
+      <Label id="lb_notice" layoutX="360.0" layoutY="255.0" text="Your processing has been submitted successfully." textFill="#0066cc">
+         <font>
+            <Font name="Microsoft YaHei Bold" size="20.0" />
+         </font></Label>
+      <Button id="bt_back" fx:id="btn_back" layoutX="535.0" layoutY="321.0" mnemonicParsing="false" onAction="#backToClaimAffair" prefHeight="30.0" prefWidth="150.0" stylesheets="@style.css" text="Back" textFill="WHITE">
+         <font>
+            <Font name="Microsoft YaHei Bold" size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

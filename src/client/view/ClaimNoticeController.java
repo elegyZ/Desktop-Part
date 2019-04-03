@@ -1,11 +1,12 @@
 package client.view;
 
-import client.desktop.ClientMainApp;
+import desktop.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import tool.Controller;
 
 //client-¿Ì≈‚≥…π¶
-public class ClaimNoticeController 
+public class ClaimNoticeController  extends Controller 
 {
 	@FXML
 	private Button btn_home;
@@ -18,15 +19,15 @@ public class ClaimNoticeController
 	@FXML
 	private Button btn_back;
 	
-	private ClientMainApp mainApp;
+	private MainApp mainApp;
 	
 	@FXML
-	public void backToInsuranceClaim()
+	public void backToInsurance()
 	{
-		mainApp.showInsuranceClaimView();
+		mainApp.showInsuranceView();
 	}
 	
-	public void setMainApp(ClientMainApp mainApp) 
+	public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
     }

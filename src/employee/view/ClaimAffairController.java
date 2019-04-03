@@ -1,6 +1,6 @@
 package employee.view;
 
-import employee.desktop.EmployeeMainApp;
+import desktop.MainApp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,13 +9,15 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
+import javafx.util.Pair;
 import model.Claim;
-import test.TestCase;
+import net.sf.json.JSONArray;
 import tool.ClaimTool;
+import tool.Controller;
+import tool.EmployeeTool;
 import tool.HttpTool;
-import tool.PolicyTool;
 
-public class ClaimAffairController 
+public class ClaimAffairController extends Controller 
 {
 	@FXML
 	private TableView<Claim> tb_claims;
@@ -39,18 +41,23 @@ public class ClaimAffairController
     private Button btn_myAccount;
     
     private ObservableList<Claim> claimData;
-    private EmployeeMainApp mainApp;
+    private MainApp mainApp;
 
     @FXML
     private void initialize() 
     {    	
     	//------------------------------------------------------------Data Update---------------------------------------------
-    	claimData = ClaimTool.initClaimList(ClaimTool.getClaimList(HttpTool.getArray(TestCase.claim_array)));
+    	Pair<Integer, String> reply = HttpTool.getArray("/claims", EmployeeTool.token);
+		if(reply.getKey().equals(200))
+		{
+			JSONArray jarray = JSONArray.fromObject(reply.getValue());
+			claimData = ClaimTool.initClaimList(ClaimTool.getClaimList(jarray));
+		}	
     	
     	//------------------------------------------------------------GUI Update---------------------------------------------
     	tb_claims.setItems(claimData);
     	policyIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPolicyId()));
-    	insuranceTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(PolicyTool.getPolicyObject(HttpTool.getObject(cellData.getValue().getPolicyId())).getPlanLevelProperty()));
+    	//insuranceTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(PolicyTool.getPolicyObject(HttpTool.getObject(cellData.getValue().getPolicyId())).getPlanLevelProperty()));
     	dateOfSubmissionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSubmissionDateProperty("Ireland")));
     	amountOfDamageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getClaimAmount())));
     	acceptanceColumn.setCellFactory((col) -> 
@@ -106,7 +113,7 @@ public class ClaimAffairController
     	}
     }
     
-    public void setMainApp(EmployeeMainApp mainApp) 
+    public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
     }

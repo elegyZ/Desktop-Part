@@ -15,7 +15,7 @@
    <children>
       <Group id="group">
          <children>
-            <Button fx:id="btn_insuranceService" layoutX="55.0" layoutY="235.0" prefHeight="27.0" stylesheets="@style.css" text="Luggage Insurances" textFill="#0066cc">
+            <Button fx:id="btn_insuranceService" layoutX="55.0" layoutY="235.0" prefHeight="27.0" stylesheets="@style.css" text="My Profile" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -32,7 +32,7 @@
                   <Insets top="10.0" />
                </padding>
             </Button>
-            <Button fx:id="btn_myInsurance" layoutX="55.0" layoutY="320.0" stylesheets="@style.css" text="My Insurances" textFill="#0066cc">
+            <Button fx:id="btn_myInsurance" layoutX="55.0" layoutY="320.0" onAction="#backToInsurance" stylesheets="@style.css" text="My Insurances" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -42,13 +42,13 @@
             </Button>
             <Line endX="205.0" layoutY="300.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
             <Line endX="205.0" layoutY="130.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-            <Label layoutX="55.0" layoutY="80.0" prefHeight="27.0" prefWidth="128.0" text="Client Server" textFill="#0066cc">
+            <Label layoutX="55.0" layoutY="80.0" text="Client Service" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei Bold" size="20.0" />
                </font>
             </Label>
             <Line endX="205.0" layoutY="470.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" strokeWidth="2.0" />
-            <Button fx:id="btn_insuranceClaim" layoutX="55.0" layoutY="405.0" onAction="#backToInsuranceClaim" stylesheets="@style.css" text="Claim Settlement" textFill="#0066cc">
+            <Button fx:id="btn_insuranceClaim" layoutX="55.0" layoutY="405.0" stylesheets="@style.css" text="Claim Settlement" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -166,6 +166,11 @@
                         </ImageView>
                      </children>
                   </Group>
+                  <ImageView fx:id="iv_upload" fitHeight="30.0" fitWidth="30.0" layoutX="450.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../resources/pic/upload.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
         </content>

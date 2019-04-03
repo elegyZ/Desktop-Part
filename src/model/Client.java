@@ -1,8 +1,6 @@
 package model;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Client 
 {
@@ -21,9 +19,6 @@ public class Client
 	private Date createDate;
 	private Date updateDate;
 	
-	private Map<String,Policy> policyMap = new HashMap<String,Policy>();
-	private Map<String,Claim> claimMap = new HashMap<String,Claim>();
-	
 	public Client(String id, String userId, String lastName, String firstName, String socialId, String gender, int age,
 				  String country, String province, String city, String phone, String email, Date createDate, Date updateDate)
 	{
@@ -41,26 +36,6 @@ public class Client
 		setEmail(email);
 		setCreateDate(createDate);
 		setUpdateDate(updateDate);
-	}
-	
-	public void addPolicy(String policyId, Policy policy)
-	{
-		policyMap.put(policyId, policy);
-	}
-	
-	public Map<String,Policy> getPolicy()
-	{
-		return policyMap;
-	}
-	
-	public void addClaim(String policyId, Claim claim)
-	{
-		claimMap.put(policyId, claim);
-	}
-	
-	public Map<String,Claim> getClaim()
-	{
-		return claimMap;
 	}
 	
 	public void setUserId(String userId)

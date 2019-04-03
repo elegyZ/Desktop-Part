@@ -1,16 +1,19 @@
 package client.view;
 
-import client.desktop.ClientMainApp;
+import desktop.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.util.Pair;
 import model.Claim;
 import tool.ClaimTool;
+import tool.ClientTool;
+import tool.Controller;
 import tool.HttpTool;
 
 //client-À˜≈‚…Í«Î»∑»œ“≥
-public class ClaimApplicationCheckController 
+public class ClaimApplicationCheckController extends Controller 
 {
 	@FXML
 	private Label locationOfAcc;
@@ -33,7 +36,7 @@ public class ClaimApplicationCheckController
 	@FXML
 	private Button btn_confirm;
 	
-	private ClientMainApp mainApp;
+	private MainApp mainApp;
 	private Claim claim;
 	
 	public void setClaim(Claim claim)
@@ -53,9 +56,13 @@ public class ClaimApplicationCheckController
 	@FXML
 	public void submit()
 	{
-		String result = HttpTool.postObject("claims", ClaimTool.claimToJSONObject(claim));
-		if(result.equals("200"))
+		Pair<Integer, String> result = HttpTool.postObject("/claims", ClientTool.token, ClaimTool.claimToJSONObject(claim));
+		if (result.getKey() == 200)
 			mainApp.showClaimNoticeView();
+		else
+		{
+			System.out.println(result);
+		}
 	}
 	
 	@FXML
@@ -65,12 +72,12 @@ public class ClaimApplicationCheckController
 	}
 	
 	@FXML
-	public void backToInsuranceClaim()
+	public void backToInsurance()
 	{
-		mainApp.showInsuranceClaimView();
+		mainApp.showInsuranceView();
 	}
 	
-	public void setMainApp(ClientMainApp mainApp) 
+	public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
 
