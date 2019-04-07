@@ -64,7 +64,8 @@ public class ClaimTool
 		for(int i = 0;i < jarray.size();i++)
 		{
 			JSONObject jobject = jarray.getJSONObject(i);
-			claimList.add(getClaimObject(jobject));
+			if(jobject.getString("status").equals("pending"))
+				claimList.add(getClaimObject(jobject));
 		}
 		return claimList;
 	}
@@ -78,7 +79,7 @@ public class ClaimTool
 		 */
 		JSONObject jobject = new JSONObject();
 		//jobject.put("type", value);
-		jobject.put("status", claim.getStatus());			//test
+		//jobject.put("status", claim.getStatus());			//test
 		jobject.put("insurance", claim.getPolicyId());
 		jobject.put("location", claim.getAccLocation());
 		jobject.put("date", DateTool.javaToMango(claim.getAccDate()));

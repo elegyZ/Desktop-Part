@@ -49,11 +49,18 @@ public class ClientSignUpController extends Controller
 			{
 				//»•±£œ’π∫¬Ú“≥√Ê£ø	
 			}
-			else
+			else if(reply.getKey().equals(500))
 			{
 				JSONObject jerror = JSONObject.fromObject(reply.getValue());
 				JSONObject jinfo = JSONObject.fromObject(jerror.get("err"));
 				errorAlert(jinfo.getString("name") + "\n" + jinfo.getString("message"));
+				username.setText(null);
+				password.setText(null);
+				password2.setText(null);
+			}
+			else
+			{
+				errorAlert("Error! Please check your Username and Password.");
 				username.setText(null);
 				password.setText(null);
 				password2.setText(null);

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="pane_background" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Group id="group">
+         <children>
+            <Button fx:id="btn_myInsurance" layoutX="55.0" layoutY="320.0" onAction="#backToInsurance" stylesheets="@style.css" text="My Insurances" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btn_myProfile" layoutX="55.0" layoutY="235.0" stylesheets="@style.css" text="My Profile" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Line endX="205.0" layoutY="300.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" strokeWidth="2.0" />
+            <Line endX="205.0" layoutY="470.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+            <Line endX="205.0" layoutY="215.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+            <Button fx:id="btn_myClaim" layoutX="54.0" layoutY="405.0" stylesheets="@style.css" text="My Claim" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Line endX="205.0" layoutY="130.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+            <Button fx:id="btn_home" layoutX="55.0" layoutY="150.0" stylesheets="@style.css" text="Home" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Button>
+            <Line endX="205.0" layoutY="385.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+            <Label layoutX="55.0" layoutY="80.0" text="Client Service" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Button fx:id="btn_modify" layoutX="554.0" layoutY="338.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Create" textFill="WHITE">
+         <font>
+            <Font name="Microsoft YaHei" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="467.0" layoutY="262.0" text="You Have Not Created A Profile." textFill="#0066cc">
+         <font>
+            <Font name="Microsoft YaHei Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

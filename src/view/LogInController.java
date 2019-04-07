@@ -52,8 +52,24 @@ public class LogInController extends Controller
 			{
 				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
 				ClientTool.setToken(replyObject.getString("token"));
+				ClientTool.setUsername(username);
 				//get Client file 得到userId    /profiles/username
 				mainApp.showInsuranceView();		//转去购买页面？
+			}
+			else if(reply.getKey().equals(401))
+			{
+				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
+				JSONObject replyError = JSONObject.fromObject(replyObject.getString("err"));
+				errorAlert(replyObject.getString("msg") + "\n" + replyError.getString("name") + "\n" + replyError.getString("message"));
+				clientUserName.setText(null);
+				clientPassword.setText(null);
+			}
+			else if(reply.getKey().equals(500))
+			{
+				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
+				errorAlert(replyObject.getString("err"));
+				clientUserName.setText(null);
+				clientPassword.setText(null);
 			}
 			else
 			{
@@ -91,6 +107,21 @@ public class LogInController extends Controller
 				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
 				EmployeeTool.setToken(replyObject.getString("token"));
 				mainApp.showClaimAffairView();
+			}
+			else if(reply.getKey().equals(401))
+			{
+				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
+				JSONObject replyError = JSONObject.fromObject(replyObject.getString("err"));
+				errorAlert(replyObject.getString("msg") + "\n" + replyError.getString("name") + "\n" + replyError.getString("message"));
+				employeeUserName.setText(null);
+				employeePassword.setText(null);
+			}
+			else if(reply.getKey().equals(500))
+			{
+				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
+				errorAlert(replyObject.getString("err"));
+				employeeUserName.setText(null);
+				employeePassword.setText(null);
 			}
 			else
 			{
