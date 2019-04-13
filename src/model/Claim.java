@@ -20,13 +20,15 @@ public class Claim
 	private String status;					//”–accept, notAccept, processing, pendingÀƒ÷÷
 	private String rejectReason;
 	private String employeeId;
+	private int type;
 	private Date createDate;
 	private Date updateDate;
 	
-	public Claim(String id, String policyId, String userId, String accLocation, Date accDate, String claimReason, float claimAmount, List<File> claimFiles, String status,
+	public Claim(String id, String policyId, String userId, int type, String accLocation, Date accDate, String claimReason, float claimAmount, List<File> claimFiles, String status,
 				 String employeeId, Date createDate, Date updateDate)
 	{
 		this.id = id;
+		setType(type);
 		setPolicyId(policyId);
 		setUserId(userId);
 		setAccLocation(accLocation);
@@ -42,6 +44,11 @@ public class Claim
 	}
 	
 	//------------set methods-----------------------------------------
+	public void setType(int type)
+	{
+		this.type = type;
+	}
+	
 	public void setUserId(String userId)
 	{
 		this.userId = userId;
@@ -103,6 +110,11 @@ public class Claim
 	}
 	
 	//------------get methods-----------------------------------
+	public int getType()
+	{
+		return type;
+	}
+	
 	public String getUserId()
 	{
 		return userId;
@@ -181,5 +193,15 @@ public class Claim
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
 			return df.format(updateDate);
 		}
+	}
+	
+	public String getTypeProperty(int type)
+	{
+		if(type == 1)
+			return "First Type";
+		else if(type == 2)
+			return "Second Type";
+		else
+			return "Third Type";
 	}
 }

@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.util.Pair;
 import net.sf.json.JSONObject;
-import tool.ClientTool;
+import tool.UserTool;
 import tool.Controller;
 import tool.HttpTool;
 
@@ -43,7 +43,7 @@ public class ClientSignUpController extends Controller
 			JSONObject jobject = new JSONObject();
 			jobject.put("username", name);
 			jobject.put("password", pwd);
-			Pair<Integer, String> reply = HttpTool.postObject("/users/signup", ClientTool.token, jobject);
+			Pair<Integer, String> reply = HttpTool.postObject("/users/signup", UserTool.user.getToken(), jobject);
 			System.out.println(reply);			//test
 			if(reply.getKey().equals(200)) 
 			{

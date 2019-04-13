@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="pane_background" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.ClientProfileController">
+<AnchorPane id="pane_background" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.ClientProfileModifyController">
    <children>
       <Group id="group">
          <children>
@@ -67,16 +67,6 @@
             <Font name="Microsoft YaHei Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="firstName" layoutX="362.0" layoutY="130.0" text="Taylor">
-         <font>
-            <Font name="Microsoft YaHei" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="lastName" layoutX="679.0" layoutY="130.0" text="Swift">
-         <font>
-            <Font name="Microsoft YaHei" size="16.0" />
-         </font>
-      </Label>
       <Label layoutX="567.0" layoutY="130.0" text="Last Name:">
          <font>
             <Font name="Microsoft YaHei Bold" size="16.0" />
@@ -87,19 +77,9 @@
             <Font name="Microsoft YaHei Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="gender" layoutX="331.0" layoutY="170.0" text="Female">
-         <font>
-            <Font name="Microsoft YaHei" size="16.0" />
-         </font>
-      </Label>
       <Label layoutX="567.0" layoutY="170.0" text="Age:">
          <font>
             <Font name="Microsoft YaHei Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="age" layoutX="620.0" layoutY="170.0" text="20">
-         <font>
-            <Font name="Microsoft YaHei" size="16.0" />
          </font>
       </Label>
       <Label layoutX="255.0" layoutY="210.0" text="ID:">
@@ -107,19 +87,9 @@
             <Font name="Microsoft YaHei Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="socialId" layoutX="293.0" layoutY="210.0" text="123456197007011234">
-         <font>
-            <Font name="Microsoft YaHei" size="16.0" />
-         </font>
-      </Label>
       <Label layoutX="567.0" layoutY="210.0" text="Country:">
          <font>
             <Font name="Microsoft YaHei Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="country" layoutX="650.0" layoutY="210.0" text="American">
-         <font>
-            <Font name="Microsoft YaHei" size="16.0" />
          </font>
       </Label>
       <Label layoutX="255.0" layoutY="250.0" text="Province:">
@@ -127,19 +97,9 @@
             <Font name="Microsoft YaHei Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="province" layoutX="348.0" layoutY="250.0" text="New York">
-         <font>
-            <Font name="Microsoft YaHei" size="16.0" />
-         </font>
-      </Label>
       <Label layoutX="567.0" layoutY="250.0" text="City:">
          <font>
             <Font name="Microsoft YaHei Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="city" layoutX="625.0" layoutY="250.0" text="Manhattan">
-         <font>
-            <Font name="Microsoft YaHei" size="16.0" />
          </font>
       </Label>
       <Label layoutX="255.0" layoutY="290.0" text="Phone:">
@@ -147,25 +107,25 @@
             <Font name="Microsoft YaHei Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="phone" layoutX="335.0" layoutY="290.0" text="+86 18812345678">
-         <font>
-            <Font name="Microsoft YaHei" size="16.0" />
-         </font>
-      </Label>
       <Label layoutX="255.0" layoutY="330.0" text="Email:">
          <font>
             <Font name="Microsoft YaHei Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="email" layoutX="329.0" layoutY="330.0" text="xxxx.xxxx@gmail.com">
-         <font>
-            <Font name="Microsoft YaHei" size="16.0" />
-         </font>
-      </Label>
-      <Button fx:id="btn_modify" layoutX="511.0" layoutY="390.0" mnemonicParsing="false" onAction="#modify" prefHeight="30.0" prefWidth="150.0" text="Modify" textFill="WHITE">
+      <Button fx:id="btn_save" layoutX="511.0" layoutY="390.0" mnemonicParsing="false" onAction="#saveProfile" prefHeight="30.0" prefWidth="150.0" text="Save" textFill="WHITE">
          <font>
             <Font name="Microsoft YaHei" size="18.0" />
          </font>
       </Button>
+      <TextField fx:id="firstName" layoutX="357.0" layoutY="126.0" />
+      <TextField fx:id="gender" layoutX="357.0" layoutY="166.0" />
+      <TextField fx:id="socialId" layoutX="357.0" layoutY="206.0" />
+      <TextField fx:id="province" layoutX="357.0" layoutY="246.0" />
+      <TextField fx:id="phone" layoutX="357.0" layoutY="286.0" />
+      <TextField fx:id="email" layoutX="357.0" layoutY="326.0" />
+      <TextField fx:id="lastName" layoutX="672.0" layoutY="126.0" />
+      <TextField fx:id="age" layoutX="672.0" layoutY="166.0" />
+      <TextField fx:id="country" layoutX="672.0" layoutY="206.0" />
+      <TextField fx:id="city" layoutX="672.0" layoutY="246.0" />
    </children>
 </AnchorPane>

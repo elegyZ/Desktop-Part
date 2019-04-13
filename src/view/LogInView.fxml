@@ -9,15 +9,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogInController">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogInController">
    <children>
-      <TabPane id="tab_pane" layoutX="279.0" layoutY="158.0" prefHeight="284.0" prefWidth="442.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="20.0" tabMaxWidth="100.0">
+      <Label layoutX="276.0" layoutY="90.0" text="Welcome To Hibernia-Sino Insurance" textAlignment="CENTER" textFill="#0066cc">
+         <font>
+            <Font name="Microsoft YaHei Bold" size="30.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="-50.0" />
+         </VBox.margin>
+      </Label>
+      <TabPane id="tab_pane" layoutX="279.0" layoutY="158.0" maxHeight="300.0" maxWidth="500.0" prefHeight="300.0" prefWidth="500.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="20.0" tabMaxWidth="100.0">
         <tabs>
           <Tab text="client">
                <content>
                   <Pane id="pane_background" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Group id="pane_background">
+                        <Group id="pane_background" layoutX="25.0" layoutY="2.0">
                            <children>
                               <Button fx:id="bt_clientLogIn" layoutX="112.0" layoutY="169.0" mnemonicParsing="false" onAction="#clientLogIn" text="Log In" textFill="WHITE">
                                  <font>
@@ -51,7 +59,7 @@
                <content>
                   <Pane id="pane_background" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css">
                      <children>
-                        <Group id="pane_background">
+                        <Group id="pane_background" layoutX="25.0" layoutY="2.0">
                            <children>
                               <Label layoutX="50.0" layoutY="100.0" text="Password">
                                  <font>
@@ -83,10 +91,5 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Label layoutX="276.0" layoutY="90.0" text="Welcome To Hibernia-Sino Insurance" textAlignment="CENTER" textFill="#0066cc">
-         <font>
-            <Font name="Microsoft YaHei Bold" size="24.0" />
-         </font>
-      </Label>
    </children>
-</AnchorPane>
+</VBox>

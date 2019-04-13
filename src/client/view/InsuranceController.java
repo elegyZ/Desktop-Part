@@ -2,7 +2,7 @@ package client.view;
 
 import model.Policy;
 import net.sf.json.JSONArray;
-import tool.ClientTool;
+import tool.UserTool;
 import tool.Controller;
 import tool.HttpTool;
 import tool.PolicyTool;
@@ -37,7 +37,7 @@ public class InsuranceController extends Controller
 	@FXML
 	private Button btn_myInsurance;
 	@FXML
-	private Button btn_insuranceClaim;
+	private Button btn_myProfile;
 	
     private ObservableList<Policy> policyData;
 	private MainApp mainApp;
@@ -45,7 +45,7 @@ public class InsuranceController extends Controller
 	private void initData() 
 	{
 		//------------------------------------------------------------Data Update---------------------------------------------
-		Pair<Integer, String> reply = HttpTool.getArray("/insurances", ClientTool.token);
+		Pair<Integer, String> reply = HttpTool.getArray("/insurances", UserTool.user.getToken());
 		if(reply.getKey().equals(200))
 		{
 			JSONArray jarray = JSONArray.fromObject(reply.getValue());
@@ -56,7 +56,7 @@ public class InsuranceController extends Controller
 		insurancePlanColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlanLevelProperty()));
 		guaranteePeriodColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDurationProperty()));
 		startingEndingDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStartEndTimeProperty("Ireland")));		//test
-		insuranceClaimColumn.setCellFactory(col -> 
+		insuranceClaimColumn.setCellFactory(cellData -> 
     	{
             TableCell<Policy, String> cell = new TableCell<Policy, String>() 
             {
@@ -99,6 +99,12 @@ public class InsuranceController extends Controller
 	public void toClaimView()
 	{
 		mainApp.showClaimView();
+	}
+	
+	@FXML
+	public void toProfile()
+	{
+		mainApp.showClientProfileView();
 	}
 	
 	@FXML

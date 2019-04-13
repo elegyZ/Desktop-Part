@@ -25,8 +25,8 @@ import net.sf.json.JSONObject;
 public class HttpTool 
 {
 	//public final static String URL = "https://65ea4d1c-c0d7-4115-8198-1c38cf9dd578.mock.pstmn.io/";
-	public final static String URL = "http://59.110.243.55";
-	public final static String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzlkOGQyM2UzZDE4MjZjOTE1YzJkOGIiLCJpYXQiOjE1NTQzNDEwMDQsImV4cCI6MTU1NDQyNzQwNH0.3VwTv5AK-X9Fv0OcvOplUcmCrNYlyjG92FgDpDaEBBs";
+	public final static String URL = "http://59.110.243.55:3000";
+	public final static String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzlkOGQyM2UzZDE4MjZjOTE1YzJkOGIiLCJpYXQiOjE1NTUxMjIwNjYsImV4cCI6MTU1NTIwODQ2Nn0.F0MyH03JRVDVj9s6Ot-MxWveG3mcd3q9nEUbDyf5cZQ";
 	
 	public static Pair<Integer, String> getObject(String lastpart, String token)
 	{
@@ -247,10 +247,9 @@ public class HttpTool
 	
 	public static void main(String[] args) 
 	{
-		/*
-		 * Pair<Integer, String> pair = getObject("/profiles/user", TOKEN);
-		 * System.out.println(pair);
-		 */
+
+		Pair<Integer, String> pair = getObject("/insurances", TOKEN);
+		System.out.println(pair);
 
 		/*
 		 * Claim claim = new Claim("claim_id", "001", null, null, null, 0, null,
@@ -261,13 +260,12 @@ public class HttpTool
 		 * System.out.println("**************" + postObject("claims",
 		 * ClaimTool.claimToJSONObject(claim)));
 		 */
-
-		String username = "user";
-		String password = "pwd";
-		JSONObject jobject = new JSONObject();
-		jobject.put("username", username);
-		jobject.put("password", password);
-		System.out.println(postObject("/users/login", "", jobject).getValue());
+		/*
+		 * String username = "user"; String password = "pwd"; JSONObject jobject = new
+		 * JSONObject(); jobject.put("username", username); jobject.put("password",
+		 * password); System.out.println(postObject("/users/login", "",
+		 * jobject).getValue());
+		 */
 
 	}
 	

@@ -41,6 +41,7 @@ public class ClaimTool
 		String id = jobject.getString("_id");
 		String policyId = jobject.getString("insurance");
 		String userId = jobject.getString("user");
+		int type = jobject.getInt("type");
 		String accLocation = jobject.getString("location");
 		Date accDate = DateTool.mangoToJava(jobject.getString("date"));	
 		String claimReason = jobject.getString("reason");
@@ -51,10 +52,10 @@ public class ClaimTool
 		 * for(int i = 0;i < array.size();i++) claimFiles.add((File) array.get(i)); }
 		 */
 		String status = jobject.getString("status");
-		String employeeId = jobject.getString("employee");
+		String employeeId = "";//jobject.getString("employee");
 		Date createDate = DateTool.mangoToJava(jobject.getString("createdAt"));	
 		Date updateDate = DateTool.mangoToJava(jobject.getString("updatedAt"));	
-		Claim claim = new Claim(id, policyId, userId, accLocation, accDate, claimReason, claimAmount, claimFiles, status, employeeId, createDate, updateDate);
+		Claim claim = new Claim(id, policyId, userId, type, accLocation, accDate, claimReason, claimAmount, claimFiles, status, employeeId, createDate, updateDate);
 		return claim;
 	}
 	
@@ -64,8 +65,7 @@ public class ClaimTool
 		for(int i = 0;i < jarray.size();i++)
 		{
 			JSONObject jobject = jarray.getJSONObject(i);
-			if(jobject.getString("status").equals("pending"))
-				claimList.add(getClaimObject(jobject));
+			claimList.add(getClaimObject(jobject));
 		}
 		return claimList;
 	}

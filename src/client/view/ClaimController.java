@@ -11,7 +11,7 @@ import javafx.util.Pair;
 import model.Claim;
 import net.sf.json.JSONArray;
 import tool.ClaimTool;
-import tool.ClientTool;
+import tool.UserTool;
 import tool.Controller;
 import tool.EmployeeTool;
 import tool.HttpTool;
@@ -43,7 +43,7 @@ public class ClaimController extends Controller
 	private void initData() 
 	{
 		//------------------------------------------------------------Data Update---------------------------------------------
-		Pair<Integer, String> reply = HttpTool.getArray("/claims?user=" + ClientTool.userId, EmployeeTool.token);
+		Pair<Integer, String> reply = HttpTool.getArray("/claims?user=" + UserTool.user.getUserId(), EmployeeTool.token);
 		if(reply.getKey().equals(200))
 		{
 			JSONArray jarray = JSONArray.fromObject(reply.getValue());

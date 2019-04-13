@@ -6,6 +6,8 @@ import client.view.ClaimApplicationController;
 import client.view.ClaimController;
 import client.view.ClaimNoticeController;
 import client.view.ClientProfileController;
+import client.view.ClientProfileCreateController;
+import client.view.ClientProfileModifyController;
 import client.view.InsuranceController;
 import client.view.InsuranceInformationController;
 import employee.view.ClaimAffairController;
@@ -13,13 +15,15 @@ import employee.view.ClaimAffairNoticeController;
 import employee.view.ClaimInformationController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Claim;
 import model.Policy;
+import model.Profile;
+import tool.UserTool;
 import view.LogInController;
 import view.ClientSignUpController;
 import view.EmployeeSignUpController;
@@ -61,7 +65,7 @@ public class MainApp extends Application
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("../view/LogInView.fxml"));
-            AnchorPane logInView = (AnchorPane) loader.load();
+            VBox logInView = (VBox) loader.load();
             logInView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(logInView);
             LogInController controller = loader.getController();
@@ -77,7 +81,7 @@ public class MainApp extends Application
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("../view/ClientSignUpView.fxml"));
-            AnchorPane clientSignUpView = (AnchorPane) loader.load();
+            VBox clientSignUpView = (VBox) loader.load();
             clientSignUpView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(clientSignUpView);
             ClientSignUpController controller = loader.getController();
@@ -87,13 +91,29 @@ public class MainApp extends Application
         }
     }
 	
+	public void showClientProfileCreateView() 
+	{
+		try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../client/view/ClientProfileCreateView.fxml"));
+            AnchorPane clientProfileCreateView = (AnchorPane) loader.load();
+            clientProfileCreateView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(clientProfileCreateView);
+            ClientProfileCreateController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
 	public void showEmployeeSignUpView() 
 	{
         try 
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("../view/EmployeeSignUpView.fxml"));
-            AnchorPane employeeSignUpView = (AnchorPane) loader.load();
+            VBox employeeSignUpView = (VBox) loader.load();
             employeeSignUpView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(employeeSignUpView);
             EmployeeSignUpController controller = loader.getController();
@@ -113,6 +133,24 @@ public class MainApp extends Application
             clientProfileView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(clientProfileView);
             ClientProfileController controller = loader.getController();
+            controller.setProfile(UserTool.user.getProfileId());
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void showClientProfileModifyView(Profile profile) 
+	{
+		try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../client/view/ClientProfileModifyView.fxml"));
+            AnchorPane clientProfileModifyView = (AnchorPane) loader.load();
+            clientProfileModifyView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(clientProfileModifyView);
+            ClientProfileModifyController controller = loader.getController();
+            controller.initProfile(profile);
             controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();

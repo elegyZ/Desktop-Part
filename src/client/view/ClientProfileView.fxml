@@ -21,7 +21,7 @@
                   <Insets top="10.0" />
                </padding>
             </Button>
-            <Button fx:id="btn_myProfile" layoutX="55.0" layoutY="235.0" stylesheets="@style.css" text="My Profile" textFill="#0066cc">
+            <Button fx:id="btn_myProfile" layoutX="55.0" layoutY="235.0" onAction="#toProfile" stylesheets="@style.css" text="My Profile" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -32,7 +32,7 @@
             <Line endX="205.0" layoutY="300.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" strokeWidth="2.0" />
             <Line endX="205.0" layoutY="470.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
             <Line endX="205.0" layoutY="215.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-            <Button fx:id="btn_myClaim" layoutX="54.0" layoutY="405.0" stylesheets="@style.css" text="My Claim" textFill="#0066cc">
+            <Button fx:id="btn_myClaim" layoutX="54.0" layoutY="405.0" onAction="#toClaimView" stylesheets="@style.css" text="My Claim" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -162,7 +162,7 @@
             <Font name="Microsoft YaHei" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btn_modify" layoutX="511.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Modify" textFill="WHITE">
+      <Button fx:id="btn_modify" layoutX="511.0" layoutY="390.0" mnemonicParsing="false" onAction="#modify" prefHeight="30.0" prefWidth="150.0" text="Modify" textFill="WHITE">
          <font>
             <Font name="Microsoft YaHei" size="18.0" />
          </font>

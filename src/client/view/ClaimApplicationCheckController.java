@@ -8,7 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.util.Pair;
 import model.Claim;
 import tool.ClaimTool;
-import tool.ClientTool;
+import tool.UserTool;
 import tool.Controller;
 import tool.HttpTool;
 
@@ -56,7 +56,7 @@ public class ClaimApplicationCheckController extends Controller
 	@FXML
 	public void submit()
 	{
-		Pair<Integer, String> result = HttpTool.postObject("/claims", ClientTool.token, ClaimTool.claimToJSONObject(claim));
+		Pair<Integer, String> result = HttpTool.postObject("/claims", UserTool.user.getToken(), ClaimTool.claimToJSONObject(claim));
 		if (result.getKey() == 200)
 			mainApp.showClaimNoticeView();
 		else

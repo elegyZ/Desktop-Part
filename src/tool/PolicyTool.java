@@ -22,6 +22,13 @@ public class PolicyTool
 	}
 	
 	//---------------Policy HTTP methods----------------------
+	public static Boolean isClaiming(JSONObject jobject)
+	{
+		if(jobject.has("claim"))
+			return true;
+		return false;
+	}
+	
 	public static Policy getPolicyObject(JSONObject jobject)
 	{
 		String policyId = jobject.getString("_id");

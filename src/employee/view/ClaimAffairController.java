@@ -57,7 +57,7 @@ public class ClaimAffairController extends Controller
     	//------------------------------------------------------------GUI Update---------------------------------------------
     	tb_claims.setItems(claimData);
     	policyIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPolicyId()));
-    	//insuranceTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(PolicyTool.getPolicyObject(HttpTool.getObject(cellData.getValue().getPolicyId())).getPlanLevelProperty()));
+    	insuranceTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTypeProperty(cellData.getValue().getType())));
     	dateOfSubmissionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSubmissionDateProperty("Ireland")));
     	amountOfDamageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getClaimAmount())));
     	acceptanceColumn.setCellFactory((col) -> 
@@ -74,7 +74,7 @@ public class ClaimAffairController extends Controller
 
                     if (!empty) 
                     {
-                        Button acceptBtn = new Button("Accept");
+                        Button acceptBtn = new Button("Assign");
                         this.setGraphic(acceptBtn);
                         acceptBtn.setOnMouseClicked((me) -> 
                         {

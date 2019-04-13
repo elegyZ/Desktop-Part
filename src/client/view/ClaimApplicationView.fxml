@@ -61,7 +61,7 @@
       </Group>
       <ScrollPane layoutX="306.0" layoutY="74.0" prefHeight="500.0" prefWidth="710.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="62.0">
         <content>
-          <AnchorPane id="pane_background" minHeight="0.0" minWidth="0.0" prefHeight="700.0">
+          <AnchorPane id="pane_background" minHeight="0.0" minWidth="0.0" prefHeight="800.0">
                      <children>
                         <Label layoutX="5.0" prefHeight="27.0" prefWidth="402.0" text="Claim Application Information" textFill="#0066cc">
                            <font>
@@ -78,35 +78,35 @@
                               <Font name="Microsoft YaHei Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="27.0" layoutY="359.0" prefHeight="107.0" prefWidth="200.0" text="Passenger transport&#10;suffers from natural&#10;disasters such as&#10;rainstorm, lightning and&#10;so on" textAlignment="CENTER">
+                        <Label layoutX="27.0" layoutY="359.0" text="①&#10;Passenger transport&#10;suffers from natural&#10;disasters such as&#10;rainstorm, lightning and&#10;so on" textAlignment="CENTER">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="16.0" />
                            </font>
                         </Label>
                         <Line endX="1.0" endY="164.0" fill="#0066cc" layoutX="243.0" layoutY="358.0" stroke="#0066cc" />
-                        <Label layoutX="265.0" layoutY="357.0" prefHeight="90.0" prefWidth="200.0" text="Passenger transport&#10;suffered fire, explosion,&#10;collision and overturn" textAlignment="CENTER">
+                        <Label layoutX="259.0" layoutY="361.0" text="②&#10;Passenger transport&#10;suffered fire, explosion,&#10;collision and overturn" textAlignment="CENTER">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="16.0" />
                            </font>
                         </Label>
                         <Line endX="1.0" endY="164.0" fill="#0066cc" layoutX="465.0" layoutY="358.0" stroke="#0066cc" />
-                        <Label layoutX="482.0" layoutY="340.0" prefHeight="107.0" prefWidth="200.0" text="Theft,  robbery, loss&#10;of luggage" textAlignment="CENTER">
+                        <Label layoutX="503.0" layoutY="361.0" text="③&#10;Theft,  robbery, loss&#10;of luggage" textAlignment="CENTER">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="6.0" layoutY="550.0" prefHeight="27.0" prefWidth="226.0" text="Claim Supporting File" textFill="#0066cc">
+                        <Label layoutX="8.0" layoutY="613.0" prefHeight="27.0" prefWidth="226.0" text="Claim Supporting File" textFill="#0066cc">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btn_upload" layoutX="314.0" layoutY="552.0" mnemonicParsing="false" onAction="#addFile" text="Upload File" />
-                        <Button id="bt_back" fx:id="btn_back" layoutX="91.0" layoutY="611.0" mnemonicParsing="false" onAction="#backToInsurance" prefWidth="150.0" stylesheets="@style.css" text="Back" textFill="WHITE">
+                        <Button fx:id="btn_upload" layoutX="280.0" layoutY="615.0" mnemonicParsing="false" onAction="#addFile" text="Upload File" />
+                        <Button id="bt_back" fx:id="btn_back" layoutX="93.0" layoutY="674.0" mnemonicParsing="false" onAction="#backToInsurance" prefWidth="150.0" stylesheets="@style.css" text="Back" textFill="WHITE">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="20.0" />
                            </font>
                         </Button>
-                        <Button id="bt_confirm" fx:id="btn_submit" layoutX="469.0" layoutY="611.0" mnemonicParsing="false" onAction="#submit" prefWidth="150.0" stylesheets="@style.css" text="Submit" textFill="WHITE">
+                        <Button id="bt_confirm" fx:id="btn_submit" layoutX="471.0" layoutY="674.0" mnemonicParsing="false" onAction="#submit" prefWidth="150.0" stylesheets="@style.css" text="Submit" textFill="WHITE">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="20.0" />
                            </font>
@@ -135,12 +135,12 @@
                         <DatePicker fx:id="dateOfAcc" layoutX="575.0" layoutY="67.0" />
                   <TextField fx:id="amountOfDamage" layoutX="213.0" layoutY="273.0" />
                         <TextArea fx:id="reasonOfClaim" layoutX="5.0" layoutY="110.0" prefHeight="150.0" prefWidth="700.0" />
-                  <ImageView fx:id="iv_upload" fitHeight="30.0" fitWidth="30.0" layoutX="450.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iv_upload" fitHeight="30.0" fitWidth="30.0" layoutX="452.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../resources/pic/upload.png" />
                      </image>
                   </ImageView>
-                  <Group id="group_next">
+                  <Group id="group_next" layoutX="1.0" layoutY="18.0">
                      <children>
                         <ImageView id="next1" fx:id="iv_next1" layoutX="100.0" layoutY="480.0" onMousePressed="#setNextButton1" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -159,6 +159,12 @@
                         </ImageView>
                      </children>
                   </Group>
+                  <Label id="lb_amountOfDamages" layoutX="5.0" layoutY="570.0" text="Type Of Accident">
+                     <font>
+                        <Font name="Microsoft YaHei Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="accType" layoutX="170.0" layoutY="566.0" prefWidth="150.0" />
                </children>
             </AnchorPane>
         </content>
