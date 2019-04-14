@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import model.Claim;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -17,7 +18,12 @@ public class ClaimTool
 	{
 		ObservableList<Claim> claimData = FXCollections.observableArrayList();
 		for(Claim claim:list)
-			claimData.add(claim);
+		{	
+			if(claim.getStatus().equals("pending"))
+				claimData.add(claim);
+			else if(claim.getStatus().equals("processing") && claim.getEmployeeId().equals(UserTool.user.getUserId()))
+				claimData.add(claim);
+		}
 		return claimData;
 	}
 	
@@ -52,7 +58,7 @@ public class ClaimTool
 		 * for(int i = 0;i < array.size();i++) claimFiles.add((File) array.get(i)); }
 		 */
 		String status = jobject.getString("status");
-		String employeeId = "";//jobject.getString("employee");
+		String employeeId = jobject.has("employee") ? jobject.getString("employee") : "";
 		Date createDate = DateTool.mangoToJava(jobject.getString("createdAt"));	
 		Date updateDate = DateTool.mangoToJava(jobject.getString("updatedAt"));	
 		Claim claim = new Claim(id, policyId, userId, type, accLocation, accDate, claimReason, claimAmount, claimFiles, status, employeeId, createDate, updateDate);
@@ -78,15 +84,30 @@ public class ClaimTool
 		 * HttpTool.getFileToByte(file); bytefiles.add(bytefile); }
 		 */
 		JSONObject jobject = new JSONObject();
-		//jobject.put("type", value);
-		//jobject.put("status", claim.getStatus());			//test
+		jobject.put("type", claim.getType());
 		jobject.put("insurance", claim.getPolicyId());
 		jobject.put("location", claim.getAccLocation());
 		jobject.put("date", DateTool.javaToMango(claim.getAccDate()));
 		jobject.put("reason", claim.getClaimReason());
 		jobject.put("amount", claim.getClaimAmount());
+		//jobject.put("file", value);
 		return jobject;
 	}
 	
+	public static Pair<Integer, String> assign(Claim claim)
+	{
+		return HttpTool.getObject("/claims/assign/" + claim.getId(), UserTool.user.getToken());
+	}
 	
+	public static Pair<Integer, String> accept(Claim claim)
+	{
+		return HttpTool.getObject("/claims/accept/" + claim.getId(), UserTool.user.getToken());
+	}
+	
+	public static Pair<Integer, String> reject(Claim claim, String reason)
+	{
+		JSONObject jobject = new JSONObject();
+		jobject.put("rejectReason", reason);
+		return HttpTool.postObject("/claims/reject/" + claim.getId(), UserTool.user.getToken(), jobject);
+	}
 }

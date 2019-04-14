@@ -7,11 +7,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.util.Pair;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import model.Claim;
+import tool.ClaimTool;
 import tool.Controller;
 
 public class ClaimInformationController extends Controller 
@@ -39,8 +41,11 @@ public class ClaimInformationController extends Controller
 	private Claim claim;
 	
 	private ButtonType acceptType = new ButtonType("Accept", ButtonData.YES);
-	//private ButtonType notAcceptType = new ButtonType("Not Accept");
-	//private ButtonType cancelType = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+	/*
+	 * private ButtonType notAcceptType = new ButtonType("Not Accept",
+	 * ButtonData.YES); private ButtonType cancelType = new ButtonType("Cancel",
+	 * ButtonData.CANCEL_CLOSE);
+	 */
 	private ButtonType okType = new ButtonType("OK", ButtonData.YES);
 	
 	public void setClaim(Claim claim)
@@ -61,7 +66,11 @@ public class ClaimInformationController extends Controller
 		if(result.isPresent())
 		{
 			claim.setStatus("accept");
-			mainApp.showClaimNoticeView();
+			Pair<Integer, String> reply = ClaimTool.accept(claim);
+			if(reply.getKey() == 200)
+				mainApp.showClaimAffairNoticeView();
+			else
+				errorAlert(reply.getValue());
 		}
 	}
 	
@@ -72,15 +81,20 @@ public class ClaimInformationController extends Controller
 		dialog.setTitle("Confirm Dialog");
 		dialog.setHeaderText("Do you Not Accept this claim?");
 		dialog.setContentText("Please enter the reason:");
-		//dialog.getDialogPane().getButtonTypes().clear();
-		//dialog.getDialogPane().getButtonTypes().add(notAcceptType);
-		//dialog.getDialogPane().getButtonTypes().add(cancelType);
+		/*
+		 * dialog.getDialogPane().getButtonTypes().clear();
+		 * dialog.getDialogPane().getButtonTypes().add(notAcceptType);
+		 * dialog.getDialogPane().getButtonTypes().add(cancelType);
+		 */
 		Optional<String> result = dialog.showAndWait();
 		if(result.isPresent() && !result.get().equals(" "))
 		{
-		    System.out.println("reason: " + result.get());	//reason testing
 		    claim.setStatus("notAccept");
-		    mainApp.showClaimNoticeView();
+		    Pair<Integer, String> reply = ClaimTool.reject(claim, result.get());
+			if(reply.getKey() == 200)
+				mainApp.showClaimAffairNoticeView();
+			else
+				errorAlert(reply.getValue());
 		}
 		else
 		{
@@ -97,8 +111,6 @@ public class ClaimInformationController extends Controller
 	@FXML
     private void backToInsuranceClaim()
     {
-		claim.setStatus("pending");
-		//POSTÐÞ¸Ä²Ù×÷
     	mainApp.showClaimAffairView();
     }
 	

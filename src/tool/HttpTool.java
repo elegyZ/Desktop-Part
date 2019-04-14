@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -19,6 +20,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import javafx.util.Pair;
+import model.Claim;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -247,19 +249,22 @@ public class HttpTool
 	
 	public static void main(String[] args) 
 	{
-
-		Pair<Integer, String> pair = getObject("/insurances", TOKEN);
-		System.out.println(pair);
+		
+		  Pair<Integer, String> pair = getArray("/users", TOKEN);
+		  System.out.println(pair);
+		 
 
 		/*
-		 * Claim claim = new Claim("claim_id", "001", null, null, null, 0, null,
-		 * "pending", DateTool.getCurrentDate(), DateTool.getCurrentDate());
+		 * Claim claim = new Claim("claim_id", "001", null, 1, null, null, null, 0,
+		 * null, "pending", null, DateTool.getCurrentDate(), DateTool.getCurrentDate());
 		 * claim.setAccLocation("Beijing"); claim.setAccDate(DateTool.getCurrentDate());
 		 * claim.setClaimReason("≤‚ ‘"); claim.setClaimAmount(Float.valueOf(250));
 		 * claim.setClaimFiles(new ArrayList<File>());
-		 * System.out.println("**************" + postObject("claims",
+		 * System.out.println("**************");
+		 * System.out.println(postObject("/claims", TOKEN,
 		 * ClaimTool.claimToJSONObject(claim)));
 		 */
+		 
 		/*
 		 * String username = "user"; String password = "pwd"; JSONObject jobject = new
 		 * JSONObject(); jobject.put("username", username); jobject.put("password",

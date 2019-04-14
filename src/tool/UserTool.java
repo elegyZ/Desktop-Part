@@ -18,8 +18,15 @@ public class UserTool
 		return jobject.getString("_id");
 	}
 	
+	public static Boolean hasProfile(JSONObject jobject)
+	{
+		return jobject.has("profile");
+	}
+	
 	public static String getProfileId(JSONObject jobject)
 	{
-		return jobject.getString("profile");
+		if(hasProfile(jobject))
+			return jobject.getString("profile");
+		return "";									//test
 	}
 }

@@ -38,8 +38,7 @@ public class PolicyTool
 		int duration = jobject.getInt("duration") / 30;
 		Date createDate = DateTool.mangoToJava(jobject.getString("createdAt"));
 		Date updateDate = DateTool.mangoToJava(jobject.getString("updatedAt"));
-		String claimId = "123";//jobject.getString("claim");									//test
-		
+		Boolean claiming = isClaiming(jobject) ? true : false;		
 		JSONObject jinsured = (JSONObject) jobject.get("insured");	
 		String insuredId = jinsured.getString("_id");		
 		String lastname = jinsured.getString("lastname");
@@ -53,7 +52,7 @@ public class PolicyTool
 		String bankAccount = jinsured.getString("bankAccount");
 		String bankUsername = jinsured.getString("bankUsername");
 		Insured insured = new Insured(insuredId, lastname, firstname, socialId, gender, age, phone, email, bankUsername, bankName, bankAccount, policyId);
-		Policy policy = new Policy(policyId, plan, level, startDate, duration, createDate, updateDate, insured, claimId);
+		Policy policy = new Policy(policyId, plan, level, startDate, duration, createDate, updateDate, insured, claiming);
 		return policy;
 	}
 	

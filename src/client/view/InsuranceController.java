@@ -56,27 +56,23 @@ public class InsuranceController extends Controller
 		insurancePlanColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlanLevelProperty()));
 		guaranteePeriodColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDurationProperty()));
 		startingEndingDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStartEndTimeProperty("Ireland")));		//test
-		insuranceClaimColumn.setCellFactory(cellData -> 
+		insuranceClaimColumn.setCellFactory(col -> 
     	{
             TableCell<Policy, String> cell = new TableCell<Policy, String>() 
             {
-
                 @Override
                 public void updateItem(String item, boolean empty) 
                 {
                     super.updateItem(item, empty);
-                    this.setText(null);
-                    this.setGraphic(null);
-
                     if (!empty) 
                     {
-                        Button acceptBtn = new Button("Claim");
-                        this.setGraphic(acceptBtn);
-                        acceptBtn.setOnMouseClicked((me) -> 
+                        Policy policy = this.getTableView().getItems().get(this.getIndex());
+                        if(!policy.getClaiming())
                         {
-                        	Policy policy = this.getTableView().getItems().get(this.getIndex());
-                        	mainApp.showClaimApplicationView(policy.getId());
-                        });
+                            Button acceptBtn = new Button("Claim");
+                            this.setGraphic(acceptBtn);
+                            acceptBtn.setOnMouseClicked((me) -> mainApp.showClaimApplicationView(policy.getId()));
+                        }
                     }
                 }
 

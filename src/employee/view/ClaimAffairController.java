@@ -14,8 +14,8 @@ import model.Claim;
 import net.sf.json.JSONArray;
 import tool.ClaimTool;
 import tool.Controller;
-import tool.EmployeeTool;
 import tool.HttpTool;
+import tool.UserTool;
 
 public class ClaimAffairController extends Controller 
 {
@@ -47,13 +47,13 @@ public class ClaimAffairController extends Controller
     private void initialize() 
     {    	
     	//------------------------------------------------------------Data Update---------------------------------------------
-    	Pair<Integer, String> reply = HttpTool.getArray("/claims", EmployeeTool.token);
+    	Pair<Integer, String> reply = HttpTool.getArray("/claims", UserTool.user.getToken());
 		if(reply.getKey().equals(200))
 		{
 			JSONArray jarray = JSONArray.fromObject(reply.getValue());
 			claimData = ClaimTool.initClaimList(ClaimTool.getClaimList(jarray));
 		}	
-    	
+    	//else alert
     	//------------------------------------------------------------GUI Update---------------------------------------------
     	tb_claims.setItems(claimData);
     	policyIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPolicyId()));
@@ -69,20 +69,40 @@ public class ClaimAffairController extends Controller
                 public void updateItem(String item, boolean empty) 
                 {
                     super.updateItem(item, empty);
-                    this.setText(null);
-                    this.setGraphic(null);
-
                     if (!empty) 
                     {
-                        Button acceptBtn = new Button("Assign");
-                        this.setGraphic(acceptBtn);
-                        acceptBtn.setOnMouseClicked((me) -> 
+                        Claim claim = this.getTableView().getItems().get(this.getIndex());
+                        if(claim.getStatus().equals("pending"))
                         {
-                        	Claim claim = this.getTableView().getItems().get(this.getIndex());
-                        	claim.setStatus("processing");					//testing
-                        	//POSTÐÞ¸Ä²Ù×÷
-                        	mainApp.showClaimInformationView(claim);
-                        });
+                        	Button bt_assign = new Button("Assign");
+                            this.setGraphic(bt_assign);
+                            bt_assign.setOnMouseClicked((assign) -> 
+                            {
+                            	claim.setStatus("processing");					//testing
+                            	Pair<Integer, String> reply = ClaimTool.assign(claim);
+                            	if(reply.getKey() == 200)
+                            	{
+                            		successAlert(reply.getValue());
+                                	Button bt_process = new Button("Process");
+                                    this.setGraphic(bt_process);
+                                    bt_process.setOnMouseClicked((process) -> 
+                                    {
+                                    	
+                                    });
+                            	}
+                            	else
+                            		errorAlert(reply.getValue());
+                            });
+                        }
+                        else if(claim.getStatus().equals("processing"))
+                        {
+                        	Button bt_process = new Button("Process");
+                            this.setGraphic(bt_process);
+                            bt_process.setOnMouseClicked((process) -> 
+                            {
+                            	mainApp.showClaimInformationView(claim);
+                            });
+                        }
                     }
                 }
 

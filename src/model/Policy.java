@@ -18,10 +18,9 @@ public class Policy
 	private Date createDate;
 	private Date updateDate;
 	private Insured insured;
-	private String claimId;
 	private Boolean claiming;
 	
-	public Policy(String id, int plan, int level, Date startDate, int duration, Date createDate, Date updateDate, Insured insured, String claimId, Boolean claiming)
+	public Policy(String id, int plan, int level, Date startDate, int duration, Date createDate, Date updateDate, Insured insured, Boolean claiming)
 	{
 		this.id = id;
 		setPlan(plan);
@@ -32,7 +31,6 @@ public class Policy
 		setCreateDate(createDate);
 		setUpdateDate(updateDate);
 		setInsured(insured);
-		setClaimId(claimId);
 		setClaiming(claiming);
 	}
 
@@ -82,17 +80,7 @@ public class Policy
 		this.insured = insured;
 	}
 	
-	public void setClaimId(String claimId)
-	{
-		this.claimId = claimId;
-	}
-	
 	//------------get methods-----------------------------------
-	public String getClaimId()
-	{
-		return claimId;
-	}
-	
 	public Date getCreateDate()
 	{
 		return createDate;

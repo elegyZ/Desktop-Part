@@ -47,7 +47,7 @@ public class EmployeeSignUpController extends Controller
 			System.out.println(reply);			//test
 			if(reply.getKey().equals(200)) 
 			{
-				//去理赔页面？	
+				//转去profile页面
 			}
 			else if(reply.getKey().equals(500))
 			{

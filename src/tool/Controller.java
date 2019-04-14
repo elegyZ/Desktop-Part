@@ -7,6 +7,17 @@ import javafx.scene.control.ButtonBar.ButtonData;
 
 public class Controller 
 {
+	public void successAlert(String success)
+	{
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Success");
+		alert.setHeaderText(null);
+		alert.setContentText(success);
+		alert.getButtonTypes().clear();
+		alert.getButtonTypes().add(new ButtonType("OK", ButtonData.YES));
+		alert.showAndWait();
+	}
+	
 	public void checkAlert(String warning)
 	{
 		Alert alert = new Alert(AlertType.WARNING);

@@ -9,7 +9,6 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import tool.UserTool;
 import tool.Controller;
-import tool.EmployeeTool;
 import tool.HttpTool;
 
 public class LogInController extends Controller 
@@ -54,7 +53,8 @@ public class LogInController extends Controller
 				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
 				String token = replyObject.getString("token");
 				Pair<Integer, String> userInfo = HttpTool.getObject("/users?username=" + username, token);
-				UserTool.setUser(UserTool.getUserId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)), username, token, UserTool.getProfileId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)));
+				System.out.println(UserTool.getUserId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)));		//5cb1dbb3f79e586a7f235b9d
+				UserTool.setUser(username, UserTool.getUserId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)), token, UserTool.getProfileId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)));
 				mainApp.showInsuranceView();		//×ªÈ¥¹ºÂòÒ³Ãæ£¿
 			}
 			else if(reply.getKey().equals(401))
@@ -106,7 +106,9 @@ public class LogInController extends Controller
 			if(reply.getKey().equals(200)) 
 			{
 				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
-				EmployeeTool.setToken(replyObject.getString("token"));
+				String token = replyObject.getString("token");
+				Pair<Integer, String> userInfo = HttpTool.getObject("/users?username=" + username, token);
+				UserTool.setUser(username, UserTool.getUserId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)), token, UserTool.getProfileId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)));
 				mainApp.showClaimAffairView();
 			}
 			else if(reply.getKey().equals(401))
