@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.util.Pair;
 import model.Claim;
@@ -20,11 +21,11 @@ public class ClaimController extends Controller
 	@FXML
 	private TableView<Claim> tb_claims;
 	@FXML
-    private TableColumn<Claim, String> claimPlanColumn;
-	@FXML
-    private TableColumn<Claim, String> claimPeriodColumn;
+    private TableColumn<Claim, String> claimLocationColumn;
 	@FXML
     private TableColumn<Claim, String> claimDateColumn;
+	@FXML
+    private TableColumn<Claim, String> claimPolicyIdColumn;
 	@FXML
     private TableColumn<Claim, String> claimProgressColumn;
 	@FXML
@@ -42,18 +43,35 @@ public class ClaimController extends Controller
 	private void initData() 
 	{
 		//------------------------------------------------------------Data Update---------------------------------------------
-		Pair<Integer, String> reply = HttpTool.getArray("/claims?user=" + UserTool.user.getUserId(), UserTool.user.getToken());
+		Pair<Integer, String> reply = HttpTool.getArray("/claims", UserTool.user.getToken());
 		if(reply.getKey().equals(200))
 		{
 			JSONArray jarray = JSONArray.fromObject(reply.getValue());
-			claimData = ClaimTool.initClaimList(ClaimTool.getClaimList(jarray));
+			claimData = ClaimTool.getClientClaimList(ClaimTool.getClaimList(jarray));
 		}		
 		//------------------------------------------------------------GUI Update---------------------------------------------
 		tb_claims.setItems(claimData);
-		claimPlanColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPolicyId()));		//test
-		claimPeriodColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPolicyId()));		//test
-		claimDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPolicyId()));		//test
-		claimProgressColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPolicyId()));		//test	
+		claimPolicyIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPolicyId()));
+		claimLocationColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAccLocation()));
+		claimDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCreateDate().toString()));
+		claimProgressColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
+		
+		tb_claims.setRowFactory(tableview -> 
+		{
+			TableRow<Claim> row = new TableRow<Claim>();
+			row.setOnMouseClicked(event -> 
+			{
+				Claim claim = row.getItem();
+				mainApp.showClaimFeedbackView(claim);
+			});
+			return row ;
+		});
+	}
+	
+	@FXML
+	public void toHome()
+	{
+		mainApp.showHomeView();
 	}
 	
 	@FXML

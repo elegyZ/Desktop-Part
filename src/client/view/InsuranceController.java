@@ -92,6 +92,12 @@ public class InsuranceController extends Controller
 	}
 	
 	@FXML
+	public void toHome()
+	{
+		mainApp.showHomeView();
+	}
+	
+	@FXML
 	public void toClaimView()
 	{
 		mainApp.showClaimView();

@@ -41,7 +41,7 @@
                </padding>
             </Button>
             <Line endX="205.0" layoutY="130.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-            <Button fx:id="btn_home" layoutX="55.0" layoutY="150.0" stylesheets="@style.css" text="Home" textFill="#0066cc">
+            <Button fx:id="btn_home" layoutX="55.0" layoutY="150.0" onAction="#toHome" stylesheets="@style.css" text="Home" textFill="#0066cc">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
@@ -64,9 +64,9 @@
       </Label>
       <TableView fx:id="tb_claims" layoutX="256.0" layoutY="115.0" prefHeight="350.0" prefWidth="700.0" stylesheets="@style.css">
         <columns>
-          <TableColumn fx:id="claimPlanColumn" prefWidth="175.0" text="Insurance Plan" />
-            <TableColumn fx:id="claimPeriodColumn" prefWidth="175.0" text="Guarantee Period" />
-            <TableColumn fx:id="claimDateColumn" prefWidth="175.0" text="Starting&#10;Ending Date" />
+          <TableColumn fx:id="claimPolicyIdColumn" prefWidth="175.0" text="Policy ID" />
+            <TableColumn fx:id="claimLocationColumn" prefWidth="175.0" text="Accident Location" />
+            <TableColumn fx:id="claimDateColumn" prefWidth="175.0" text="Claim Date" />
           <TableColumn fx:id="claimProgressColumn" prefWidth="175.0" text="Claim Progress" />
         </columns>
       </TableView>

@@ -10,7 +10,7 @@ import net.sf.json.JSONObject;
 public class ProfileTool 
 {
 	//---------------User HTTP methods----------------------
-	public static Profile getProfile(JSONObject jobject)
+	public static Profile JSONObjectToprofile(JSONObject jobject)
 	{
 		String id = jobject.getString("_id");
 		String lastName = jobject.getString("lastname");
@@ -32,8 +32,8 @@ public class ProfileTool
 	public static JSONObject profileToJSONObject(Profile profile)
 	{
 		JSONObject jobject = new JSONObject();
-		jobject.put("firstName", profile.getFirstName());
-		jobject.put("lastName", profile.getLastName());
+		jobject.put("firstname", profile.getFirstName());
+		jobject.put("lastname", profile.getLastName());
 		jobject.put("socialId", profile.getSocialId());
 		jobject.put("gender", profile.getGender());
 		jobject.put("age", profile.getAge());
@@ -49,5 +49,10 @@ public class ProfileTool
 	{
 		Pair<Integer, String> profileInfo = HttpTool.getObject("/profiles?_id=" + profile, UserTool.user.getToken());
 		return JSONArray.fromObject(profileInfo.getValue()).getJSONObject(0);
+	}
+	
+	public static Pair<Integer, String> postProfile(JSONObject jobject)
+	{
+		return HttpTool.postObject("/profiles", UserTool.user.getToken(), jobject);
 	}
 }

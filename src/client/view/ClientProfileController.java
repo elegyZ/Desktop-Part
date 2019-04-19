@@ -51,7 +51,7 @@ public class ClientProfileController extends Controller
 	
 	public void setProfile(String profileId)
 	{
-		profile = ProfileTool.getProfile(ProfileTool.getJSONObject(profileId));
+		profile = ProfileTool.JSONObjectToprofile(ProfileTool.getJSONObject(profileId));
 		firstName.setText(profile.getFirstName());
 		lastName.setText(profile.getLastName());
 		socialId.setText(profile.getSocialId());
@@ -67,6 +67,12 @@ public class ClientProfileController extends Controller
 	public void modify()
 	{
 		mainApp.showClientProfileModifyView(profile);
+	}
+	
+	@FXML
+	public void toHome()
+	{
+		mainApp.showHomeView();
 	}
 	
 	@FXML

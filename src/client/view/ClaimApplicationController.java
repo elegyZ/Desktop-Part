@@ -18,6 +18,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Claim;
@@ -47,11 +48,11 @@ public class ClaimApplicationController  extends Controller
 	@FXML
 	private Button btn_upload;
 	@FXML
-	private ImageView iv_upload;
+	private Text filenameList;
 	@FXML
 	private Button btn_home;
 	@FXML
-	private Button btn_insuranceService;
+	private Button btn_myProfile;
 	@FXML
 	private Button btn_myInsurance;
 	@FXML
@@ -64,7 +65,8 @@ public class ClaimApplicationController  extends Controller
 	private MainApp mainApp;
 	private String policyId;
 	private Claim claim;
-	List<File> fileList = new ArrayList<File>();
+	private List<File> fileList = new ArrayList<File>();
+	private String filename = "";
 	
 	public void setPolicy(String policyId)
 	{
@@ -79,6 +81,9 @@ public class ClaimApplicationController  extends Controller
 		reasonOfClaim.setText(claim.getClaimReason());
 		amountOfDamage.setText(String.valueOf(claim.getClaimAmount()));
 		fileList = claim.getClaimFiles();
+		for(File file:claim.getClaimFiles())
+			filename += file.getName() + "\n";
+		filenameList.setText(filename);
 	}
 	
 	public void setClaim()
@@ -88,7 +93,7 @@ public class ClaimApplicationController  extends Controller
 		Date accDate = Date.valueOf(dateOfAcc.getValue().toString());
 		float claimAmount = Float.valueOf(amountOfDamage.getText());
 		String claimReason = reasonOfClaim.getText();
-		List<File> claimFiles = null;		//test
+		List<File> claimFiles = fileList;
 		String status = "pending";
 		String employeeId = "";
 		int type = getType();
@@ -138,7 +143,6 @@ public class ClaimApplicationController  extends Controller
 				reasonOfClaim.setText("");
 		});
 		dateOfAcc.setValue(LocalDate.now());
-		iv_upload.setVisible(false);
 	}
 	
 	@FXML
@@ -185,12 +189,14 @@ public class ClaimApplicationController  extends Controller
 		List<File> list =  fileChooser.showOpenMultipleDialog(stage);
 		if (list != null) 
 		{  
+			filename = "";
+			fileList.clear();
 			list.stream().forEach((file) -> 
 			{
 				fileList.add(file);
-				iv_upload.setVisible(true);			//test
-				//System.out.println(file);
-			});			
+				filename += file + "\n";
+			});	
+			filenameList.setText(filename);
 		}
 	}
 	
@@ -211,11 +217,29 @@ public class ClaimApplicationController  extends Controller
 			mainApp.showClaimApplicationCheckView(claim);
 		}
 	}
+	
+	@FXML
+	public void toHome()
+	{
+		mainApp.showHomeView();
+	}
 
 	@FXML
 	public void backToInsurance()
 	{
 		mainApp.showInsuranceView();
+	}
+	
+	@FXML
+	public void toClaimView()
+	{
+		mainApp.showClaimView();
+	}
+	
+	@FXML
+	public void toProfile()
+	{
+		mainApp.showClientProfileView();
 	}
 	
 	public void setMainApp(MainApp mainApp) 

@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import desktop.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.util.Pair;
 import model.Profile;
@@ -24,7 +25,9 @@ public class ClientProfileModifyController extends Controller
 	@FXML
 	private TextField socialId;
 	@FXML
-	private TextField gender;
+	private RadioButton btn_male;
+	@FXML
+	private RadioButton btn_female;
 	@FXML
 	private TextField age;
 	@FXML
@@ -51,6 +54,18 @@ public class ClientProfileModifyController extends Controller
 	private MainApp mainApp;
 	private Profile profile;
 	
+	@FXML
+	public void initialize()
+	{
+		btn_male.setSelected(true);
+		btn_male.setOnMouseClicked((me) -> {
+			btn_female.setSelected(false);
+		});
+		btn_female.setOnMouseClicked((me) -> {
+			btn_male.setSelected(false);
+		});
+	}
+	
 	public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
@@ -58,7 +73,7 @@ public class ClientProfileModifyController extends Controller
 	
 	public void setProfile()
 	{
-		profile = new Profile("", lastName.getText(), firstName.getText(), socialId.getText(), gender.getText(), Integer.parseInt(age.getText()), country.getText(), 
+		profile = new Profile("", lastName.getText(), firstName.getText(), socialId.getText(), (btn_male.isSelected()?"male":"female"), Integer.parseInt(age.getText()), country.getText(), 
 							  province.getText(), city.getText(), phone.getText(), email.getText(), DateTool.getCurrentDate(), DateTool.getCurrentDate());
 	}
 	
@@ -67,7 +82,16 @@ public class ClientProfileModifyController extends Controller
 		firstName.setText(profile.getFirstName());
 		lastName.setText(profile.getLastName());
 		socialId.setText(profile.getSocialId());
-		gender.setText(profile.getGender());
+		if(profile.getGender().toLowerCase().equals("male"))
+		{
+			btn_male.setSelected(true);
+			btn_female.setSelected(false);
+		}
+		else
+		{
+			btn_female.setSelected(true);
+			btn_male.setSelected(false);
+		}
 		age.setText(String.valueOf(profile.getAge()));
 		country.setText(profile.getCountry());
 		province.setText(profile.getProvince());
@@ -86,8 +110,6 @@ public class ClientProfileModifyController extends Controller
 			checkAlert("Please Input Your Lastname.");
 		else if(socialId.getText().equals(""))
 			checkAlert("Please Input Your Identity Number.");
-		else if(gender.getText().equals(""))
-			checkAlert("Please Input Your Gender.");
 		else if(age.getText().equals(""))
 			checkAlert("Please Input Your Age.");
 		else if(!isNum.matches())
@@ -107,12 +129,19 @@ public class ClientProfileModifyController extends Controller
 			setProfile();
 			Pair<Integer, String> reply = HttpTool.postObject("/profiles", UserTool.user.getToken(), ProfileTool.profileToJSONObject(profile));
 			if(reply.getKey().equals(200))
-				;
+				mainApp.showClientProfileView();
 			else
 			{
-				
+				errorAlert(reply.getValue());
+				mainApp.showClientProfileModifyView(profile);
 			}
 		}
+	}
+	
+	@FXML
+	public void toHome()
+	{
+		mainApp.showHomeView();
 	}
 	
 	@FXML

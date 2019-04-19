@@ -80,6 +80,12 @@ public class InsuranceInformationController extends Controller
 	}
 	
 	@FXML
+	public void toHome()
+	{
+		mainApp.showHomeView();
+	}
+	
+	@FXML
 	public void backToInsurance()
 	{
 		mainApp.showInsuranceView();

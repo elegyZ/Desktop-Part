@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.ClientNoticeController">
+   <children>
+      <ScrollPane minWidth="1000.0" stylesheets="@style.css">
+         <content>
+            <VBox id="stage" alignment="CENTER" minHeight="600.0" minWidth="1000.0" stylesheets="@style.css">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <VBox id="group" spacing="20.0" stylesheets="@style.css">
+                           <children>
+                              <Label text="Client Service" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button fx:id="btn_home" onAction="#toHome" stylesheets="@style.css" text="Home" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" strokeWidth="2.0" />
+                              <Button fx:id="btn_myInsurance" onAction="#backToInsurance" stylesheets="@style.css" text="My Insurances" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button fx:id="btn_myProfile" onAction="#toClaimView" stylesheets="@style.css" text="My Profile" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button fx:id="btn_insuranceClaim" onAction="#toProfile" stylesheets="@style.css" text="Claim Settlement" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></VBox>
+                        <VBox alignment="CENTER" prefHeight="600.0" spacing="25.0">
+                           <children>
+                              <Label fx:id="hintwords" text="Your claim has been submitted successfully." textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <HBox id="pane_background" alignment="TOP_CENTER" prefWidth="700.0" stylesheets="@style.css">
+                                 <children>
+                                    <Button fx:id="btn_act" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Back" textFill="WHITE" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</HBox>

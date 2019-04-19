@@ -1,10 +1,19 @@
 package tool;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
@@ -27,18 +36,12 @@ public class ClaimTool
 		return claimData;
 	}
 	
-	public static void refreshClaimList(ObservableList<Claim> claimData)
+	public static ObservableList<Claim> getClientClaimList(List<Claim> list)
 	{
-		if(!claimData.isEmpty())
-		{
-			Iterator<Claim> iterator = claimData.iterator();
-	        while(iterator.hasNext())
-	        {
-	            Claim integer = iterator.next();
-	            if(!integer.getStatus().equals("pending"))
-	                iterator.remove(); 
-	        }
-		}
+		ObservableList<Claim> claimData = FXCollections.observableArrayList();
+		for(Claim claim:list)
+			claimData.add(claim);
+		return claimData;
 	}
 	
 	//---------------Claim HTTP methods----------------------
@@ -53,10 +56,14 @@ public class ClaimTool
 		String claimReason = jobject.getString("reason");
 		float claimAmount = (float) jobject.getDouble("amount");
 		List<File> claimFiles = new ArrayList<File>();
-		/*
-		 * JSONArray array = jobject.getJSONArray("claimFiles"); if(!array.isEmpty()) {
-		 * for(int i = 0;i < array.size();i++) claimFiles.add((File) array.get(i)); }
-		 */
+		if(jobject.has("files"))
+		{
+			JSONArray array = jobject.getJSONArray("files");
+			if (!array.isEmpty()) {
+				for (int i = 0; i < array.size(); i++)
+					claimFiles.add(new File((String) array.get(i)));
+			}
+		}		 
 		String status = jobject.getString("status");
 		String employeeId = jobject.has("employee") ? jobject.getString("employee") : "";
 		Date createDate = DateTool.mangoToJava(jobject.getString("createdAt"));	
@@ -76,22 +83,40 @@ public class ClaimTool
 		return claimList;
 	}
 	
-	public static JSONObject claimToJSONObject(Claim claim)
+	public static Map<String, ContentBody> claimToMap(Claim claim)
 	{
-		/*
-		 * List<File> files = claim.getClaimFiles(); List<byte[]> bytefiles = new
-		 * ArrayList<byte[]>(); for(File file:files) { byte[] bytefile =
-		 * HttpTool.getFileToByte(file); bytefiles.add(bytefile); }
-		 */
-		JSONObject jobject = new JSONObject();
-		jobject.put("type", claim.getType());
-		jobject.put("insurance", claim.getPolicyId());
-		jobject.put("location", claim.getAccLocation());
-		jobject.put("date", DateTool.javaToMango(claim.getAccDate()));
-		jobject.put("reason", claim.getClaimReason());
-		jobject.put("amount", claim.getClaimAmount());
-		//jobject.put("file", value);
-		return jobject;
+		Map<String, ContentBody> map = new HashMap<String, ContentBody>();
+		map.put("type", new StringBody(String.valueOf(claim.getType()), ContentType.MULTIPART_FORM_DATA));
+		map.put("insurance", new StringBody(claim.getPolicyId(), ContentType.MULTIPART_FORM_DATA));
+		map.put("location", new StringBody(claim.getAccLocation(), ContentType.MULTIPART_FORM_DATA));
+		map.put("date", new StringBody(DateTool.javaToMango(claim.getAccDate()), ContentType.MULTIPART_FORM_DATA));
+		map.put("reason", new StringBody(claim.getClaimReason(), ContentType.MULTIPART_FORM_DATA));
+		map.put("amount", new StringBody(String.valueOf(claim.getClaimAmount()), ContentType.MULTIPART_FORM_DATA));
+		int i = 0;
+		for(File file:claim.getClaimFiles())
+		{
+			map.put("file" + i, new FileBody(file));
+			i++;
+		}
+		return map;
+	}
+	
+	public static Pair<Integer, String> post(Claim claim)
+	{
+		Pair<Integer, String> reply;
+		try {
+			reply = HttpTool.postClaim("/claims", UserTool.user.getToken(), ClaimTool.claimToMap(claim));
+		} 
+		catch (ClientProtocolException e) 
+		{
+			e.printStackTrace();
+			reply = new Pair<Integer, String>(null, e.toString());
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+			reply = new Pair<Integer, String>(null, e.toString());
+		}
+		return reply;
 	}
 	
 	public static Pair<Integer, String> assign(Claim claim)

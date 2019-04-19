@@ -5,11 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.util.Pair;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import tool.UserTool;
 import tool.Controller;
-import tool.HttpTool;
 
 public class LogInController extends Controller 
 {
@@ -43,38 +40,17 @@ public class LogInController extends Controller
 			checkAlert("Please Enter Your Password.");
 		else
 		{
-			JSONObject userObject = new JSONObject();
-			userObject.put("username", username);
-			userObject.put("password", password);
-			Pair<Integer, String> reply = HttpTool.postObject("/users/login", UserTool.user.getToken(), userObject);
-			System.out.println(reply);			//test
+			Pair<Integer, String> reply = UserTool.login(username, password);
 			if(reply.getKey().equals(200)) 
 			{
-				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
-				String token = replyObject.getString("token");
-				Pair<Integer, String> userInfo = HttpTool.getObject("/users?username=" + username, token);
-				System.out.println(UserTool.getUserId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)));		//5cb1dbb3f79e586a7f235b9d
-				UserTool.setUser(username, UserTool.getUserId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)), token, UserTool.getProfileId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)));
-				mainApp.showInsuranceView();		//转去购买页面？
-			}
-			else if(reply.getKey().equals(401))
-			{
-				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
-				JSONObject replyError = JSONObject.fromObject(replyObject.getString("err"));
-				errorAlert(replyObject.getString("msg") + "\n" + replyError.getString("name") + "\n" + replyError.getString("message"));
-				clientUserName.setText(null);
-				clientPassword.setText(null);
-			}
-			else if(reply.getKey().equals(500))
-			{
-				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
-				errorAlert(replyObject.getString("err"));
-				clientUserName.setText(null);
-				clientPassword.setText(null);
+				if(UserTool.initUserInfo(reply, username))
+					mainApp.showHomeView();
+				else
+					mainApp.showProfileCreateView();
 			}
 			else
 			{
-				errorAlert("Error! Please check your Username and Password.");
+				errorAlert(reply.getValue());
 				clientUserName.setText(null);
 				clientPassword.setText(null);
 			}
@@ -84,7 +60,7 @@ public class LogInController extends Controller
 	@FXML
 	public void clientSignUp()
 	{
-		mainApp.showClientSignUpView();
+		mainApp.showSignUpView("client");
 	}
 	
 	@FXML
@@ -98,37 +74,17 @@ public class LogInController extends Controller
 			checkAlert("Please Enter Your Password.");
 		else
 		{
-			JSONObject empolyeeObject = new JSONObject();
-			empolyeeObject.put("username", username);
-			empolyeeObject.put("password", password);
-			Pair<Integer, String> reply = HttpTool.postObject("/users/login", UserTool.user.getToken(), empolyeeObject);			//url需要改吗？
-			System.out.println(reply);			//test
+			Pair<Integer, String> reply = UserTool.login(username, password);
 			if(reply.getKey().equals(200)) 
 			{
-				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
-				String token = replyObject.getString("token");
-				Pair<Integer, String> userInfo = HttpTool.getObject("/users?username=" + username, token);
-				UserTool.setUser(username, UserTool.getUserId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)), token, UserTool.getProfileId(JSONArray.fromObject(userInfo.getValue()).getJSONObject(0)));
-				mainApp.showClaimAffairView();
-			}
-			else if(reply.getKey().equals(401))
-			{
-				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
-				JSONObject replyError = JSONObject.fromObject(replyObject.getString("err"));
-				errorAlert(replyObject.getString("msg") + "\n" + replyError.getString("name") + "\n" + replyError.getString("message"));
-				employeeUserName.setText(null);
-				employeePassword.setText(null);
-			}
-			else if(reply.getKey().equals(500))
-			{
-				JSONObject replyObject = JSONObject.fromObject(reply.getValue());
-				errorAlert(replyObject.getString("err"));
-				employeeUserName.setText(null);
-				employeePassword.setText(null);
+				if(UserTool.initUserInfo(reply, username))
+					mainApp.showClaimAffairView();
+				else
+					mainApp.showProfileCreateView();
 			}
 			else
 			{
-				errorAlert("Error! Please check your Username and Password.");
+				errorAlert(reply.getValue());
 				employeeUserName.setText(null);
 				employeePassword.setText(null);
 			}
@@ -138,7 +94,7 @@ public class LogInController extends Controller
 	@FXML
 	public void employeeSignUp()
 	{
-		mainApp.showEmployeeSignUpView();
+		mainApp.showSignUpView("employee");
 	}
 	
 	public void setMainApp(MainApp mainApp)

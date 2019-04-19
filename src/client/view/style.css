@@ -30,3 +30,11 @@
 	-fx-alignment: center;
 }
 
+#stage{
+	-fx-background-color: white;
+}
+
+#scrollPane{
+	-fx-background-color: white;
+}
+

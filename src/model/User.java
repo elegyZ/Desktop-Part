@@ -6,18 +6,31 @@ public class User
 	private String username = "";
 	private String token = "";
 	private String profileId = "";
+	private Boolean employee = false;
 	
-	public User(String username, String userId, String token, String profileId)
+	public void setUserId(String userId)
+	{
+		this.userId = userId;
+	}
+	
+	public void setUsername(String username)
 	{
 		this.username = username;
-		this.userId = userId;
+	}
+	
+	public void setToken(String token)
+	{
 		this.token = token;
-		setProfileId(profileId);
 	}
 	
 	public void setProfileId(String profileId)
 	{
 		this.profileId = profileId;
+	}
+	
+	public void setEmployee(Boolean employee)
+	{
+		this.employee = employee;
 	}
 	
 	public String getUserId()
@@ -38,5 +51,10 @@ public class User
 	public String getProfileId()
 	{
 		return profileId;
+	}
+	
+	public Boolean isEmployee()
+	{
+		return employee;
 	}
 }
