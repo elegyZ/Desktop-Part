@@ -138,7 +138,7 @@
                                        <font>
                                           <Font name="Microsoft YaHei" size="18.0" />
                                        </font></Text>
-                                    <Button fx:id="btn_download" mnemonicParsing="false" text="Download" />
+                                    <Button fx:id="btn_download" mnemonicParsing="false" onAction="#downloadFile" text="Download" />
                                  </children>
                               </HBox>
                               <HBox spacing="30.0">

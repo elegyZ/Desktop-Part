@@ -1,111 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.web.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane id="pane_background" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="employee.view.ClaimInformationController">
+<HBox prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="employee.view.ClaimInformationController">
    <children>
-      <Group id="group" stylesheets="@style.css">
-         <children>
-            <Button id="bt_policyModification" fx:id="btn_policyModification" layoutX="52.0" layoutY="230.0" mnemonicParsing="false" stylesheets="@style.css" text="Policy Modification" textFill="#0066cc">
-               <font>
-                  <Font name="Microsoft YaHei" size="20.0" />
-               </font>
+      <ScrollPane minWidth="1000.0" stylesheets="@style.css">
+         <content>
+            <VBox id="stage" alignment="CENTER" minHeight="600.0" minWidth="1000.0" stylesheets="@style.css">
                <padding>
-                  <Insets top="10.0" />
+                  <Insets bottom="80.0" top="80.0" />
                </padding>
-            </Button>
-            <Label id="lb_workMenu" layoutX="50.0" layoutY="80.0" text="Work Menu" textFill="#0066cc">
-               <font>
-                  <Font name="Microsoft YaHei Bold" size="20.0" />
-               </font>
-            </Label>
-            <Line id="line_myAccount" endX="200.0" layoutX="2.0" layoutY="380.0" startX="50.0" stroke="#3399ff" strokeWidth="2.0" />
-            <Line id="line_workMenu" endX="200.0" layoutX="2.0" layoutY="125.0" startX="50.0" stroke="#3399ff" strokeWidth="2.0" />
-            <Button id="bt_myAccount" fx:id="btn_myAccount" layoutX="52.0" layoutY="315.0" mnemonicParsing="false" stylesheets="@style.css" text="My Account" textFill="#0066cc">
-               <font>
-                  <Font name="Microsoft YaHei" size="20.0" />
-               </font>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-            </Button>
-            <Button id="bt_insuranceClaim" fx:id="btn_insuranceClaim" layoutX="52.0" layoutY="145.0" mnemonicParsing="false" onAction="#backToInsuranceClaim" stylesheets="@style.css" text="Insurance Claim" textFill="#0066cc">
-               <font>
-                  <Font name="Microsoft YaHei" size="20.0" />
-               </font>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-            </Button>
-            <Line id="line_InsuranceClaim" endX="200.0" layoutX="2.0" layoutY="210.0" startX="50.0" stroke="#0066cc" strokeWidth="3.0" />
-            <Line id="line_policyModification" endX="200.0" layoutX="2.0" layoutY="295.0" startX="50.0" stroke="#3399ff" strokeWidth="2.0" />
-         </children>
-      </Group>
-      <Button id="bt_accept" fx:id="btn_accept" layoutX="305.0" layoutY="500.0" mnemonicParsing="false" onAction="#acceptClaim" prefHeight="30.0" prefWidth="150.0" stylesheets="@style.css" text="Accept" textFill="WHITE">
-         <font>
-            <Font name="Microsoft YaHei Bold" size="20.0" />
-         </font>
-      </Button>
-      <Button id="bt_notAccept" fx:id="btn_notAccept" layoutX="680.0" layoutY="500.0" mnemonicParsing="false" onAction="#notAcceptClaim" prefHeight="30.0" prefWidth="150.0" stylesheets="@style.css" text="Not Accept" textFill="WHITE">
-         <font>
-            <Font name="Microsoft YaHei Bold" size="20.0" />
-         </font>
-      </Button>
-      <ScrollPane layoutX="260.0" layoutY="80.0" prefHeight="400.0" prefWidth="720.0">
-        <content>
-          <AnchorPane id="anchorPane_information" minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="750.0">
                <children>
-                  <Label id="lb_claimInformation" layoutX="10.0" text="Claim Information" textFill="#0066cc">
-                     <font>
-                        <Font name="Microsoft YaHei Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <Label id="lb_locationOfAccident" layoutX="10.0" layoutY="50.0" text="Location of Accident">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="20.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="95.0" text="Date of Accident">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="20.0" />
-                     </font>
-                  </Label>
-                  <Label id="lb_amountOfDamages" layoutX="10.0" layoutY="315.0" text="Amount of Damages (€)">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="20.0" />
-                     </font>
-                  </Label>
-                  <Label id="lb_claimFile" layoutX="10.0" layoutY="360.0" text="Claim Supporting File" textFill="#0066cc">
-                     <font>
-                        <Font name="Microsoft YaHei Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="300.0" layoutY="359.0" mnemonicParsing="false" text="Download" />
-                  <TextArea fx:id="claimReason" layoutX="5.0" layoutY="130.0" prefHeight="170.0" prefWidth="700.0" />
-                  <Label fx:id="locationOfAccident" layoutX="230.0" layoutY="50.0" text="China, Beijing">
-                     <font>
-                        <Font name="Microsoft YaHei" size="18.0" />
-                     </font></Label>
-                  <Label fx:id="dateOfAccident" layoutX="200.0" layoutY="95.0" text="2020/04/01">
-                     <font>
-                        <Font name="Microsoft YaHei" size="18.0" />
-                     </font></Label>
-                  <Label fx:id="amountOfDamage" layoutX="250.0" layoutY="318.0" text="200">
-                     <font>
-                        <Font name="Microsoft YaHei" size="18.0" />
-                     </font></Label>
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <VBox id="group" fx:id="btn_group" spacing="20.0" stylesheets="@style.css">
+                           <children>
+                              <Label text="Work Menu" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button id="bt_insuranceClaim" fx:id="btn_claimAffair" mnemonicParsing="false" onAction="#getAllClaimAffiar" stylesheets="@style.css" text="Insurance Claim" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
+                              <Line fx:id="line_all" endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button fx:id="btn_pending" mnemonicParsing="false" onAction="#getPendingAffair" text="Pending" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets left="30.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Line fx:id="line_pending" endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button fx:id="btn_processing" mnemonicParsing="false" onAction="#getProcessingAffair" text="Processing" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets left="30.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Line fx:id="line_processing" endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button fx:id="btn_closed" mnemonicParsing="false" onAction="#getClosedAffiar" text="Closed" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets left="30.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Line fx:id="line_closed" endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button id="bt_policyModification" fx:id="btn_policyModification" mnemonicParsing="false" stylesheets="@style.css" text="Policy Modification" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button id="bt_myAccount" fx:id="btn_myAccount" mnemonicParsing="false" stylesheets="@style.css" text="My Account" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="600.0" spacing="25.0">
+                           <children>
+                              <Label id="lb_claimInformation" text="Claim Information" textFill="#0066cc">
+                                 <font>
+                                    <Font name="Microsoft YaHei Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <VBox spacing="30.0">
+                                       <children>
+                                          <Label text="Date of Accident:">
+                                             <font>
+                                                <Font name="Microsoft YaHei" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Location of Accident:">
+                                             <font>
+                                                <Font name="Microsoft YaHei" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Amount of Damage:">
+                                             <font>
+                                                <Font name="Microsoft YaHei" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Claim Reason:">
+                                             <font>
+                                                <Font name="Microsoft YaHei" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="30.0">
+                                       <children>
+                                          <Label fx:id="dateOfAccident" text="2020/04/01">
+                                             <font>
+                                                <Font name="Microsoft YaHei" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="locationOfAccident" text="China, Beijing">
+                                             <font>
+                                                <Font name="Microsoft YaHei" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="amountOfDamage" text="200">
+                                             <font>
+                                                <Font name="Microsoft YaHei" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Text fx:id="claimReason" strokeType="OUTSIDE" strokeWidth="0.0" text="double visibleWidth = visibleBounds.getWidth();//可见宽度    double scrollWidth = totalWidth - visibleWidth;//待滚动宽度    double hvalue = scrollPane.getHvalue();    double maxX = visibleWidth + hvalue * scrollWidth;//当前显示的maxX" wrappingWidth="500.0">
+                                             <font>
+                                                <Font name="Microsoft YaHei" size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox spacing="50.0">
+                                 <children>
+                                    <Label id="lb_claimFile" text="Claim Supporting File" textFill="#0066cc">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="filenameList" strokeType="OUTSIDE" strokeWidth="0.0" text="No File" wrappingWidth="250.0">
+                                       <font>
+                                          <Font name="Microsoft YaHei" size="18.0" />
+                                       </font></Text>
+                                    <Button fx:id="btn_download" mnemonicParsing="false" onAction="#downloadFile" text="Download" />
+                                 </children>
+                              </HBox>
+                              <HBox id="pane_background" alignment="TOP_CENTER" prefWidth="700.0" spacing="100.0" stylesheets="@style.css">
+                                 <children>
+                                    <Button id="bt_notAccept" fx:id="btn_notAccept" mnemonicParsing="false" onAction="#notAcceptClaim" prefHeight="30.0" prefWidth="150.0" stylesheets="@style.css" text="Not Accept" textFill="WHITE">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="20.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="bt_accept" fx:id="btn_accept" mnemonicParsing="false" onAction="#acceptClaim" prefHeight="30.0" prefWidth="150.0" stylesheets="@style.css" text="Accept" textFill="WHITE">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="20.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
                </children>
-            </AnchorPane>
-        </content>
+            </VBox>
+         </content>
       </ScrollPane>
    </children>
-</AnchorPane>
+</HBox>

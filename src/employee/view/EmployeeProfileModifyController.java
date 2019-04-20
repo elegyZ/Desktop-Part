@@ -1,4 +1,4 @@
-package client.view;
+package employee.view;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 import javafx.util.Pair;
 import model.Profile;
 import tool.Controller;
@@ -16,7 +18,7 @@ import tool.HttpTool;
 import tool.ProfileTool;
 import tool.UserTool;
 
-public class ClientProfileModifyController extends Controller 
+public class EmployeeProfileModifyController extends Controller 
 {
 	@FXML
 	private TextField firstName;
@@ -43,13 +45,23 @@ public class ClientProfileModifyController extends Controller
 	@FXML
 	private Button btn_save;
 	@FXML
-	private Button btn_home;
-	@FXML
-	private Button btn_myProfile;
-	@FXML
-	private Button btn_myInsurance;
-	@FXML
-	private Button btn_myClaim;
+    private VBox btn_group;
+    @FXML
+    private Line line_pending;
+    @FXML
+    private Line line_processing;
+    @FXML
+    private Line line_closed;
+    @FXML
+    private Button btn_pending;
+    @FXML
+    private Button btn_processing;
+    @FXML
+    private Button btn_closed;
+    @FXML
+    private Button btn_policyRenew;
+    @FXML
+    private Button btn_myProfile;
 	
 	private MainApp mainApp;
 	private Profile profile;
@@ -64,6 +76,9 @@ public class ClientProfileModifyController extends Controller
 		btn_female.setOnMouseClicked((me) -> {
 			btn_male.setSelected(false);
 		});
+		setVisible(false);
+		btn_group.setOnMouseEntered((me) -> setVisible(true));
+		btn_group.setOnMouseExited((me) -> setVisible(false));
 	}
 	
 	public void setMainApp(MainApp mainApp) 
@@ -131,37 +146,78 @@ public class ClientProfileModifyController extends Controller
 			if(reply.getKey().equals(200))
 			{
 				UserTool.freshProfile();
-				mainApp.showClientProfileView();
+				mainApp.showEmployeeProfileView();
 			}
 			else
 			{
 				errorAlert(reply.getValue());
-				mainApp.showClientProfileModifyView(profile);
+				mainApp.showEmployeeProfileModifyView(profile);
 			}
 		}
 	}
 	
-	@FXML
-	public void toHome()
-	{
-		mainApp.showHomeView();
-	}
+	public void setVisible(Boolean bool)
+    {
+    	if(bool)
+    	{
+    		btn_pending.setVisible(true);
+    		btn_processing.setVisible(true);
+    		btn_closed.setVisible(true);
+    		line_pending.setVisible(true);
+    		line_processing.setVisible(true);
+    		line_closed.setVisible(true);
+    		btn_pending.setManaged(true);
+    		btn_processing.setManaged(true);
+    		btn_closed.setManaged(true);
+    		line_pending.setManaged(true);
+    		line_processing.setManaged(true);
+    		line_closed.setManaged(true);
+    	}
+    	else
+    	{
+    		btn_pending.setVisible(false);
+    		btn_processing.setVisible(false);
+    		btn_closed.setVisible(false);
+    		line_pending.setVisible(false);
+    		line_processing.setVisible(false);
+    		line_closed.setVisible(false);
+    		btn_pending.setManaged(false);
+    		btn_processing.setManaged(false);
+    		btn_closed.setManaged(false);
+    		line_pending.setManaged(false);
+    		line_processing.setManaged(false);
+    		line_closed.setManaged(false);
+    	}
+    }
 	
 	@FXML
-	public void toClaimView()
-	{
-		mainApp.showClaimView();
-	}
-	
-	@FXML
-	public void toProfile()
-	{
-		mainApp.showClientProfileView();
-	}
-	
-	@FXML
-	public void backToInsurance()
-	{
-		mainApp.showInsuranceView();
-	}
+    public void getPendingAffair()
+    {
+    	mainApp.showClaimAffairView("pending");
+    }
+    
+    @FXML
+    public void getProcessingAffair()
+    {
+    	mainApp.showClaimAffairView("processing");
+    }
+    
+    @FXML
+    public void getClosedAffiar()
+    {
+    	mainApp.showClaimAffairView("closed");
+    }
+    
+    @FXML
+    public void getAllClaimAffiar()
+    {
+    	
+    	mainApp.showClaimAffairView("all");
+    }
+    
+    @FXML
+    public void toProfileView()
+    {
+    	mainApp.showEmployeeProfileView();
+    }
 }

@@ -1,3 +1,7 @@
+#group > .choice-box{
+	-fx-background-color: white;
+}
+
 #group > .button{
 	-fx-background-color: white;
 	-fx-font-size: 20;
@@ -39,4 +43,16 @@
 
 .table-cell{
 	-fx-alignment: center;
+}
+
+.scroll-pane{
+	-fx-background-color: white;
+}
+
+#stage{
+	-fx-background-color: white;
+}
+
+#backgroud{
+	-fx-background-color: white;
 }

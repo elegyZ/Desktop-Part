@@ -8,13 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.util.Pair;
 import model.Claim;
-import net.sf.json.JSONArray;
 import tool.ClaimTool;
-import tool.UserTool;
 import tool.Controller;
-import tool.HttpTool;
 
 public class ClaimController extends Controller 
 {
@@ -43,12 +39,7 @@ public class ClaimController extends Controller
 	private void initData() 
 	{
 		//------------------------------------------------------------Data Update---------------------------------------------
-		Pair<Integer, String> reply = HttpTool.getArray("/claims", UserTool.user.getToken());
-		if(reply.getKey().equals(200))
-		{
-			JSONArray jarray = JSONArray.fromObject(reply.getValue());
-			claimData = ClaimTool.getClientClaimList(ClaimTool.getClaimList(jarray));
-		}		
+		claimData = ClaimTool.getClaimAffairList();
 		//------------------------------------------------------------GUI Update---------------------------------------------
 		tb_claims.setItems(claimData);
 		claimPolicyIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPolicyId()));

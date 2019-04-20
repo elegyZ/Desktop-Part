@@ -40,4 +40,11 @@ public class UserTool
 	{
 		return jobject.has("profile");
 	}
+	
+	public static void freshProfile()
+	{
+		Pair<Integer, String> userInfo = HttpTool.getObject("/users?username=" + UserTool.user.getUsername(), UserTool.user.getToken());
+		JSONObject juserinfo = JSONArray.fromObject(userInfo.getValue()).getJSONObject(0);
+		UserTool.user.setProfileId(juserinfo.getString("profile"));
+	}
 }

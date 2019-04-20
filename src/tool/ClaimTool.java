@@ -23,25 +23,75 @@ import net.sf.json.JSONObject;
 
 public class ClaimTool 
 {	
-	public static ObservableList<Claim> initClaimList(List<Claim> list)
+	public static ObservableList<Claim> getClaimAffairList()
 	{
 		ObservableList<Claim> claimData = FXCollections.observableArrayList();
-		for(Claim claim:list)
-		{	
-			if(claim.getStatus().equals("pending"))
+		Pair<Integer, String> reply = HttpTool.getArray("/claims", UserTool.user.getToken());
+		if(reply.getKey().equals(200))
+		{
+			JSONArray jarray = JSONArray.fromObject(reply.getValue());
+			for(Claim claim:ClaimTool.getClaimList(jarray))
 				claimData.add(claim);
-			else if(claim.getStatus().equals("processing") && claim.getEmployeeId().equals(UserTool.user.getUserId()))
-				claimData.add(claim);
-		}
+		}	
 		return claimData;
 	}
 	
-	public static ObservableList<Claim> getClientClaimList(List<Claim> list)
+	public static ObservableList<Claim> initPendingList()
 	{
 		ObservableList<Claim> claimData = FXCollections.observableArrayList();
-		for(Claim claim:list)
-			claimData.add(claim);
+		Pair<Integer, String> reply = HttpTool.getArray("/claims?status=pending", UserTool.user.getToken());
+		if(reply.getKey().equals(200))
+		{
+			JSONArray jarray = JSONArray.fromObject(reply.getValue());
+			for(Claim claim:ClaimTool.getClaimList(jarray))
+				claimData.add(claim);
+		}	
 		return claimData;
+	}
+	
+	public static ObservableList<Claim> initProcessingList()
+	{
+		ObservableList<Claim> claimData = FXCollections.observableArrayList();
+		Pair<Integer, String> reply = HttpTool.getArray("/claims?status=processing&&employee=" + UserTool.user.getUserId(), UserTool.user.getToken());
+		if(reply.getKey().equals(200))
+		{
+			JSONArray jarray = JSONArray.fromObject(reply.getValue());
+			for(Claim claim:ClaimTool.getClaimList(jarray))
+				claimData.add(claim);
+		}	
+		return claimData;
+	}
+	
+	public static ObservableList<Claim> initClosedList()
+	{
+		ObservableList<Claim> claimData = FXCollections.observableArrayList();
+		Pair<Integer, String> reply = HttpTool.getArray("/claims?status=accepted&employee=" + UserTool.user.getUserId(), UserTool.user.getToken());
+		if(reply.getKey().equals(200))
+		{
+			JSONArray jarray = JSONArray.fromObject(reply.getValue());
+			for(Claim claim:ClaimTool.getClaimList(jarray))
+				claimData.add(claim);
+		}	
+		reply = HttpTool.getArray("/claims?status=rejected&employee=" + UserTool.user.getUserId(), UserTool.user.getToken());
+		if(reply.getKey().equals(200))
+		{
+			JSONArray jarray = JSONArray.fromObject(reply.getValue());
+			for(Claim claim:ClaimTool.getClaimList(jarray))
+				claimData.add(claim);
+		}	
+		return claimData;
+	}
+	
+	public static ObservableList<Claim> initFilterData(String type)
+	{
+		if(type.equals("all"))
+			return getClaimAffairList();
+		else if(type.equals("pending"))
+			return initPendingList();
+		else if(type.equals("processing"))
+			return initProcessingList();
+		else
+			return initClosedList();
 	}
 	
 	//---------------Claim HTTP methods----------------------

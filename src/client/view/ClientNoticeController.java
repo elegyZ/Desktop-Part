@@ -43,14 +43,6 @@ public class ClientNoticeController extends Controller
 				mainApp.showHomeView();
 			});
 		}
-		else if(type.equals("no profile"))
-		{
-			hintwords.setText(NoticeTool.NoProfileNoticeWords);
-			btn_act.setText(NoticeTool.NoProfieNoticeButton);
-			btn_act.setOnMouseClicked((me) -> {
-				mainApp.showProfileCreateView();
-			});
-		}
 	}
 	
 	@FXML

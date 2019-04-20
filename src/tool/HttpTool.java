@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class HttpTool
 {
 	//public final static String URL = "https://65ea4d1c-c0d7-4115-8198-1c38cf9dd578.mock.pstmn.io/";
 	public final static String URL = "http://59.110.243.55:3000";
-	public final static String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzlkOGQyM2UzZDE4MjZjOTE1YzJkOGIiLCJpYXQiOjE1NTU2NDE0MDgsImV4cCI6MTU1NTcyNzgwOH0.l3qPungDgNknBr1ZHHwk1k8ZfQ99aNimJQlFke4TK_Q";
+	public final static String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzlkOGQyM2UzZDE4MjZjOTE1YzJkOGIiLCJpYXQiOjE1NTU3NjU0MTgsImV4cCI6MTU1NTg1MTgxOH0.7TWGUQCGYqfiVQg87WbXsuOQxhQINkNN8dDfpjMiwPw";
 	
 	public static Pair<Integer, String> getObject(String lastpart, String token)
 	{
@@ -270,24 +271,8 @@ public class HttpTool
 			}
 		}
 	}
-	
-	public static final int cache = 10 * 1024;  
-    public static final boolean isWindows;  
-    public static final String splash;  
-    public static final String root;  
-    static {  
-        if (System.getProperty("os.name") != null && System.getProperty("os.name").toLowerCase().contains("windows")) {  
-            isWindows = true;  
-            splash = "\\";  
-            root="C:\\Users\\aa\\Desktop";  
-        } else {  
-            isWindows = false;  
-            splash = "/";  
-            root="/search";  
-        }  
-    }  
 
-    public static String download(String lastpart, String token, String fileSaveName) 
+    public static Pair<Integer, String> download(String lastpart, String token, String fileSaveName, String root) 
     {  
     	String urlStr = URL + lastpart;
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -299,56 +284,66 @@ public class HttpTool
 	    httpGet.setHeader("Content-Type","application/json");	
 	    httpGet.addHeader("Authorization", "Bearer " + token);
 	    CloseableHttpResponse response = null;
+	    int cache = 10 * 1024;
         try 
         {  
-            response = httpClient.execute(httpGet);   
-            HttpEntity entity = response.getEntity();  
-            InputStream is = entity.getContent();  
-            String fileSavePath = getFileSavePath(fileSaveName);  
-            File file = new File(fileSavePath);  
-            file.getParentFile().mkdirs();  
-            FileOutputStream fileout = new FileOutputStream(file);  
-            /** 
-             * 根据实际运行效果 设置缓冲区大小 
-             */  
-            byte[] buffer=new byte[cache];  
-            int ch = 0;  
-            while ((ch = is.read(buffer)) != -1) {  
-                fileout.write(buffer,0,ch);  
-            }  
-            is.close();  
-            fileout.flush();  
-            fileout.close();  
-  
+			response = httpClient.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+			int code = response.getStatusLine().getStatusCode();
+			String result = "";
+			if(code == 200)
+			{
+	            InputStream is = entity.getContent();  
+	            String fileSavePath = getFileSavePath(root, fileSaveName);  
+	            File file = new File(fileSavePath);  
+	            file.getParentFile().mkdirs();  
+	            FileOutputStream fileout = new FileOutputStream(file);  
+	            /** 
+	             * 根据实际运行效果 设置缓冲区大小 
+	             */  
+	            byte[] buffer=new byte[cache];  
+	            int ch = 0;  
+	            while ((ch = is.read(buffer)) != -1) {  
+	                fileout.write(buffer,0,ch);  
+	            }  
+	            result = EntityUtils.toString(entity, "UTF-8");
+	            is.close();  
+	            fileout.flush();  
+	            fileout.close();
+			}
+			Pair<Integer, String> pair = new Pair<Integer, String>(code, result);
+			return pair;
         } catch (Exception e) {  
             e.printStackTrace();  
-        }  
-        return null;  
+            return new Pair<Integer, String>(404,e.toString());
+        }    
     }  	
 
-    public static String getFileSavePath(String fileSaveName) 
+    public static String getFileSavePath(String root, String fileSaveName) 
     {  
-        String filepath = root + splash; 
+        String filepath = root + "\\"; 
         filepath += fileSaveName;
         return filepath;  
     }
     
 	public static void main(String[] args) 
 	{
-		Pair<Integer, String> reply = HttpTool.getArray("/users", TOKEN);
-		System.out.println(reply);
+//		Pair<Integer, String> reply = HttpTool.getArray("/claims", TOKEN);
+//		JSONArray jarray = JSONArray.fromObject(reply.getValue());
+//		for(int i = 0;i < jarray.size();i++)
+//			System.out.println(JSONObject.fromObject(jarray.get(i)).getString("files") + "\n" + JSONObject.fromObject(jarray.get(i)));
 		
-//		List<Claim> claimData = new ArrayList<Claim>();
-//		Pair<Integer, String> reply = HttpTool.getArray("/claims?location=nowhere", TOKEN);
-//		if(reply.getKey().equals(200))
-//		{
-//			JSONArray jarray = JSONArray.fromObject(reply.getValue());
-//			claimData = ClaimTool.getClientClaimList(ClaimTool.getClaimList(jarray));
-//		}	
-//		System.out.println(claimData.get(0).getId());		///res/claim-files/:claimId/:filename
-//		download("res/claim-files/" + claimData.get(0).getId() + "/" + claimData.get(0).getClaimFiles().get(0), TOKEN, claimData.get(0).getClaimFiles().get(0).toString());
+		List<Claim> claimData = new ArrayList<Claim>();
+		Pair<Integer, String> reply = HttpTool.getArray("/claims?_id=5cb9c374b19d9b195023a587", TOKEN);
+		if(reply.getKey().equals(200))
+		{
+			JSONArray jarray = JSONArray.fromObject(reply.getValue());
+			claimData = ClaimTool.getClaimList(jarray);
+		}	
+		System.out.println(claimData.get(0).getClaimFiles().get(0).toString());		///res/claim-files/:claimId/:filename
+		//download("/res/claim-files/5cb9c374b19d9b195023a587/1555678068107_test.txt", TOKEN, claimData.get(0).getClaimFiles().get(0).toString());
 
-		//download(null, null, "HiberniaTest");
+
 //		String username = "user";
 //		String password = "pwd";
 //		JSONObject jobject = new JSONObject();

@@ -44,7 +44,16 @@ public class LogInController extends Controller
 			if(reply.getKey().equals(200)) 
 			{
 				if(UserTool.initUserInfo(reply, username))
-					mainApp.showHomeView();
+				{
+					if(!UserTool.user.isEmployee())
+						mainApp.showHomeView();
+					else
+					{
+						errorAlert("Employee Should Log In On Employee Page.");
+						clientUserName.setText(null);
+						clientPassword.setText(null);
+					}
+				}
 				else
 					mainApp.showProfileCreateView();
 			}
@@ -78,7 +87,16 @@ public class LogInController extends Controller
 			if(reply.getKey().equals(200)) 
 			{
 				if(UserTool.initUserInfo(reply, username))
-					mainApp.showClaimAffairView();
+				{
+					if(UserTool.user.isEmployee())
+						mainApp.showClaimAffairView("all");
+					else
+					{
+						errorAlert("Client Should Log In On Client Page.");
+						employeeUserName.setText(null);
+						employeePassword.setText(null);
+					}
+				}
 				else
 					mainApp.showProfileCreateView();
 			}

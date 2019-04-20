@@ -10,6 +10,7 @@ import model.Profile;
 import tool.Controller;
 import tool.DateTool;
 import tool.ProfileTool;
+import tool.UserTool;
 
 public class ProfileCreateController extends Controller 
 {
@@ -60,7 +61,10 @@ public class ProfileCreateController extends Controller
 		Pair<Integer, String> reply = ProfileTool.postProfile(ProfileTool.profileToJSONObject(profile));
 		if(reply.getKey() == 200)
 		{
-			mainApp.showHomeView();
+			if(UserTool.user.isEmployee())
+				mainApp.showClaimAffairView("all");
+			else
+				mainApp.showHomeView();
 		}
 		else
 		{

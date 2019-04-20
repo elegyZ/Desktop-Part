@@ -12,9 +12,11 @@ import client.view.HomeController;
 import client.view.InsuranceController;
 import client.view.InsuranceInformationController;
 import client.view.InsurancePurchaseController;
-import employee.view.ClaimAffairController;
-import employee.view.ClaimAffairNoticeController;
+import employee.view.EmployeeNoticeController;
+import employee.view.EmployeeProfileController;
+import employee.view.EmployeeProfileModifyController;
 import employee.view.ClaimInformationController;
+import employee.view.ClaimAffairController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -53,7 +55,8 @@ public class MainApp extends Application
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("../view/RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();            
+            rootLayout = (BorderPane) loader.load();    
+            rootLayout.setStyle("-fx-background-color: white;");
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -314,34 +317,70 @@ public class MainApp extends Application
     }
 	
 	//----------------------------------------employee views---------------------------------------------
-	public void showClaimAffairView() 
+	public void showEmployeeProfileView() 
 	{
         try 
         {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("../employee/view/ClaimAffairView.fxml"));
-            AnchorPane claimAffairView = (AnchorPane) loader.load();
-            claimAffairView.setStyle("-fx-background-color: white;");
-            rootLayout.setCenter(claimAffairView);
-            ClaimAffairController controller = loader.getController();
+            loader.setLocation(MainApp.class.getResource("../employee/view/EmployeeProfileView.fxml"));
+            HBox employeeProfileView = (HBox) loader.load();
+            employeeProfileView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(employeeProfileView);
+            EmployeeProfileController controller = loader.getController();
             controller.setMainApp(this);
+            controller.setProfile(UserTool.user.getProfileId());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 	
-	public void showClaimInformationView(Claim claim) 
+	public void showEmployeeProfileModifyView(Profile profile) 
+	{
+		try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../employee/view/EmployeeProfileModifyView.fxml"));
+            HBox employeeProfileModifyView = (HBox) loader.load();
+            employeeProfileModifyView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(employeeProfileModifyView);
+            EmployeeProfileModifyController controller = loader.getController();
+            controller.initProfile(profile);
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void showClaimAffairView(String type) 
+	{
+        try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../employee/view/ClaimAffairView.fxml"));
+            HBox claimAffairView = (HBox) loader.load();
+            claimAffairView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(claimAffairView);
+            ClaimAffairController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setType(type);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	public void showClaimInformationView(Claim claim, String type) 
 	{
         try 
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("../employee/view/ClaimInformationView.fxml"));
-            AnchorPane claimInformationView = (AnchorPane) loader.load();
+            HBox claimInformationView = (HBox) loader.load();
             claimInformationView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(claimInformationView);
             ClaimInformationController controller = loader.getController();
-            controller.setClaim(claim);
             controller.setMainApp(this);
+            controller.setType(type);
+            controller.setClaim(claim);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -356,7 +395,7 @@ public class MainApp extends Application
             AnchorPane claimAffairNoticeViewView = (AnchorPane) loader.load();
             claimAffairNoticeViewView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(claimAffairNoticeViewView);
-            ClaimAffairNoticeController controller = loader.getController();
+            EmployeeNoticeController controller = loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
