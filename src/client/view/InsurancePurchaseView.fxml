@@ -16,11 +16,28 @@
          <content>
             <VBox id="stage" alignment="TOP_CENTER" minHeight="600.0" minWidth="1000.0" stylesheets="@style.css">
                <children>
+                  <ToolBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: white;">
+                     <items>
+                        <Button id="language" fx:id="bt_language" mnemonicParsing="false" onAction="#changeLanguage" text="English" textFill="#0066cc">
+                           <font>
+                              <Font name="Microsoft YaHei Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" onMousePressed="#toProfile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/pic/user.png" />
+                           </image>
+                        </ImageView>
+                     </items>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                     </padding>
+                  </ToolBar>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <VBox id="group" spacing="20.0" stylesheets="@style.css">
                            <children>
-                              <Label text="Client Service" textFill="#0066cc">
+                              <Label fx:id="lb_clientService" text="Client Service" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="20.0" />
                                  </font>
@@ -34,7 +51,7 @@
                                     <Insets top="10.0" />
                                  </padding>
                               </Button>
-                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" strokeWidth="2.0" />
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
                               <Button fx:id="btn_myInsurance" onAction="#backToInsurance" stylesheets="@style.css" text="My Insurances" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei" size="20.0" />
@@ -43,8 +60,8 @@
                                     <Insets top="10.0" />
                                  </padding>
                               </Button>
-                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-                              <Button fx:id="btn_myProfile" onAction="#toClaimView" stylesheets="@style.css" text="My Profile" textFill="#0066cc">
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" strokeWidth="2.0" />
+                              <Button fx:id="btn_myClaim" onAction="#toProfile" stylesheets="@style.css" text="My Claims" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei" size="20.0" />
                                  </font>
@@ -53,22 +70,24 @@
                                  </padding>
                               </Button>
                               <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-                              <Button fx:id="btn_insuranceClaim" onAction="#toProfile" stylesheets="@style.css" text="Claim Settlement" textFill="#0066cc">
-                                 <font>
-                                    <Font name="Microsoft YaHei" size="20.0" />
-                                 </font>
+                              <Button fx:id="btn_aboutUs" mnemonicParsing="false" onAction="#toAboutUs" text="About Us" textFill="#0066cc">
                                  <padding>
                                     <Insets top="10.0" />
                                  </padding>
                               </Button>
                               <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#logout" text="Log Out" textFill="#0066cc">
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
                            </children>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin></VBox>
                         <VBox prefHeight="600.0" spacing="25.0">
                            <children>
-                              <Label text="Insurance Type" textFill="#0066cc">
+                              <Label fx:id="lb_insuranceTypeInfo" text="Insurance Type" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="20.0" />
                                  </font>
@@ -80,7 +99,7 @@
                                  <children>
                                     <VBox id="pane_background" alignment="TOP_CENTER" spacing="15.0" stylesheets="@style.css">
                                        <children>
-                                          <Label text="Basic">
+                                          <Label fx:id="lb_basic" text="Basic">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="20.0" />
                                              </font>
@@ -90,7 +109,7 @@
                                                 <Font name="Microsoft YaHei Bold" size="20.0" />
                                              </font>
                                           </Label>
-                                          <Text fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="The maximum amount of compensation" textAlignment="CENTER" wrappingWidth="220.60498046875">
+                                          <Text fx:id="text1" fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="The maximum amount of compensation" textAlignment="CENTER" wrappingWidth="220.0">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="18.0" />
                                              </font>
@@ -106,7 +125,7 @@
                                     <Line endY="150.0" stroke="#0066cc" strokeLineCap="ROUND" strokeLineJoin="ROUND" />
                                     <VBox id="pane_background" alignment="TOP_CENTER" spacing="15.0" stylesheets="@style.css">
                                        <children>
-                                          <Label text="Medium">
+                                          <Label fx:id="lb_medium" text="Medium">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="20.0" />
                                              </font>
@@ -116,7 +135,7 @@
                                                 <Font name="Microsoft YaHei Bold" size="20.0" />
                                              </font>
                                           </Label>
-                                          <Text fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="The maximum amount of compensation" textAlignment="CENTER" wrappingWidth="220.60498046875">
+                                          <Text fx:id="text2" fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="The maximum amount of compensation" textAlignment="CENTER" wrappingWidth="220.0">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="18.0" />
                                              </font>
@@ -132,7 +151,7 @@
                                     <Line endY="150.0" stroke="#0066cc" strokeLineCap="ROUND" strokeLineJoin="ROUND" />
                                     <VBox id="pane_background" alignment="TOP_CENTER" spacing="15.0" stylesheets="@style.css">
                                        <children>
-                                          <Label text="Premium">
+                                          <Label fx:id="lb_premium" text="Premium">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="20.0" />
                                              </font>
@@ -142,7 +161,7 @@
                                                 <Font name="Microsoft YaHei Bold" size="20.0" />
                                              </font>
                                           </Label>
-                                          <Text fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="The maximum amount of compensation" textAlignment="CENTER" wrappingWidth="220.60498046875">
+                                          <Text fx:id="text3" fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="The maximum amount of compensation" textAlignment="CENTER" wrappingWidth="220.0">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="18.0" />
                                              </font>
@@ -157,7 +176,7 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <Label text="Insured Information" textFill="#0066cc">
+                              <Label fx:id="lb_insuredInformation" text="Insured Information" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="20.0" />
                                  </font>
@@ -166,27 +185,22 @@
                                  <children>
                                     <VBox spacing="25.0">
                                        <children>
-                                          <Label text="First Name:">
+                                          <Label fx:id="lb_firstname" text="First Name:">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutY="35.0" text="Gender:">
+                                          <Label fx:id="lb_gander" layoutY="35.0" text="Gender:">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="2.0" layoutY="75.0" text="ID Number:">
+                                          <Label fx:id="lb_ID" layoutX="2.0" layoutY="75.0" text="ID Number:">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Phone Number:">
-                                             <font>
-                                                <Font name="Microsoft YaHei Bold" size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Bank Account Name:">
+                                          <Label fx:id="lb_countrycode" text="Country Code:">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="16.0" />
                                              </font>
@@ -203,33 +217,27 @@
                                              </children>
                                           </HBox>
                                           <TextField fx:id="tf_socialId" />
-                                          <TextField fx:id="tf_phone" />
-                                          <TextField fx:id="tf_bankUsername" />
+                                          <ChoiceBox fx:id="cb_nationcode" prefWidth="200.0" />
                                        </children>
                                     </VBox>
                                     <VBox layoutX="373.0" spacing="25.0">
                                        <children>
-                                          <Label layoutX="373.0" text="Last Name:">
+                                          <Label fx:id="lb_lastname" layoutX="373.0" text="Last Name:">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="373.0" layoutY="33.0" text="Age:">
+                                          <Label fx:id="lb_age" layoutX="373.0" layoutY="33.0" text="Age:">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="463.0" layoutY="53.0" text="Email:">
+                                          <Label fx:id="lb_email" layoutX="463.0" layoutY="53.0" text="Email:">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Bank Name:">
-                                             <font>
-                                                <Font name="Microsoft YaHei Bold" size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Bank Account:">
+                                          <Label fx:id="lb_phone" text="Phone Number:">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="16.0" />
                                              </font>
@@ -241,38 +249,99 @@
                                           <TextField fx:id="tf_lastname" />
                                           <TextField fx:id="tf_age" />
                                           <TextField fx:id="tf_email" />
-                                          <TextField fx:id="tf_bankName" />
-                                          <TextField fx:id="tf_bankAccount" />
+                                          <TextField fx:id="tf_phone" />
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
-                              <Label text="Insurance Duration" textFill="#0066cc">
+                              <Label fx:id="lb_accountForClaimPayment" text="Account For Claim Payment" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="20.0" />
                                  </font>
                               </Label>
+                              <HBox spacing="15.0">
+                                 <children>
+                                    <VBox layoutX="373.0" spacing="25.0">
+                                       <children>
+                                          <Label fx:id="lb_bankName" text="Bank Name:">
+                                             <font>
+                                                <Font name="Microsoft YaHei Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lb_bankAccount" text="Bank Account:">
+                                             <font>
+                                                <Font name="Microsoft YaHei Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="510.0" prefHeight="200.0" spacing="15.0">
+                                       <children>
+                                          <TextField fx:id="tf_bankName" />
+                                          <TextField fx:id="tf_bankAccount" />
+                                       </children>
+                                    </VBox>
+                                    <Label fx:id="lb_bankAccountName" text="Bank Account Name:">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tf_bankUsername" />
+                                 </children>
+                              </HBox>
                               <HBox spacing="20.0">
                                  <children>
-                                    <Label text="Start Date:">
+                                    <Label fx:id="lb_insuranceDurationInfo" text="Insurance Duration" textFill="#0066cc">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lb_30days" text="30days per period" textFill="#666666">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <Label fx:id="lb_startdate" text="Start Date:">
                                        <font>
                                           <Font name="Microsoft YaHei Bold" size="16.0" />
                                        </font>
                                     </Label>
                                     <DatePicker fx:id="startdate" />
-                                    <Label text="Duration:">
+                                 </children>
+                              </HBox>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Label fx:id="lb_duration" text="Duration:">
                                        <font>
                                           <Font name="Microsoft YaHei Bold" size="16.0" />
                                        </font>
                                     </Label>
                                     <TextField fx:id="tf_duration" />
-                                    <Label text="Months">
+                                    <Label fx:id="lb_period" text="Periods">
                                        <font>
                                           <Font name="Microsoft YaHei Bold" size="16.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <Label fx:id="lb_expiredate" text="Expire Date:">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lb_expiredatedate" text="2019-05-20">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="16.0" />
+                                       </font>
                                     </Label>
                                  </children>
                               </HBox>
@@ -285,7 +354,7 @@
                         </VBox>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="80.0" top="80.0" />
+                        <Insets bottom="80.0" />
                      </VBox.margin>
                   </HBox>
                </children>

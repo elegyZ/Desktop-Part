@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import model.Profile;
 import tool.Controller;
 import tool.ProfileTool;
+import tool.UserTool;
 
 public class ClientProfileController extends Controller 
 {
@@ -35,18 +36,83 @@ public class ClientProfileController extends Controller
 	@FXML
 	private Button btn_home;
 	@FXML
-	private Button btn_myProfile;
+	private Button btn_logout;
 	@FXML
 	private Button btn_myInsurance;
 	@FXML
 	private Button btn_myClaim;
+	@FXML
+	private Button btn_aboutUs;
+	@FXML
+	private Button bt_language;
+	@FXML
+	private Label lb_clientService;
+	@FXML
+	private Label lb_profile;
+	@FXML
+	private Label lb_firstname;
+	@FXML
+	private Label lb_lastname;
+	@FXML
+	private Label lb_gander;
+	@FXML
+	private Label lb_age;
+	@FXML
+	private Label lb_ID;
+	@FXML
+	private Label lb_country;
+	@FXML
+	private Label lb_province;
+	@FXML
+	private Label lb_city;
+	@FXML
+	private Label lb_phone;
+	@FXML
+	private Label lb_email;
 	
 	private MainApp mainApp;
 	private Profile profile;
 	
+	@FXML
+	public void changeLanguage()
+	{
+		UserTool.i18n.changeLanguage();
+		setLanguageBtn();
+	}
+	
+	public void setLanguageBtn()
+	{
+		bt_language.setText(UserTool.i18n.get("language"));
+		setText();
+	}
+	
+	public void setText()
+	{
+		lb_clientService.setText(UserTool.i18n.get("clientservice"));
+		btn_home.setText(UserTool.i18n.get("home"));
+		btn_myInsurance.setText(UserTool.i18n.get("myinsurance"));
+		btn_myClaim.setText(UserTool.i18n.get("myclaim"));
+		btn_aboutUs.setText(UserTool.i18n.get("aboutus"));
+		btn_logout.setText(UserTool.i18n.get("logout"));
+		
+		lb_profile.setText(UserTool.i18n.get("profile"));
+		lb_firstname.setText(UserTool.i18n.get("firstname"));
+		lb_lastname.setText(UserTool.i18n.get("lastname"));
+		lb_gander.setText(UserTool.i18n.get("gander"));
+		lb_age.setText(UserTool.i18n.get("age"));
+		lb_ID.setText(UserTool.i18n.get("ID"));
+		lb_country.setText(UserTool.i18n.get("country"));
+		lb_province.setText(UserTool.i18n.get("province"));
+		lb_city.setText(UserTool.i18n.get("city"));
+		lb_phone.setText(UserTool.i18n.get("phone"));
+		lb_email.setText(UserTool.i18n.get("email"));
+		btn_modify.setText(UserTool.i18n.get("modify"));
+	}
+	
 	public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
+        setLanguageBtn();
     }
 	
 	public void setProfile(String profileId)
@@ -85,6 +151,18 @@ public class ClientProfileController extends Controller
 	public void toProfile()
 	{
 		mainApp.showClientProfileView();
+	}
+	
+	@FXML
+	public void toAboutUs()
+	{
+		mainApp.showAboutUsView();
+	}
+	
+	@FXML
+	public void logout()
+	{
+		mainApp.showLogInView();
 	}
 	
 	@FXML

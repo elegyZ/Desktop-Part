@@ -33,3 +33,13 @@
 .table-cell{
 	-fx-alignment: center;
 }
+
+#language{
+	-fx-background-color: white;
+	-fx-font-size: 18;
+}
+
+#language:hover{
+	-fx-background-color: white;
+	-fx-font-size: 19;
+}

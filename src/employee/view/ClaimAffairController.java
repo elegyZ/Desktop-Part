@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -42,23 +43,60 @@ public class ClaimAffairController extends Controller
     @FXML
     private VBox btn_group;
     @FXML
+    private Button btn_claimAffiar;
+    @FXML
     private Button btn_pending;
     @FXML
     private Button btn_processing;
     @FXML
     private Button btn_closed;
     @FXML
-    private Button btn_policyRenew;
+	private Button btn_logout;
     @FXML
-    private Button btn_myProfile;
+	private Button bt_language;
+    @FXML
+   	private Label lb_workmenu;
+    @FXML
+   	private Label lb_claimAffairs;
     
     private ObservableList<Claim> claimData;
     private MainApp mainApp;
     private String type;
     
+    @FXML
+	public void changeLanguage()
+	{
+		UserTool.i18n.changeLanguage();
+		setLanguageBtn();
+	}
+	
+    public void setLanguageBtn()
+	{
+		bt_language.setText(UserTool.i18n.get("language"));
+		setText();
+	}
+	
+	public void setText()
+	{
+		lb_workmenu.setText(UserTool.i18n.get("workmenu"));
+		btn_claimAffiar.setText(UserTool.i18n.get("claimAffair"));
+		btn_pending.setText(UserTool.i18n.get("pending"));
+		btn_processing.setText(UserTool.i18n.get("processing"));
+		btn_closed.setText(UserTool.i18n.get("closed"));
+		btn_logout.setText(UserTool.i18n.get("logout"));
+		
+		lb_claimAffairs.setText(UserTool.i18n.get("claimAffairInfo"));
+		policyIdColumn.setText(UserTool.i18n.get("policyIdCol"));
+		insuranceTypeColumn.setText(UserTool.i18n.get("insuranceTypeCol"));
+		dateOfSubmissionColumn.setText(UserTool.i18n.get("dateOfSubmissionCol"));
+		amountOfDamageColumn.setText(UserTool.i18n.get("amountOfDamageCol"));
+		acceptanceColumn.setText(UserTool.i18n.get("acceptanceCol"));
+	}
+    
     public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
+        setLanguageBtn();
     }
     
     public void setType(String t)
@@ -147,7 +185,7 @@ public class ClaimAffairController extends Controller
 						Claim claim = this.getTableView().getItems().get(this.getIndex());
 						if(claim.getStatus().equals("pending"))
                         {
-                        	Button bt_assign = new Button("Assign");
+                        	Button bt_assign = new Button(UserTool.i18n.get("btn_Assign"));
                             this.setGraphic(bt_assign);
                             bt_assign.setOnMouseClicked((assign) -> 
                             {
@@ -155,8 +193,8 @@ public class ClaimAffairController extends Controller
                             	Pair<Integer, String> reply = ClaimTool.assign(claim);
                             	if(reply.getKey() == 200)
                             	{
-                            		successAlert("The Claim Has Been Assigned To You Successfally!");
-                                	Button bt_process = new Button("Process");
+                            		successAlert(UserTool.i18n.get("TheClaimHasBeenAssignedToYouSuccessfally"));
+                                	Button bt_process = new Button(UserTool.i18n.get("btn_Process"));
                                     this.setGraphic(bt_process);
                                     bt_process.setOnMouseClicked((process) -> 
                                     {
@@ -164,12 +202,12 @@ public class ClaimAffairController extends Controller
                                     });
                             	}
                             	else
-                            		errorAlert("Can Not Assign This Claim!\n" + reply.getValue());
+                            		errorAlert(UserTool.i18n.get("CanNotAssignThisClaim") + reply.getValue());
                             });
                         }
                         else if(claim.getStatus().equals("processing") && claim.getEmployeeId().equals(UserTool.user.getUserId()))
                         {
-                        	Button bt_process = new Button("Process");
+                        	Button bt_process = new Button(UserTool.i18n.get("btn_Process"));
                             this.setGraphic(bt_process);
                             bt_process.setOnMouseClicked((process) -> 
                             {
@@ -214,4 +252,10 @@ public class ClaimAffairController extends Controller
     {
     	mainApp.showEmployeeProfileView();
     }
+    
+    @FXML
+	public void logout()
+	{
+		mainApp.showLogInView();
+	}
 }

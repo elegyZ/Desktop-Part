@@ -3,6 +3,7 @@ package view;
 import desktop.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.util.Pair;
@@ -25,8 +26,46 @@ public class SignUpController extends Controller
 	private Button bt_signUp;
 	@FXML
 	private Button bt_back;
+	@FXML
+	private Label lb_WTSHI;
+	@FXML
+	private Label lb_username;
+	@FXML
+	private Label lb_password1;
+	@FXML
+	private Label lb_password2;
+	@FXML
+	private Button bt_language;
+	
 	private MainApp mainApp;
 	private String type;
+	
+	@FXML
+	public void changeLanguage()
+	{
+		UserTool.i18n.changeLanguage();
+		setLanguageBtn();
+	}
+	
+	public void setLanguageBtn()
+	{
+		bt_language.setText(UserTool.i18n.get("language"));
+		setText();
+	}
+	
+	public void setText()
+	{
+		lb_WTSHI.setText(UserTool.i18n.get("WTSHI"));
+		lb_username.setText(UserTool.i18n.get("username"));
+		lb_password1.setText(UserTool.i18n.get("password"));
+		lb_password2.setText(UserTool.i18n.get("password2"));
+		bt_signUp.setText(UserTool.i18n.get("signup"));
+		bt_back.setText(UserTool.i18n.get("back"));
+		if(type.equals("client"))
+			typename.setText(UserTool.i18n.get("client"));
+		else
+			typename.setText(UserTool.i18n.get("employee"));
+	}
 	
 	@FXML
 	public void signUp()
@@ -35,13 +74,13 @@ public class SignUpController extends Controller
 		String pwd = password.getText();
 		String pwd2 = password2.getText();
 		if(name.equals(""))
-			checkAlert("Please Enter Your Username.");
+			checkAlert(UserTool.i18n.get("PleaseEnterYourUsername"));
 		else if(pwd.equals(""))
-			checkAlert("Please Enter Your Password.");
+			checkAlert(UserTool.i18n.get("PleaseEnterYourPassword"));
 		else if(pwd2.equals(""))
-			checkAlert("Please Confirm Your Password.");
+			checkAlert(UserTool.i18n.get("PleaseConfirmYourPassword"));
 		else if(!pwd.equals(pwd2))
-			checkAlert("The Passwords Are Not The Same, Please Confirm Your Password.");
+			checkAlert(UserTool.i18n.get("ThePasswordsAreNotTheSamePleaseConfirmYourPassword"));
 		else
 		{
 			JSONObject jobject = new JSONObject();
@@ -67,7 +106,7 @@ public class SignUpController extends Controller
 			}
 			else
 			{
-				errorAlert("Error! Please check your Username and Password.");
+				errorAlert(UserTool.i18n.get("ErrorPleasecheckyourUsernameandPassword")); 
 				username.setText(null);
 				password.setText(null);
 				password2.setText(null);
@@ -85,14 +124,11 @@ public class SignUpController extends Controller
 	public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
+        setLanguageBtn();
     }
 	
 	public void setType(String t)
 	{
 		this.type = t;
-		if(type.equals("client"))
-			typename.setText("Client");
-		else
-			typename.setText("Employee");
 	}
 }

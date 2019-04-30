@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -33,14 +34,51 @@ public class InsuranceController extends Controller
 	@FXML
 	private Button btn_home;
 	@FXML
-	private Button btn_insuranceService;
+	private Button btn_logout;
+	@FXML
+	private Button btn_myClaim;
 	@FXML
 	private Button btn_myInsurance;
 	@FXML
-	private Button btn_myProfile;
+	private Button btn_aboutUs;
+	@FXML
+	private Button bt_language;
+	@FXML
+	private Label lb_clientService;
+	@FXML
+	private Label lb_purchacedInsurance;
 	
     private ObservableList<Policy> policyData;
 	private MainApp mainApp;
+	
+	@FXML
+	public void changeLanguage()
+	{
+		UserTool.i18n.changeLanguage();
+		setLanguageBtn();
+	}
+	
+	public void setLanguageBtn()
+	{
+		bt_language.setText(UserTool.i18n.get("language"));
+		setText();
+	}
+	
+	public void setText()
+	{
+		lb_clientService.setText(UserTool.i18n.get("clientservice"));
+		btn_home.setText(UserTool.i18n.get("home"));
+		btn_myInsurance.setText(UserTool.i18n.get("myinsurance"));
+		btn_myClaim.setText(UserTool.i18n.get("myclaim"));
+		btn_aboutUs.setText(UserTool.i18n.get("aboutus"));
+		btn_logout.setText(UserTool.i18n.get("logout"));
+		
+		lb_purchacedInsurance.setText(UserTool.i18n.get("purchacedInsurance"));
+		insurancePlanColumn.setText(UserTool.i18n.get("insurancePlanCol"));
+		guaranteePeriodColumn.setText(UserTool.i18n.get("guaranteePeriodCol"));
+		startingEndingDateColumn.setText(UserTool.i18n.get("startingEndingDateCol"));
+		insuranceClaimColumn.setText(UserTool.i18n.get("insuranceClaimCol"));
+	}
 
 	private void initData() 
 	{
@@ -69,7 +107,7 @@ public class InsuranceController extends Controller
                         Policy policy = this.getTableView().getItems().get(this.getIndex());
                         if(!policy.getClaiming())
                         {
-                            Button acceptBtn = new Button("Claim");
+                            Button acceptBtn = new Button(UserTool.i18n.get("btn_Claim"));
                             this.setGraphic(acceptBtn);
                             acceptBtn.setOnMouseClicked((me) -> mainApp.showClaimApplicationView(policy.getId()));
                         }
@@ -114,10 +152,23 @@ public class InsuranceController extends Controller
 	{
 		mainApp.showInsuranceView();
 	}
+	
+	@FXML
+	public void toAboutUs()
+	{
+		mainApp.showAboutUsView();
+	}
+
+	@FXML
+	public void logout()
+	{
+		mainApp.showLogInView();
+	}
 	    
 	public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
+        setLanguageBtn();
         initData();
     }
 }

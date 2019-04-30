@@ -15,11 +15,28 @@
          <content>
             <VBox id="stage" alignment="TOP_CENTER" minWidth="1000.0" stylesheets="@style.css">
                <children>
+                  <ToolBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: white;">
+                     <items>
+                        <Button id="language" fx:id="bt_language" mnemonicParsing="false" onAction="#changeLanguage" text="English" textFill="#0066cc">
+                           <font>
+                              <Font name="Microsoft YaHei Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" onMousePressed="#toProfile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/pic/user.png" />
+                           </image>
+                        </ImageView>
+                     </items>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                     </padding>
+                  </ToolBar>
                   <HBox alignment="TOP_CENTER" spacing="25.0">
                      <children>
                         <VBox id="group" spacing="20.0" stylesheets="@style.css">
                            <children>
-                              <Label text="Client Service" textFill="#0066cc">
+                              <Label fx:id="lb_clientService" text="Client Service" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="20.0" />
                                  </font>
@@ -43,16 +60,7 @@
                                  </padding>
                               </Button>
                               <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-                              <Button fx:id="btn_myProfile" onAction="#toClaimView" stylesheets="@style.css" text="My Profile" textFill="#0066cc">
-                                 <font>
-                                    <Font name="Microsoft YaHei" size="20.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets top="10.0" />
-                                 </padding>
-                              </Button>
-                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-                              <Button fx:id="btn_insuranceClaim" onAction="#toClaimView" stylesheets="@style.css" text="Claim Settlement" textFill="#0066cc">
+                              <Button fx:id="btn_insuranceClaim" onAction="#toClaimView" stylesheets="@style.css" text="My Claims" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei" size="20.0" />
                                  </font>
@@ -61,6 +69,17 @@
                                  </padding>
                               </Button>
                               <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" strokeWidth="2.0" />
+                              <Button fx:id="btn_aboutUs" mnemonicParsing="false" onAction="#toAboutUs" text="About Us" textFill="#0066cc">
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
+                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#logout" text="Log Out" textFill="#0066cc">
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -69,30 +88,30 @@
                            <children>
                               <VBox spacing="10.0">
                                  <children>
-                                    <Label prefHeight="27.0" prefWidth="402.0" text="Claim Application Information" textFill="#0066cc">
+                                    <Label fx:id="lb_claimApplicationInfo" prefHeight="27.0" prefWidth="402.0" text="Claim Application Information" textFill="#0066cc">
                                        <font>
                                           <Font name="Microsoft YaHei Bold" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label prefHeight="22.0" prefWidth="514.0" text="Subject Matter of Application for Compensation">
+                                    <Label fx:id="lb_subject" prefHeight="22.0" prefWidth="514.0" text="Subject Matter of Application for Compensation">
                                        <font>
                                           <Font name="Microsoft YaHei Bold" size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label id="lb_locationOfAccident" text="Location of Accident">
+                                    <Label id="lb_locationOfAccident" fx:id="lb_location" text="Location of Accident">
                                        <font>
                                           <Font name="Microsoft YaHei Bold" size="16.0" />
                                        </font>
                                     </Label>
                                     <TextField fx:id="locationOfAcc" />
-                                    <Label text="Date of Accident">
+                                    <Label fx:id="lb_date" text="Date of Accident">
                                        <font>
                                           <Font name="Microsoft YaHei Bold" size="16.0" />
                                        </font>
                                     </Label>
                                     <DatePicker fx:id="dateOfAcc" />
                                     <TextArea fx:id="reasonOfClaim" prefHeight="150.0" prefWidth="700.0" />
-                                    <Label id="lb_amountOfDamages" text="Amount of Damages (€)">
+                                    <Label id="lb_amountOfDamages" fx:id="lb_amount" text="Amount of Damages (€)">
                                        <font>
                                           <Font name="Microsoft YaHei Bold" size="16.0" />
                                        </font>
@@ -104,69 +123,61 @@
                                  <children>
                                     <HBox spacing="20.0">
                                        <children>
-                                          <Label prefHeight="27.0" prefWidth="200.0" text="Types of Accidents" textFill="#0066cc">
+                                          <Label fx:id="lb_typeOfAccInfo" prefHeight="27.0" prefWidth="200.0" text="Types of Accidents" textFill="#0066cc">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="20.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="24.0" prefWidth="412.0" text="Click to get the claim supporting file list" textFill="#666666">
+                                          <Label fx:id="lb_clickToGet" prefHeight="24.0" prefWidth="412.0" text="Click to get the claim supporting file list" textFill="#666666">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="18.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <HBox spacing="20.0">
+                                    <HBox alignment="TOP_CENTER" spacing="50.0">
                                        <children>
-                                          <VBox alignment="TOP_CENTER" spacing="10.0">
-                                             <children>
-                                                <Label text="①&#10;Passenger transport&#10;suffers from natural&#10;disasters such as&#10;rainstorm, lightning and&#10;so on" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="Microsoft YaHei Bold" size="16.0" />
-                                                   </font>
-                                                </Label>
-                                                <ImageView id="next1" fx:id="iv_next1" onMousePressed="#setNextButton1" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../../resources/pic/btn_next.PNG" />
-                                                   </image>
-                                                </ImageView>
-                                             </children>
-                                          </VBox>
+                                          <Text fx:id="lb_acc1" strokeType="OUTSIDE" strokeWidth="0.0" text="①Passenger transportsuffers from naturaldisasters such asrainstorm, lightning andso on" textAlignment="CENTER" wrappingWidth="150.0">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
                                           <Line endX="1.0" endY="164.0" fill="#0066cc" stroke="#0066cc" />
-                                          <VBox alignment="TOP_CENTER" spacing="55.0">
-                                             <children>
-                                                <Label text="②&#10;Passenger transport&#10;suffered fire, explosion,&#10;collision and overturn" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="Microsoft YaHei Bold" size="16.0" />
-                                                   </font>
-                                                </Label>
-                                                <ImageView id="next2" fx:id="iv_next2" onMousePressed="#setNextButton2" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../../resources/pic/btn_next.PNG" />
-                                                   </image>
-                                                </ImageView>
-                                             </children>
-                                          </VBox>
+                                          <Text fx:id="lb_acc2" strokeType="OUTSIDE" strokeWidth="0.0" text="②Passenger transportsuffered fire, explosion,collision and overturn" textAlignment="CENTER" wrappingWidth="150.0">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
                                           <Line endX="1.0" endY="164.0" fill="#0066cc" stroke="#0066cc" />
-                                          <VBox alignment="TOP_CENTER" spacing="78.0">
-                                             <children>
-                                                <Label text="③&#10;Theft,  robbery, loss&#10;of luggage" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="Microsoft YaHei Bold" size="16.0" />
-                                                   </font>
-                                                </Label>
-                                                <ImageView id="next3" fx:id="iv_next3" onMousePressed="#setNextButton3" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../../resources/pic/btn_next.PNG" />
-                                                   </image>
-                                                </ImageView>
-                                             </children>
-                                          </VBox>
+                                          <Text fx:id="lb_acc3" strokeType="OUTSIDE" strokeWidth="0.0" text="③Theft,  robbery, lossof luggage" textAlignment="CENTER" wrappingWidth="150.0">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="TOP_CENTER" spacing="200.0">
+                                       <children>
+                                          <ImageView id="next1" fx:id="iv_next1" onMousePressed="#setNextButton1" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../resources/pic/btn_next.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView id="next2" fx:id="iv_next2" onMousePressed="#setNextButton2" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../resources/pic/btn_next.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView id="next3" fx:id="iv_next3" onMousePressed="#setNextButton3" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../resources/pic/btn_next.PNG" />
+                                             </image>
+                                          </ImageView>
                                        </children>
                                     </HBox>
                                     <HBox spacing="50.0">
                                        <children>
-                                          <Label id="lb_amountOfDamages" text="Accident Type">
+                                          <Label id="lb_amountOfDamages" fx:id="lb_acctype" text="Accident Type">
                                              <font>
                                                 <Font name="Microsoft YaHei Bold" size="16.0" />
                                              </font>
@@ -178,7 +189,7 @@
                               </VBox>
                               <HBox spacing="50.0">
                                  <children>
-                                    <Label prefHeight="27.0" prefWidth="226.0" text="Claim Supporting File" textFill="#0066cc">
+                                    <Label fx:id="lb_claimSupportFile" prefHeight="27.0" prefWidth="226.0" text="Claim Supporting File" textFill="#0066cc">
                                        <font>
                                           <Font name="Microsoft YaHei Bold" size="20.0" />
                                        </font>
@@ -210,7 +221,7 @@
                   </HBox>
                </children>
                <padding>
-                  <Insets bottom="80.0" top="80.0" />
+                  <Insets bottom="80.0" />
                </padding>
             </VBox>
          </content>

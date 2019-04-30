@@ -333,15 +333,15 @@ public class HttpTool
 //		for(int i = 0;i < jarray.size();i++)
 //			System.out.println(JSONObject.fromObject(jarray.get(i)).getString("files") + "\n" + JSONObject.fromObject(jarray.get(i)));
 		
-		List<Claim> claimData = new ArrayList<Claim>();
-		Pair<Integer, String> reply = HttpTool.getArray("/claims?_id=5cb9c374b19d9b195023a587", TOKEN);
-		if(reply.getKey().equals(200))
-		{
-			JSONArray jarray = JSONArray.fromObject(reply.getValue());
-			claimData = ClaimTool.getClaimList(jarray);
-		}	
-		System.out.println(claimData.get(0).getClaimFiles().get(0).toString());		///res/claim-files/:claimId/:filename
-		//download("/res/claim-files/5cb9c374b19d9b195023a587/1555678068107_test.txt", TOKEN, claimData.get(0).getClaimFiles().get(0).toString());
+//		List<Claim> claimData = new ArrayList<Claim>();
+//		Pair<Integer, String> reply = HttpTool.getArray("/claims?_id=5cb9c374b19d9b195023a587", TOKEN);
+//		if(reply.getKey().equals(200))
+//		{
+//			JSONArray jarray = JSONArray.fromObject(reply.getValue());
+//			claimData = ClaimTool.getClaimList(jarray);
+//		}	
+//		System.out.println(claimData.get(0).getClaimFiles().get(0).toString());		///res/claim-files/:claimId/:filename
+//		//download("/res/claim-files/5cb9c374b19d9b195023a587/1555678068107_test.txt", TOKEN, claimData.get(0).getClaimFiles().get(0).toString());
 
 
 //		String username = "user";
@@ -350,6 +350,16 @@ public class HttpTool
 //		jobject.put("username", username);
 //		jobject.put("password", password);
 //		System.out.println(postObject("/users/login", "", jobject).getValue());
+		
+		I18NTool i18n = new I18NTool();
+		String usernameCN = i18n.get("username");
+		String passwordCN = i18n.get("password");
+		i18n.changeLanguage();
+		String usernameUS = i18n.get("username");
+		String passwordUS = i18n.get("password");
+
+		System.out.println(usernameCN + "--" + passwordCN);
+		System.out.println(usernameUS + "--" + passwordUS);
 
 	}
 	

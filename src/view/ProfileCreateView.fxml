@@ -12,12 +12,24 @@
    <children>
       <ScrollPane id="group" minWidth="1000.0" stylesheets="@style.css">
          <content>
-            <VBox id="pane_background" alignment="TOP_CENTER" minHeight="600.0" minWidth="1000.0" spacing="50.0" stylesheets="@style.css">
+            <VBox id="pane_background" alignment="TOP_CENTER" minHeight="600.0" minWidth="1000.0" spacing="50.0" style="-fx-background-color: white;" stylesheets="@style.css">
                <padding>
-                  <Insets bottom="80.0" left="55.0" right="55.0" top="80.0" />
+                  <Insets bottom="80.0" left="55.0" right="55.0" />
                </padding>
                <children>
-                  <Label text="Profile Information" textFill="#0066cc">
+                  <ToolBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: white;">
+                     <items>
+                        <Button id="language" fx:id="bt_language" mnemonicParsing="false" onAction="#changeLanguage" text="English" textFill="#0066cc">
+                           <font>
+                              <Font name="Microsoft YaHei Bold" size="15.0" />
+                           </font>
+                        </Button>
+                     </items>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                     </padding>
+                  </ToolBar>
+                  <Label fx:id="lb_profile" text="Profile Information" textFill="#0066cc">
                      <font>
                         <Font name="Microsoft YaHei Bold" size="20.0" />
                      </font>
@@ -26,27 +38,32 @@
                      <children>
                         <VBox spacing="20.0">
                            <children>
-                              <Label text="First Name:">
+                              <Label fx:id="lb_firstname" text="First Name:">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Gender:">
+                              <Label fx:id="lb_gander" text="Gender:">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="ID:">
+                              <Label fx:id="lb_ID" text="ID:">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Province:">
+                              <Label fx:id="lb_province" text="Province:">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Phone:">
+                              <Label fx:id="lb_countrycode" text="Country Code:">
+                                 <font>
+                                    <Font name="Microsoft YaHei Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lb_email" text="Email:">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="16.0" />
                                  </font>
@@ -64,32 +81,33 @@
                               </HBox>
                               <TextField fx:id="tf_socialId" />
                               <TextField fx:id="tf_province" />
-                              <TextField fx:id="tf_phone" />
+                              <ChoiceBox fx:id="cb_nationcode" prefWidth="200.0" />
+                              <TextField fx:id="tf_email" />
                            </children>
                         </VBox>
                         <VBox spacing="20.0">
                            <children>
-                              <Label text="Last Name:">
+                              <Label fx:id="lb_lastname" text="Last Name:">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Age:">
+                              <Label fx:id="lb_age" text="Age:">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Country:">
+                              <Label fx:id="lb_country" text="Country:">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="City:">
+                              <Label fx:id="lb_city" text="City:">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Email:">
+                              <Label fx:id="lb_phone" text="Phone:">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="16.0" />
                                  </font>
@@ -102,7 +120,7 @@
                               <TextField fx:id="tf_age" />
                               <TextField fx:id="tf_country" />
                               <TextField fx:id="tf_city" />
-                              <TextField fx:id="tf_email" />
+                              <TextField fx:id="tf_phone" />
                            </children>
                         </VBox>
                      </children>

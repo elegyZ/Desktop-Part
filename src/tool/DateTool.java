@@ -14,7 +14,7 @@ public class DateTool
 	{
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(startDate);
-		calendar.add(Calendar.MONTH, duration);
+		calendar.add(Calendar.DAY_OF_MONTH, duration * 30);
 		return calendar.getTime();
 	}
 	
@@ -44,6 +44,13 @@ public class DateTool
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss 'UTC'");
 		String dateString = sdf.format(date);
 		dateString = dateString.replace(" UTC", "Z");
+		return dateString;
+	}
+	
+	public static String format(Date date)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = sdf.format(date);
 		return dateString;
 	}
 }

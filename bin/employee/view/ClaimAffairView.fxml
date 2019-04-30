@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.shape.*?>
@@ -14,14 +15,31 @@
          <content>
             <VBox id="background" alignment="TOP_CENTER" minHeight="600.0" minWidth="1000.0" style="-fx-background-color: white;" stylesheets="@style.css">
                <padding>
-                  <Insets bottom="80.0" left="55.0" right="55.0" top="80.0" />
+                  <Insets bottom="80.0" left="55.0" right="55.0" />
                </padding>
                <children>
+                  <ToolBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: white;">
+                     <items>
+                        <Button id="language" fx:id="bt_language" mnemonicParsing="false" onAction="#changeLanguage" text="English" textFill="#0066cc">
+                           <font>
+                              <Font name="Microsoft YaHei Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" onMousePressed="#toProfileView" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/pic/user.png" />
+                           </image>
+                        </ImageView>
+                     </items>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                     </padding>
+                  </ToolBar>
                   <HBox id="stage" spacing="20.0" stylesheets="@style.css">
                      <children>
                         <VBox id="group" fx:id="btn_group" spacing="20.0" stylesheets="@style.css">
                            <children>
-                              <Label text="Work Menu" textFill="#0066cc">
+                              <Label fx:id="lb_workmenu" text="Work Menu" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="20.0" />
                                  </font>
@@ -72,29 +90,16 @@
                                  </VBox.margin>
                               </Button>
                               <Line fx:id="line_closed" endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-                              <Button id="bt_policyModification" fx:id="btn_policyRenew" mnemonicParsing="false" stylesheets="@style.css" text="Policy Modification" textFill="#0066cc">
-                                 <font>
-                                    <Font name="Microsoft YaHei" size="20.0" />
-                                 </font>
+                              <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#logout" text="Log Out" textFill="#0066cc">
                                  <padding>
                                     <Insets top="10.0" />
                                  </padding>
                               </Button>
-                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-                              <Button id="bt_myAccount" fx:id="btn_myProfile" mnemonicParsing="false" onAction="#toProfileView" stylesheets="@style.css" text="My Account" textFill="#0066cc">
-                                 <font>
-                                    <Font name="Microsoft YaHei" size="20.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets top="10.0" />
-                                 </padding>
-                              </Button>
-                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
                            </children>
                         </VBox>
                         <VBox spacing="25.0">
                            <children>
-                              <Label id="lb_claimAffairs" text="Claim Affairs" textFill="#0066cc">
+                              <Label id="lb_claimAffairs" fx:id="lb_claimAffairs" text="Claim Affairs" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="20.0" />
                                  </font>

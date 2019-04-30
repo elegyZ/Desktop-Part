@@ -5,12 +5,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import model.Claim;
 import tool.ClaimTool;
 import tool.Controller;
+import tool.UserTool;
 
 public class ClaimController extends Controller 
 {
@@ -27,14 +29,51 @@ public class ClaimController extends Controller
 	@FXML
 	private Button btn_home;
 	@FXML
-	private Button btn_insuranceService;
+	private Button btn_logout;
+	@FXML
+	private Button btn_myClaim;
 	@FXML
 	private Button btn_myInsurance;
 	@FXML
-	private Button btn_insuranceClaim;
+	private Button btn_aboutUs;
+	@FXML
+	private Button bt_language;
+	@FXML
+	private Label lb_clientService;
+	@FXML
+	private Label lb_claimHistory;
 	
 	private ObservableList<Claim> claimData;
 	private MainApp mainApp;
+	
+	@FXML
+	public void changeLanguage()
+	{
+		UserTool.i18n.changeLanguage();
+		setLanguageBtn();
+	}
+	
+	public void setLanguageBtn()
+	{
+		bt_language.setText(UserTool.i18n.get("language"));
+		setText();
+	}
+	
+	public void setText()
+	{
+		lb_clientService.setText(UserTool.i18n.get("clientservice"));
+		btn_home.setText(UserTool.i18n.get("home"));
+		btn_myInsurance.setText(UserTool.i18n.get("myinsurance"));
+		btn_myClaim.setText(UserTool.i18n.get("myclaim"));
+		btn_aboutUs.setText(UserTool.i18n.get("aboutus"));
+		btn_logout.setText(UserTool.i18n.get("logout"));
+		
+		lb_claimHistory.setText(UserTool.i18n.get("claimHistory"));
+		claimLocationColumn.setText(UserTool.i18n.get("accLocation"));
+		claimDateColumn.setText(UserTool.i18n.get("claimDate"));
+		claimPolicyIdColumn.setText(UserTool.i18n.get("policyIdCol"));
+		claimProgressColumn.setText(UserTool.i18n.get("claimPregress"));
+	}
 	
 	private void initData() 
 	{
@@ -66,14 +105,39 @@ public class ClaimController extends Controller
 	}
 	
 	@FXML
+	public void toClaimView()
+	{
+		mainApp.showClaimView();
+	}
+	
+	@FXML
+	public void toProfile()
+	{
+		mainApp.showClientProfileView();
+	}
+	
+	@FXML
 	public void backToInsurance()
 	{
 		mainApp.showInsuranceView();
 	}
-	    
+	
+	@FXML
+	public void toAboutUs()
+	{
+		mainApp.showAboutUsView();
+	}
+	
+	@FXML
+	public void logout()
+	{
+		mainApp.showLogInView();
+	}
+	
 	public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
+        setLanguageBtn();
         initData();
     }
 }

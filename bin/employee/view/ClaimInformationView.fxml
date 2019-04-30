@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.shape.*?>
@@ -8,20 +9,37 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="employee.view.ClaimInformationController">
+<HBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="employee.view.ClaimInformationController">
    <children>
       <ScrollPane minWidth="1000.0" stylesheets="@style.css">
          <content>
             <VBox id="stage" alignment="CENTER" minHeight="600.0" minWidth="1000.0" stylesheets="@style.css">
                <padding>
-                  <Insets bottom="80.0" top="80.0" />
+                  <Insets bottom="80.0" />
                </padding>
                <children>
+                  <ToolBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: white;">
+                     <items>
+                        <Button id="language" fx:id="bt_language" mnemonicParsing="false" onAction="#changeLanguage" text="English" textFill="#0066cc">
+                           <font>
+                              <Font name="Microsoft YaHei Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" onMousePressed="#toProfileView" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/pic/user.png" />
+                           </image>
+                        </ImageView>
+                     </items>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                     </padding>
+                  </ToolBar>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <VBox id="group" fx:id="btn_group" spacing="20.0" stylesheets="@style.css">
                            <children>
-                              <Label text="Work Menu" textFill="#0066cc">
+                              <Label fx:id="lb_workmenu" text="Work Menu" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="20.0" />
                                  </font>
@@ -72,24 +90,11 @@
                                  </VBox.margin>
                               </Button>
                               <Line fx:id="line_closed" endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-                              <Button id="bt_policyModification" fx:id="btn_policyModification" mnemonicParsing="false" stylesheets="@style.css" text="Policy Modification" textFill="#0066cc">
-                                 <font>
-                                    <Font name="Microsoft YaHei" size="20.0" />
-                                 </font>
+                              <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#logout" text="Log Out" textFill="#0066cc">
                                  <padding>
                                     <Insets top="10.0" />
                                  </padding>
                               </Button>
-                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-                              <Button id="bt_myAccount" fx:id="btn_myAccount" mnemonicParsing="false" stylesheets="@style.css" text="My Account" textFill="#0066cc">
-                                 <font>
-                                    <Font name="Microsoft YaHei" size="20.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets top="10.0" />
-                                 </padding>
-                              </Button>
-                              <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -97,7 +102,7 @@
                         </VBox>
                         <VBox prefHeight="600.0" spacing="25.0">
                            <children>
-                              <Label id="lb_claimInformation" text="Claim Information" textFill="#0066cc">
+                              <Label id="lb_claimInformation" fx:id="lb_claimInformation" text="Claim Information" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="20.0" />
                                  </font>
@@ -106,22 +111,22 @@
                                  <children>
                                     <VBox spacing="30.0">
                                        <children>
-                                          <Label text="Date of Accident:">
+                                          <Label fx:id="lb_dateOfAcc" text="Date of Accident:">
                                              <font>
                                                 <Font name="Microsoft YaHei" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Location of Accident:">
+                                          <Label fx:id="lb_locationOfAcc" text="Location of Accident:">
                                              <font>
                                                 <Font name="Microsoft YaHei" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Amount of Damage:">
+                                          <Label fx:id="lb_amountOfDamage" text="Amount of Damage:">
                                              <font>
                                                 <Font name="Microsoft YaHei" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Claim Reason:">
+                                          <Label fx:id="lb_claimReason" text="Claim Reason:">
                                              <font>
                                                 <Font name="Microsoft YaHei" size="18.0" />
                                              </font>
@@ -156,7 +161,7 @@
                               </HBox>
                               <HBox spacing="50.0">
                                  <children>
-                                    <Label id="lb_claimFile" text="Claim Supporting File" textFill="#0066cc">
+                                    <Label id="lb_claimFile" fx:id="lb_claimSupportingFile" text="Claim Supporting File" textFill="#0066cc">
                                        <font>
                                           <Font name="Microsoft YaHei Bold" size="20.0" />
                                        </font>

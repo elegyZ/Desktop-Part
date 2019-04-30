@@ -8,6 +8,7 @@ import net.sf.json.JSONObject;
 public class UserTool 
 {
 	public static User user = new User();
+	public static I18NTool i18n = new I18NTool();
 	
 	//---------------User HTTP methods----------------------
 	public static Pair<Integer, String> login(String username, String password)

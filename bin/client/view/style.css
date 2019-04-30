@@ -38,3 +38,12 @@
 	-fx-background-color: white;
 }
 
+#language{
+	-fx-background-color: white;
+	-fx-font-size: 18;
+}
+
+#language:hover{
+	-fx-background-color: white;
+	-fx-font-size: 19;
+}

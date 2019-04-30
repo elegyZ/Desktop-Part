@@ -15,6 +15,23 @@
          <content>
             <VBox id="stage" alignment="TOP_CENTER" minWidth="1000.0" stylesheets="@style.css">
                <children>
+                  <ToolBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: white;">
+                     <items>
+                        <Button id="language" fx:id="bt_language" mnemonicParsing="false" onAction="#changeLanguage" text="English" textFill="#0066cc">
+                           <font>
+                              <Font name="Microsoft YaHei Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" onMousePressed="#toProfile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/pic/user.png" />
+                           </image>
+                        </ImageView>
+                     </items>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                     </padding>
+                  </ToolBar>
                   <ImageView fitHeight="501.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../resources/pic/company.png" />
@@ -24,7 +41,7 @@
                      <children>
                         <VBox id="group" spacing="20.0" stylesheets="@style.css">
                            <children>
-                              <Label text="Client Service" textFill="#0066cc">
+                              <Label fx:id="lb_clientService" text="Client Service" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei Bold" size="20.0" />
                                  </font>
@@ -48,7 +65,7 @@
                                  </padding>
                               </Button>
                               <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-                              <Button fx:id="btn_myProfile" onAction="#toProfile" stylesheets="@style.css" text="My Profile" textFill="#0066cc">
+                              <Button fx:id="btn_insuranceClaim" onAction="#toClaimView" stylesheets="@style.css" text="My Claims" textFill="#0066cc">
                                  <font>
                                     <Font name="Microsoft YaHei" size="20.0" />
                                  </font>
@@ -57,54 +74,59 @@
                                  </padding>
                               </Button>
                               <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
-                              <Button fx:id="btn_insuranceClaim" onAction="#toClaimView" stylesheets="@style.css" text="Claim Settlement" textFill="#0066cc">
-                                 <font>
-                                    <Font name="Microsoft YaHei" size="20.0" />
-                                 </font>
+                              <Button fx:id="btn_aboutUs" mnemonicParsing="false" onAction="#toAboutUs" text="About Us" textFill="#0066cc">
                                  <padding>
                                     <Insets top="10.0" />
                                  </padding>
                               </Button>
                               <Line endX="205.0" startX="55.0" stroke="#0066cc" strokeMiterLimit="0.0" />
+                              <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#logout" text="Log Out" textFill="#0066cc">
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Button>
                            </children>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin></VBox>
-                        <VBox id="pane_background" alignment="TOP_CENTER" spacing="10.0" stylesheets="@style.css">
+                        <VBox spacing="10.0">
                            <children>
-                              <Text fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="When you travel on three of the most common modes of transport, train, plane, and long-distance bus, do you worry about the loss of your belongings as a result of an accident? Our basic insurance will be a good escort for your luggage to help you stop damage in time." textAlignment="CENTER" wrappingWidth="211.60498046875">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font></Text>
-                              <Button fx:id="bt_plan1" mnemonicParsing="false" onAction="#toPlan1" prefHeight="30.0" prefWidth="150.0" text="Plan I" textFill="WHITE">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin></Button>
-                           </children>
-                        </VBox>
-                        <Line endY="360.0" stroke="#0066cc" strokeLineCap="ROUND" strokeLineJoin="ROUND" />
-                        <VBox id="pane_background" alignment="TOP_CENTER" spacing="30.0" stylesheets="@style.css">
-                           <children>
-                              <Text fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="When you travel by train, plane, long-distance bus or taxi, how can you remedy the damage caused by the loss of your luggage in the event of natural and man-made disasters? This quality insurance can provide you with better protection." textAlignment="CENTER" wrappingWidth="199.60498046875">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Button fx:id="bt_plan2" mnemonicParsing="false" onAction="#toPlan2" prefHeight="30.0" prefWidth="150.0" text="Plan II" textFill="WHITE">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin></Button>
-                           </children>
-                        </VBox>
-                        <Line endY="360.0" stroke="#0066cc" strokeLineCap="ROUND" strokeLineJoin="ROUND" />
-                        <VBox id="pane_background" alignment="TOP_CENTER" spacing="30.0" stylesheets="@style.css">
-                           <children>
-                              <Text fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="When you travel by train, plane, coach, taxi or steamship, if your luggage is lost due to fire, explosion, torrential rain and so on, how are you going to recover the loss? The supreme insurance products we offer must be your best choice." textAlignment="CENTER" wrappingWidth="201.60498046875">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font>
-                              </Text>
-                              <Button fx:id="bt_plan3" mnemonicParsing="false" onAction="#toPlan3" prefHeight="30.0" prefWidth="150.0" text="Plan III" textFill="WHITE" />
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <Text fx:id="txt_1" fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="When you travel on three of the most common modes of transport, train, plane, and long-distance bus, do you worry about the loss of your belongings as a result of an accident? Our basic insurance will be a good escort for your luggage to help you stop damage in time." textAlignment="CENTER" wrappingWidth="210.0">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Line endY="300.0" stroke="#0066cc" strokeLineCap="ROUND" strokeLineJoin="ROUND" />
+                                    <Text fx:id="txt_2" fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="When you travel by train, plane, long-distance bus or taxi, how can you remedy the damage caused by the loss of your luggage in the event of natural and man-made disasters? This quality insurance can provide you with better protection." textAlignment="CENTER" wrappingWidth="210.0">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Line endY="300.0" stroke="#0066cc" strokeLineCap="ROUND" strokeLineJoin="ROUND" />
+                                    <Text fx:id="txt_3" fill="#666666" strokeType="OUTSIDE" strokeWidth="0.0" text="When you travel by train, plane, coach, taxi or steamship, if your luggage is lost due to fire, explosion, torrential rain and so on, how are you going to recover the loss? The supreme insurance products we offer must be your best choice." textAlignment="CENTER" wrappingWidth="210.0">
+                                       <font>
+                                          <Font name="Microsoft YaHei Bold" size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox id="pane_background" alignment="TOP_CENTER" spacing="100.0">
+                                 <children>
+                                    <Button fx:id="bt_plan1" mnemonicParsing="false" onAction="#toPlan1" prefHeight="30.0" prefWidth="150.0" text="Plan I" textFill="WHITE">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button fx:id="bt_plan2" mnemonicParsing="false" onAction="#toPlan2" prefHeight="30.0" prefWidth="150.0" text="Plan II" textFill="WHITE">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button fx:id="bt_plan3" mnemonicParsing="false" onAction="#toPlan3" prefHeight="30.0" prefWidth="150.0" text="Plan III" textFill="WHITE" />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
@@ -114,7 +136,7 @@
                   </HBox>
                </children>
                <padding>
-                  <Insets bottom="80.0" top="50.0" />
+                  <Insets bottom="80.0" />
                </padding>
             </VBox>
          </content>

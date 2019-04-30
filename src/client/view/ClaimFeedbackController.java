@@ -40,19 +40,74 @@ public class ClaimFeedbackController extends Controller
 	@FXML
 	private Button btn_home;
 	@FXML
+	private Button btn_logout;
+	@FXML
 	private Button btn_myClaim;
 	@FXML
 	private Button btn_myInsurance;
 	@FXML
-	private Button btn_myProfile;
+	private Button btn_aboutUs;
+	@FXML
+	private Button bt_language;
+	@FXML
+	private Label lb_clientService;
+	@FXML
+	private Label lb_claimInfo;
+	@FXML
+	private Label lb_location;
+	@FXML
+	private Label lb_date;
+	@FXML
+	private Label lb_amount;
+	@FXML
+	private Label lb_reason;
+	@FXML
+	private Label lb_claimSupportFile;
+	@FXML
+	private Label lb_claimStatus;
 	
 	private MainApp mainApp;
 	private Claim claim;
 	private String filename = "";
+	
+	@FXML
+	public void changeLanguage()
+	{
+		UserTool.i18n.changeLanguage();
+		setLanguageBtn();
+	}
+	
+	public void setLanguageBtn()
+	{
+		bt_language.setText(UserTool.i18n.get("language"));
+		setText();
+	}
+	
+	public void setText()
+	{
+		lb_clientService.setText(UserTool.i18n.get("clientservice"));
+		btn_home.setText(UserTool.i18n.get("home"));
+		btn_myInsurance.setText(UserTool.i18n.get("myinsurance"));
+		btn_myClaim.setText(UserTool.i18n.get("myclaim"));
+		btn_aboutUs.setText(UserTool.i18n.get("aboutus"));
+		btn_logout.setText(UserTool.i18n.get("logout"));
+		
+		lb_claimInfo.setText(UserTool.i18n.get("claimInfo"));
+		lb_location.setText(UserTool.i18n.get("location"));
+		lb_date.setText(UserTool.i18n.get("date"));
+		lb_amount.setText(UserTool.i18n.get("amount"));
+		lb_reason.setText(UserTool.i18n.get("reason"));
+		lb_claimSupportFile.setText(UserTool.i18n.get("claimSupportFile"));
+		lb_claimStatus.setText(UserTool.i18n.get("claimStatus"));
+		rejectLabel.setText(UserTool.i18n.get("reject"));
+		btn_back.setText(UserTool.i18n.get("back"));
+		btn_download.setText(UserTool.i18n.get("download"));
+	}
 	    
 	public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
+        setLanguageBtn();
     }
 	
 	public void setClaim(Claim claim)
@@ -102,7 +157,7 @@ public class ClaimFeedbackController extends Controller
 			String lastpart = "/res/claim-files/" + claim.getId() + "/" + file;
 			Pair<Integer, String> reply = HttpTool.download(lastpart, UserTool.user.getToken(), file.toString(), root);
 			if(reply.getKey() == 200)
-				successAlert("Files Had Been Downloaded Successfully.");
+				successAlert(UserTool.i18n.get("FilesHadBeenDownloadedSuccessfully"));
 			else
 				errorAlert(reply.getValue());
 		}
@@ -138,5 +193,17 @@ public class ClaimFeedbackController extends Controller
 	public void backToInsurance()
 	{
 		mainApp.showInsuranceView();
+	}
+	
+	@FXML
+	public void toAboutUs()
+	{
+		mainApp.showAboutUsView();
+	}
+	
+	@FXML
+	public void logout()
+	{
+		mainApp.showLogInView();
 	}
 }

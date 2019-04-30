@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VerificationController">
+   <children>
+      <ToolBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: white;">
+         <items>
+            <Button id="language" fx:id="bt_language" mnemonicParsing="false" onAction="#changeLanguage" text="English" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="15.0" />
+               </font>
+            </Button>
+         </items>
+         <padding>
+            <Insets bottom="20.0" left="20.0" top="20.0" />
+         </padding>
+      </ToolBar>
+      <VBox alignment="TOP_CENTER" spacing="20.0">
+         <children>
+            <Label fx:id="lb_WTSHI" layoutX="276.0" layoutY="90.0" text="Welcome To Hibernia-Sino Insurance" textAlignment="CENTER" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="30.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <TabPane id="tab_pane" layoutX="279.0" layoutY="158.0" maxHeight="300.0" maxWidth="500.0" prefHeight="300.0" prefWidth="500.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="20.0" tabMaxWidth="100.0">
+               <tabs>
+                  <Tab fx:id="typename" text="client">
+                     <content>
+                        <Pane id="pane_background" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="261.0" prefWidth="500.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER" spacing="10.0">
+                                       <children>
+                                          <VBox alignment="TOP_RIGHT" spacing="20.0">
+                                             <children>
+                                                <Label fx:id="lb_verification" layoutX="99.0" layoutY="52.0" text="Verification Code">
+                                                   <font>
+                                                      <Font name="Microsoft YaHei Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox spacing="15.0">
+                                             <children>
+                                                <TextField fx:id="tf_userName" layoutX="195.0" layoutY="50.0" prefWidth="230.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox id="pane_background" alignment="CENTER" layoutX="151.0" layoutY="176.0" spacing="10.0">
+                                       <children>
+                                          <Button fx:id="bt_back" layoutX="274.0" layoutY="176.0" mnemonicParsing="false" onAction="#back" prefHeight="30.0" prefWidth="150.0" text="Back" textFill="WHITE" />
+                                          <Button fx:id="bt_send" layoutX="151.0" layoutY="176.0" mnemonicParsing="false" onAction="#send" prefHeight="30.0" prefWidth="150.0" text="Verify" textFill="WHITE">
+                                             <font>
+                                                <Font name="Microsoft YaHei Bold" size="18.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
+</VBox>

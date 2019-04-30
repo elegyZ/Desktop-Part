@@ -1,6 +1,8 @@
 package desktop;
 
 import java.io.IOException;
+
+import client.view.AboutUsController;
 import client.view.ClaimApplicationCheckController;
 import client.view.ClaimApplicationController;
 import client.view.ClaimController;
@@ -20,7 +22,6 @@ import employee.view.ClaimAffairController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -30,8 +31,11 @@ import model.Policy;
 import model.Profile;
 import tool.UserTool;
 import view.ProfileCreateController;
+import view.FindPasswordController;
 import view.LogInController;
+import view.NewPasswordController;
 import view.SignUpController;
+import view.VerificationController;
 
 public class MainApp extends Application 
 {
@@ -45,7 +49,7 @@ public class MainApp extends Application
         this.primaryStage.setTitle("Hibernia-Sino");      
         initRootLayout();
         showLogInView();
-        //showProfileCreateView();
+        //showFindPasswordView("employee");
 	}
 	
 	
@@ -60,6 +64,57 @@ public class MainApp extends Application
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	public void showFindPasswordView(String type) 
+	{
+        try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../view/FindPasswordView.fxml"));
+            VBox findPasswordView = (VBox) loader.load();
+            findPasswordView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(findPasswordView);
+            FindPasswordController controller = loader.getController();
+            controller.setType(type);
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	public void showVerificationView(String type) 
+	{
+        try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../view/VerificationView.fxml"));
+            VBox verificationView = (VBox) loader.load();
+            verificationView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(verificationView);
+            VerificationController controller = loader.getController();
+            controller.setType(type);
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	public void showNewPasswordView(String type) 
+	{
+        try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../view/NewPasswordView.fxml"));
+            VBox newPasswordView = (VBox) loader.load();
+            newPasswordView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(newPasswordView);
+            NewPasswordController controller = loader.getController();
+            controller.setType(type);
+            controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,8 +146,8 @@ public class MainApp extends Application
             signUpView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(signUpView);
             SignUpController controller = loader.getController();
-            controller.setMainApp(this);
             controller.setType(type);
+            controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,8 +213,8 @@ public class MainApp extends Application
             clientNoticeView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(clientNoticeView);
             ClientNoticeController controller = loader.getController();
-            controller.setMainApp(this);
             controller.setType(type);
+            controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -171,12 +226,12 @@ public class MainApp extends Application
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("../client/view/ClientProfileView.fxml"));
-            AnchorPane clientProfileView = (AnchorPane) loader.load();
+            HBox clientProfileView = (HBox) loader.load();
             clientProfileView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(clientProfileView);
             ClientProfileController controller = loader.getController();
-            controller.setProfile(UserTool.user.getProfileId());
             controller.setMainApp(this);
+            controller.setProfile(UserTool.user.getProfileId());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -192,8 +247,8 @@ public class MainApp extends Application
             clientProfileModifyView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(clientProfileModifyView);
             ClientProfileModifyController controller = loader.getController();
-            controller.initProfile(profile);
             controller.setMainApp(this);
+            controller.initProfile(profile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -205,7 +260,7 @@ public class MainApp extends Application
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("../client/view/InsuranceView.fxml"));
-            AnchorPane InsuranceView = (AnchorPane) loader.load();
+            HBox InsuranceView = (HBox) loader.load();
             InsuranceView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(InsuranceView);
             InsuranceController controller = loader.getController();
@@ -221,7 +276,7 @@ public class MainApp extends Application
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("../client/view/InsuranceInformationView.fxml"));
-            AnchorPane insuranceInformationView = (AnchorPane) loader.load();
+            HBox insuranceInformationView = (HBox) loader.load();
             insuranceInformationView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(insuranceInformationView);
             InsuranceInformationController controller = loader.getController();
@@ -238,7 +293,7 @@ public class MainApp extends Application
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("../client/view/ClaimView.fxml"));
-            AnchorPane claimView = (AnchorPane) loader.load();
+            HBox claimView = (HBox) loader.load();
             claimView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(claimView);
             ClaimController controller = loader.getController();
@@ -275,8 +330,8 @@ public class MainApp extends Application
             claimApplicationView.setStyle("-fx-background-color: white;");
             rootLayout.setCenter(claimApplicationView);
             ClaimApplicationController controller = loader.getController();
-            controller.setPolicy(policyId);
             controller.setMainApp(this);
+            controller.setPolicy(policyId);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -310,6 +365,22 @@ public class MainApp extends Application
             rootLayout.setCenter(claimApplicationCheckView);
             ClaimApplicationCheckController controller = loader.getController();
             controller.setClaim(claim);
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	public void showAboutUsView() 
+	{
+        try 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../client/view/AboutUsView.fxml"));
+            HBox aboutUsView = (HBox) loader.load();
+            aboutUsView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(aboutUsView);
+            AboutUsController controller = loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
@@ -391,10 +462,10 @@ public class MainApp extends Application
         try 
         {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("../employee/view/ClaimAffairNoticeView.fxml"));
-            AnchorPane claimAffairNoticeViewView = (AnchorPane) loader.load();
-            claimAffairNoticeViewView.setStyle("-fx-background-color: white;");
-            rootLayout.setCenter(claimAffairNoticeViewView);
+            loader.setLocation(MainApp.class.getResource("../employee/view/EmployeeNoticeView.fxml"));
+            HBox employeeNoticeView = (HBox) loader.load();
+            employeeNoticeView.setStyle("-fx-background-color: white;");
+            rootLayout.setCenter(employeeNoticeView);
             EmployeeNoticeController controller = loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {

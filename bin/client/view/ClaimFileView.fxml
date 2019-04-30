@@ -9,7 +9,7 @@
 
 <VBox prefHeight="500.0" prefWidth="500.0" spacing="20" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.ClaimFileController">
    <children>
-      <Label layoutX="71.0" layoutY="30.0" text="▶ Claim Supporting File List" textFill="#0066cc">
+      <Label fx:id="title" layoutX="71.0" layoutY="30.0" text="▶ Claim Supporting File List" textFill="#0066cc">
          <font>
             <Font name="Microsoft YaHei Bold" size="20.0" />
          </font>

@@ -9,97 +9,147 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogInController">
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogInController">
    <children>
-      <Label layoutX="276.0" layoutY="90.0" text="Welcome To Hibernia-Sino Insurance" textAlignment="CENTER" textFill="#0066cc">
-         <font>
-            <Font name="Microsoft YaHei Bold" size="30.0" />
-         </font>
+      <ToolBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: white;">
+        <items>
+          <Button id="language" fx:id="bt_language" mnemonicParsing="false" onAction="#changeLanguage" text="English" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="15.0" />
+               </font></Button>
+        </items>
+         <padding>
+            <Insets bottom="20.0" left="20.0" top="20.0" />
+         </padding>
+      </ToolBar>
+      <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1000.0" spacing="20.0" style="-fx-background-color: white;">
+         <children>
+            <Label fx:id="lb_WTSHI" layoutX="276.0" layoutY="90.0" text="Welcome To Hibernia-Sino Insurance" textAlignment="CENTER" textFill="#0066cc">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="30.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <TabPane id="tab_pane" layoutX="279.0" layoutY="158.0" maxHeight="300.0" maxWidth="500.0" prefHeight="300.0" prefWidth="500.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="20.0" tabMaxWidth="100.0">
+              <tabs>
+                <Tab fx:id="tb_client" text="Client">
+                     <content>
+                        <Pane id="pane_background" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="261.0" prefWidth="500.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER" layoutX="50.0" layoutY="47.0" spacing="10.0">
+                                       <children>
+                                          <VBox alignment="TOP_RIGHT" layoutX="50.0" layoutY="50.0" spacing="20.0">
+                                             <children>
+                                                <Label fx:id="lb_username1" layoutX="50.0" layoutY="50.0" text="Username">
+                                                   <font>
+                                                      <Font name="Microsoft YaHei Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lb_password1" layoutX="50.0" layoutY="100.0" text="Password">
+                                                   <font>
+                                                      <Font name="Microsoft YaHei Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox layoutX="170.0" layoutY="47.0" spacing="15.0">
+                                             <children>
+                                                <TextField fx:id="clientUserName" layoutX="170.0" layoutY="47.0" prefWidth="230.0" />
+                                                <PasswordField fx:id="clientPassword" layoutX="170.0" layoutY="97.0" prefHeight="30.0" prefWidth="230.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <Label fx:id="lb_forget1" layoutX="133.0" layoutY="140.0" onMousePressed="#clientForgot" text="Forgot The Password?" textFill="#666666" underline="true">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox id="pane_background" alignment="CENTER" layoutX="112.0" layoutY="180.0" spacing="15.0">
+                                       <children>
+                                          <Button fx:id="bt_clientLogIn" layoutX="112.0" layoutY="180.0" mnemonicParsing="false" onAction="#clientLogIn" prefHeight="30.0" prefWidth="150.0" text="Log In" textFill="WHITE">
+                                             <font>
+                                                <Font name="Microsoft YaHei Bold" size="18.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="bt_clientSignUp" layoutX="223.0" layoutY="180.0" mnemonicParsing="false" onAction="#clientSignUp" prefHeight="30.0" prefWidth="150.0" text="Sign Up" textFill="WHITE">
+                                             <font>
+                                                <Font name="Microsoft YaHei Bold" size="18.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </content>
+                  </Tab>
+                <Tab fx:id="tb_employee" text="Employee">
+                     <content>
+                        <Pane id="pane_background" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="261.0" prefWidth="500.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER" layoutX="50.0" layoutY="47.0" spacing="10.0">
+                                       <children>
+                                          <VBox alignment="TOP_RIGHT" layoutX="50.0" layoutY="50.0" spacing="20.0">
+                                             <children>
+                                                <Label fx:id="lb_username2" layoutX="50.0" layoutY="50.0" text="Username">
+                                                   <font>
+                                                      <Font name="Microsoft YaHei Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lb_password2" layoutX="50.0" layoutY="100.0" text="Password">
+                                                   <font>
+                                                      <Font name="Microsoft YaHei Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox layoutX="170.0" layoutY="47.0" spacing="15.0">
+                                             <children>
+                                                <TextField fx:id="employeeUserName" layoutX="170.0" layoutY="47.0" prefWidth="230.0" />
+                                                <PasswordField fx:id="employeePassword" layoutX="170.0" layoutY="97.0" prefHeight="30.0" prefWidth="230.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <Label fx:id="lb_forget2" layoutX="133.0" layoutY="140.0" onMousePressed="#employeeForgot" text="Forgot The Password?" textFill="#666666" underline="true">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox id="pane_background" alignment="CENTER" layoutX="112.0" layoutY="180.0" spacing="15.0">
+                                       <children>
+                                          <Button fx:id="bt_employeeLogIn" layoutX="112.0" layoutY="180.0" mnemonicParsing="false" onAction="#employeeLogIn" prefHeight="30.0" prefWidth="150.0" text="Log In" textFill="WHITE">
+                                             <font>
+                                                <Font name="Microsoft YaHei Bold" size="18.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="bt_employeeSignUp" layoutX="223.0" layoutY="180.0" mnemonicParsing="false" onAction="#employeeSignUp" prefHeight="30.0" prefWidth="150.0" text="Sign Up" textFill="WHITE">
+                                             <font>
+                                                <Font name="Microsoft YaHei Bold" size="18.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
          <VBox.margin>
-            <Insets top="-50.0" />
+            <Insets top="30.0" />
          </VBox.margin>
-      </Label>
-      <TabPane id="tab_pane" layoutX="279.0" layoutY="158.0" maxHeight="300.0" maxWidth="500.0" prefHeight="300.0" prefWidth="500.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="20.0" tabMaxWidth="100.0">
-        <tabs>
-          <Tab text="Client">
-               <content>
-                  <Pane id="pane_background" prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Group id="pane_background" layoutX="25.0" layoutY="2.0">
-                           <children>
-                              <Button fx:id="bt_clientLogIn" layoutX="112.0" layoutY="180.0" mnemonicParsing="false" onAction="#clientLogIn" text="Log In" textFill="WHITE">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="bt_clientSignUp" layoutX="223.0" layoutY="180.0" mnemonicParsing="false" onAction="#clientSignUp" text="Sign Up" textFill="WHITE">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font>
-                              </Button>
-                              <Label layoutX="50.0" layoutY="100.0" text="Password">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="clientUserName" layoutX="170.0" layoutY="47.0" prefWidth="230.0" />
-                              <Label layoutX="50.0" layoutY="50.0" text="Username">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <PasswordField fx:id="clientPassword" layoutX="170.0" layoutY="97.0" prefHeight="30.0" prefWidth="230.0" />
-                              <Label layoutX="133.0" layoutY="140.0" text="Forgot The Password?" textFill="#666666" underline="true">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Group>
-                     </children>
-                  </Pane>
-               </content>
-            </Tab>
-          <Tab text="Employee">
-               <content>
-                  <Pane id="pane_background" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css">
-                     <children>
-                        <Group id="pane_background" layoutX="25.0" layoutY="2.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="100.0" text="Password">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="employeeUserName" layoutX="170.0" layoutY="47.0" prefWidth="230.0" />
-                              <Label layoutX="50.0" layoutY="50.0" text="Username">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="bt_employeeLogIn" layoutX="112.0" layoutY="180.0" mnemonicParsing="false" onAction="#employeeLogIn" text="Log In" textFill="WHITE">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="bt_employeeSignUp" layoutX="223.0" layoutY="180.0" mnemonicParsing="false" onAction="#employeeSignUp" text="Sign Up" textFill="WHITE">
-                                 <font>
-                                    <Font name="Microsoft YaHei Bold" size="18.0" />
-                                 </font>
-                              </Button>
-                              <PasswordField fx:id="employeePassword" layoutX="170.0" layoutY="97.0" prefHeight="30.0" prefWidth="230.0" />
-                              <Label layoutX="133.0" layoutY="140.0" text="Forgot The Password?" textFill="#666666" underline="true">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Group>
-                     </children>
-                  </Pane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
+      </VBox>
    </children>
 </VBox>

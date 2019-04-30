@@ -60,9 +60,23 @@ public class ClaimInformationController extends Controller
 	@FXML
     private Button btn_claimAffair;
     @FXML
-    private Button btn_policyModification;
+	private Button bt_language;
     @FXML
-    private Button btn_myAccount;
+   	private Label lb_workmenu;
+    @FXML
+   	private Label lb_claimInformation;
+    @FXML
+   	private Label lb_dateOfAcc;
+    @FXML
+   	private Label lb_locationOfAcc;
+    @FXML
+   	private Label lb_amountOfDamage;
+    @FXML
+   	private Label lb_claimReason;
+    @FXML
+   	private Label lb_claimSupportingFile;
+    @FXML
+	private Button btn_logout;
 	
 	private MainApp mainApp;
 	private Claim claim;
@@ -70,16 +84,47 @@ public class ClaimInformationController extends Controller
 	private String filename = "";
 	
 	private ButtonType acceptType = new ButtonType("Accept", ButtonData.YES);
-	/*
-	 * private ButtonType notAcceptType = new ButtonType("Not Accept",
-	 * ButtonData.YES); private ButtonType cancelType = new ButtonType("Cancel",
-	 * ButtonData.CANCEL_CLOSE);
-	 */
+	private ButtonType notAcceptType = new ButtonType("Not Accept", ButtonData.OK_DONE);
+	private ButtonType cancelType = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 	private ButtonType okType = new ButtonType("OK", ButtonData.YES);
+	
+	@FXML
+	public void changeLanguage()
+	{
+		UserTool.i18n.changeLanguage();
+		setLanguageBtn();
+	}
+	
+	public void setLanguageBtn()
+	{
+		bt_language.setText(UserTool.i18n.get("language"));
+		setText();
+	}
+	
+	public void setText()
+	{
+		lb_workmenu.setText(UserTool.i18n.get("workmenu"));
+		btn_claimAffair.setText(UserTool.i18n.get("claimAffair"));
+		btn_pending.setText(UserTool.i18n.get("pending"));
+		btn_processing.setText(UserTool.i18n.get("processing"));
+		btn_closed.setText(UserTool.i18n.get("closed"));
+		btn_logout.setText(UserTool.i18n.get("logout"));
+		
+	   	lb_claimInformation.setText(UserTool.i18n.get("claimInfo"));
+	   	lb_dateOfAcc.setText(UserTool.i18n.get("date"));
+	   	lb_locationOfAcc.setText(UserTool.i18n.get("location"));
+	   	lb_amountOfDamage.setText(UserTool.i18n.get("amount"));
+	   	lb_claimReason.setText(UserTool.i18n.get("reason"));
+	   	lb_claimSupportingFile.setText(UserTool.i18n.get("claimSupportFile"));
+	   	btn_download.setText(UserTool.i18n.get("download"));
+	   	btn_accept.setText(UserTool.i18n.get("accept"));
+	   	btn_notAccept.setText(UserTool.i18n.get("notaccept"));
+	}
 	
 	public void setMainApp(MainApp mainApp) 
     {
         this.mainApp = mainApp;
+        setLanguageBtn();
     }
 	
 	public void setType(String t)
@@ -97,7 +142,13 @@ public class ClaimInformationController extends Controller
     	else if(type.equals("processing"))
     		line_processing.setStrokeWidth(2);
     	else
+    	{
     		line_closed.setStrokeWidth(2);
+    		btn_accept.setVisible(false);
+    		btn_notAccept.setVisible(false);
+    		btn_accept.setManaged(false);
+    		btn_notAccept.setManaged(false);
+    	}
 	}
 	
 	public void setVisible(Boolean bool)
@@ -163,7 +214,7 @@ public class ClaimInformationController extends Controller
 			String lastpart = "/res/claim-files/" + claim.getId() + "/" + file;
 			Pair<Integer, String> reply = HttpTool.download(lastpart, UserTool.user.getToken(), file.toString(), root);
 			if(reply.getKey() == 200)
-				successAlert("Files Had Been Downloaded Successfully.");
+				successAlert(UserTool.i18n.get("FilesHadBeenDownloadedSuccessfully"));
 			else
 				errorAlert(reply.getValue());
 		}
@@ -181,11 +232,14 @@ public class ClaimInformationController extends Controller
 	private void acceptClaim()
 	{
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Confirm Dialog");
-		alert.setHeaderText("Do you accept this claim?");
-		alert.setContentText("Please check it cautiously.");
-		alert.getButtonTypes().clear();
-		alert.getButtonTypes().add(acceptType);
+		alert.setTitle(UserTool.i18n.get("ConfirmDialog"));
+		alert.setHeaderText(UserTool.i18n.get("Doyouacceptthisclaim"));
+		alert.setContentText(UserTool.i18n.get("Pleasecheckitcautiously"));
+		if(UserTool.i18n.isEnglish())
+		{
+			alert.getButtonTypes().clear();
+			alert.getButtonTypes().add(acceptType);
+		}
 		Optional<ButtonType> result = alert.showAndWait();
 		if(result.isPresent())
 		{
@@ -202,14 +256,16 @@ public class ClaimInformationController extends Controller
 	private void notAcceptClaim()
 	{
 		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Confirm Dialog");
-		dialog.setHeaderText("Do you Not Accept this claim?");
-		dialog.setContentText("Please enter the reason:");
-		/*
-		 * dialog.getDialogPane().getButtonTypes().clear();
-		 * dialog.getDialogPane().getButtonTypes().add(notAcceptType);
-		 * dialog.getDialogPane().getButtonTypes().add(cancelType);
-		 */
+		dialog.setTitle(UserTool.i18n.get("ConfirmDialog"));
+		dialog.setHeaderText(UserTool.i18n.get("DoyouNotAcceptthisclaim"));
+		dialog.setContentText(UserTool.i18n.get("Pleaseenterthereason"));
+		//dialog.getDialogPane().lookupButton(ButtonType.)
+		if(UserTool.i18n.isEnglish())
+		{
+			dialog.getDialogPane().getButtonTypes().clear();
+			dialog.getDialogPane().getButtonTypes().add(notAcceptType);
+			dialog.getDialogPane().getButtonTypes().add(cancelType);
+		}		 
 		Optional<String> result = dialog.showAndWait();
 		if(result.isPresent() && !result.get().equals(" "))
 		{
@@ -223,11 +279,14 @@ public class ClaimInformationController extends Controller
 		else
 		{
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Warning");
+			alert.setTitle(UserTool.i18n.get("dialogwarning"));
 			alert.setHeaderText(null);
-			alert.setContentText("You must enter a reason!");
-			alert.getButtonTypes().clear();
-			alert.getButtonTypes().add(okType);
+			alert.setContentText(UserTool.i18n.get("Youmustenterareason"));
+			if(UserTool.i18n.isEnglish())
+			{
+				alert.getButtonTypes().clear();
+				alert.getButtonTypes().add(okType);
+			}
 			alert.showAndWait();
 		}
 	}
@@ -261,4 +320,10 @@ public class ClaimInformationController extends Controller
     {
     	mainApp.showEmployeeProfileView();
     }
+    
+    @FXML
+	public void logout()
+	{
+		mainApp.showLogInView();
+	}
 }
